@@ -3,10 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Contact Manager</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    
-</body>
+
+    <body>
+        <header>
+            <h1>Contact Manager</h1>
+        </header>
+
+        <div class = "container">
+
+            <!--Log-in Form-->
+
+            <div id="login-form">
+                <h2>Login</h2>
+                <form action = "login.php" method="POST">
+                    <input type = "text" name = "username" placeholder= "Username" required>
+                    <input password = "text" password = "password" placeholder= "Password" required>
+                    <inpit type = "submit" value= "Login">
+                </form>
+                <p> Need to create an account? <a href = "#register-form">Register here</a></p>
+            </div>
+
+            <!--Registration Form(for new users)-->
+            <div id = "register-form" style= "display:none;">
+                <h2>Register</h2>
+                <form action = "register.php" method = "POST">
+                    <input type = "text" name = "firstName" placeholder = "First Name" required>
+
+                </form>
+            </div>
+        </div>
+        
+    </body>
 </html>
