@@ -117,6 +117,9 @@ body {
     position: relative;
     transition: 0.2s;
     user-select: none;
+    font-family: "Zilla Slab", serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 #contacts a div:hover {
@@ -162,6 +165,7 @@ button {
     color: white;
     border: none;
     cursor: pointer;
+    transition: 0.2s;
 }
 button:hover {
     background-color: #999;
@@ -182,6 +186,7 @@ button:hover {
     align-items: center;
     justify-content: center;
     opacity: 0;
+    transition: 0.5s;
 }
 
 #contact-info div {

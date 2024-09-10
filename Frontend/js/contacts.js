@@ -56,9 +56,15 @@ function buttonClicked(button) {
     detailEmail.textContent = email;
 
     contactInfo.style.opacity = '1';
+    contactInfo.style.transform = '';
 }
 
 
 xButton.addEventListener('click',function(){
     contactInfo.style.opacity = '0';
+    contactInfo.style.transform = 'translateY(150%) rotate(40deg)';
+
+    setTimeout(function(){
+        contactInfo.style.transform = 'translateY(-150%)';
+    },500);
 })
