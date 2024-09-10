@@ -15,12 +15,27 @@
 
 <body>
 
-    <h1 class="playfair-bold">Contacts List</h1>
-
     <div class="content">
-        <ul id="contacts">
-            
-        </ul>
+        <div id="contacts">
+            <h1 class="playfair-bold" style="margin: 2%;">Contacts List</h1>
+            <div class="search-container">
+                <form action="/search_results.php" method="GET">
+                    <input type="text" placeholder="Search contacts..." name="query">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+            <p id="placeholder-text">Contacts will appear here when searched.</p>
+            <a id="contact-button-template" style="display:none"><div>Contact Name</div></a>
+        </div>
+        <div id="contact-info">
+            <a class="x-button">X</a>
+            <div>
+                <h3 id="detail-firstname">First Name</h3>
+                <h3 id="detail-lastname">Last Name</h3>
+            </div>
+            <p style="font-size: 3rem; margin: 0 !important">•</p>
+            <h4 id="detail-email">Email</h4>
+        </div>
     </div>
 
     
