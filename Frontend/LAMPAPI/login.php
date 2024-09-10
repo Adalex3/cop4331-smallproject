@@ -4,7 +4,7 @@ session_start();
 include("login.html");
 
 // Place holder values
-$conn = new mysqli("localhost", "username", "password", "database");
+$conn = new mysqli("localhost", "root", "qUJ@lHgJrNi1", "contactManager");
 
 if($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
