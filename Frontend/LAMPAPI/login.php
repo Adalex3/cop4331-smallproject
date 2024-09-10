@@ -14,7 +14,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $sql = "SELECT id, username, password FROM users WHERE username = '$username'";
+    $sql = "SELECT username, password FROM users WHERE username = '$username'";
     $data = $conn->query($sql);
 
     if($data->num_rows == 1) { // Username exists
@@ -22,7 +22,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         if($password == $row['password']) { // Password is correct
             $_SESSION["username"] = $username;
 
-            header("location: contacts.html");
+            header("location: contacts.html"); // Go to contacts page
         } else { // Password is incorrect
             echo("Invalid username or password.");
         }
