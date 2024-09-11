@@ -12,7 +12,7 @@ if($conn->connect_error)
 if(isset($data->username) && isset($data->Password))
 {
     $username = htmlspecialchars($data->username);
-    $password = htmlspecialchars(%$data->Password);
+    $password = htmlspecialchars($data->Password);
 
     $stmt = $conn->prepare("SELECT Password FROM Users WHERE username = ?");
     $stmt->bind_param("s", username);
@@ -30,7 +30,7 @@ if(isset($data->username) && isset($data->Password))
         }
         else
         {
-            echo json_encode(["error" => "Incorrect password."])
+            echo json_encode(["error" => "Incorrect password."]);
         }
     }
     else 
@@ -51,4 +51,4 @@ function getRequestInfo()
 {
     return json_decode(file_get_contents('php://input'), true);
 }
->?
+?>
