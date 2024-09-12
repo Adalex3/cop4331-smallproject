@@ -16,9 +16,9 @@
             <!--Log-in Form-->
             <div id="login-form">
                 <h2>Login</h2>
-                <form action="Backend/Login.php" method="POST">
+                <form action="LAMPAPI/login.php" method="POST">
                     <input type="text" name="username" placeholder="Username" required>
-                    <input type="text" name="password" placeholder="Password" required>
+                    <input type="password" name="password" placeholder="Password" required>
                     <input type="submit" value="Login">
                 </form>
                 <p>Need to create an account? <a href="#" id="register-here">Register here</a></p>
@@ -27,11 +27,11 @@
             <!--Registration Form(for new users)-->
             <div id="register-form" style="display:none;">
                 <h2>Register</h2>
-                <form action="Backend/Register.php" method="POST">
+                <form action="LAMPAPI/register.php" method="POST">
                     <input type="text" name="firstName" placeholder="First Name" required>
                     <input type="text" name="lastName" placeholder="Last Name" required>
                     <input type="text" name="username" placeholder="Username" required>
-                    <input type="text" name="password" placeholder="Password" required>
+                    <input type="password" name="password" placeholder="Password" required>
                     <input type="submit" value="Register">
                 </form>
                 <p>Already have an account? <a href="#" id="login-here">Login here</a></p>
@@ -49,22 +49,7 @@
                 e.preventDefault();
                 document.getElementById('register-form').style.display = 'none';
                 document.getElementById('login-form').style.display = 'block';
-                var formData = new FormData(this);
-                fetch('Backend/Login.php', {
-                method: 'POST',
-                body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        window.location.href = 'Frontend/contacts.html'; // Redirect to contacts.html
-                    } else {
-                        // Handle error (e.g., show a message to the user)
-                        alert('Login failed, please try again.');
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-                });
+            });
         </script>
 
     </body>

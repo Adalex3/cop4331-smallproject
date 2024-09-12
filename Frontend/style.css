@@ -18,7 +18,7 @@ form {
 }
 
 input[type="text"],
-input[password="text"],
+input[type="password"],
 input[type="submit"] {
     font-size: 1rem;
     text-align: center;

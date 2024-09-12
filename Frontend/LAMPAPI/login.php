@@ -1,6 +1,5 @@
 <?php
 session_start();
-include("login.html");
 
 // Database connection
 $conn = new mysqli("localhost", "root", "qUJ@lHgJrNi1", "contactManager");
@@ -20,13 +19,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->store_result();
 
     if ($stmt->num_rows == 1) { // Username exists
-        $stmt->bind_result($dbUsername, $dbPassword);
+        $stmt->bind_result($dbPassword);
         $stmt->fetch();
 
         // Verify the password
         if (password_verify($password, $dbPassword)) {
             $_SESSION["username"] = $username;
-            header("Location: contacts.html"); // Redirect to contacts page
+            header("Location: http://contactmanager11.online/Frontend/contacts.html"); // Redirect to contacts page
             exit();
         } else {
             echo("Invalid username or password.");
