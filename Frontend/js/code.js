@@ -9,6 +9,7 @@ function doLogin()
 	
 	let login = document.getElementById("loginName").value;
 	let password = document.getElementById("loginPassword").value;
+	console.log(`Login: ${login}, Password: ${password}`);
 //	var hash = md5( password );
 	
 	document.getElementById("loginResult").innerHTML = "";
@@ -59,7 +60,7 @@ function saveCookie()
 	let minutes = 20;
 	let date = new Date();
 	date.setTime(date.getTime()+(minutes*60*1000));	
-	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
+	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ";expires=" + date.toGMTString();
 }
 
 function readCookie()
