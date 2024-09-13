@@ -11,10 +11,14 @@ if($conn->connect_error)
 
 if(isset($data->username) && isset($data->Password))
 {
-    $username = htmlspecialchars($data->username);
-    $password = htmlspecialchars($data->Password);
+    $username = $data->username;
+    $password = $data->password;
 
     $stmt = $conn->prepare("SELECT Password FROM Users WHERE username = ?");
+    if (!$stmt) {
+        echo json_encode(["error" => "Database error."]);
+        exit();
+    }
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $stmt->store_result();
