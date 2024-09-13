@@ -148,6 +148,7 @@ body {
 
 
 .search-container {
+    position: relative;
     margin: 0 auto;
     max-width: 400px;
     padding: 50px;
@@ -173,14 +174,14 @@ button:hover {
 
 
 
-#contact-info {
+.contact-info {
     position: relative;
     border: solid 1px gray;
     width: 42.5vw;
     height: 85vh;
 }
 
-#contact-info {
+.contact-info {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -189,7 +190,7 @@ button:hover {
     transition: 0.5s;
 }
 
-#contact-info div {
+.contact-info div {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -199,12 +200,12 @@ button:hover {
     font-size: 3rem;
 }
 
-#contact-info h3 {
+.contact-info h3 {
     margin: 0 !important;
     font-size: 3rem;
 }
 
-#contact-info h4 {
+.contact-info h4 {
     margin-top: 5%;
     font-size: 2rem;
 }
@@ -222,3 +223,56 @@ button:hover {
     color:white;
     cursor: pointer;
 }
+
+
+.x-button.add {
+    top: 40%;
+    bottom: 0px;
+    left: auto;
+    right: 0px;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+.x-button:hover {
+    scale:110%;
+}
+
+
+  /* Tooltip text from the data attribute */
+  .x-button.add::after {
+    content: attr(data-tooltip);
+    width: 100px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    font-size: 0.8rem;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    transform: translate(-50%, 20%);
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.2s;
+    pointer-events: none;
+  }
+
+  .x-button.add:hover::after {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(-50%,0);
+  }
+
+  .x-button.add:active::after {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(-50%,125%) scale(90%);
+  }
+
+
+  .actions a {
+    font-size: 1.5rem;
+    margin: 5%;
+  }

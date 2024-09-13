@@ -7,7 +7,11 @@ const templateButton = document.querySelector("#contact-button-template");
 
 const placeholderText = document.getElementById("placeholder-text");
 
-const xButton = document.querySelector(".x-button");
+const xButton = document.querySelector(".x-button:not(.add)");
+const addButton = document.querySelector(".x-button.add");
+
+contacts = []
+currentVisibleContact = -1
 
 
 function createAndAssignButton(firstName,lastName,email) {
@@ -15,6 +19,8 @@ function createAndAssignButton(firstName,lastName,email) {
     const newButton = templateButton.cloneNode(true);
 
     newButton.style.display = '';
+
+    contacts.push({"firstName":firstName,"lastName":lastName,"email":email});
 
     newButton.setAttribute("data-firstname",firstName);
     newButton.setAttribute("data-lastname",lastName);
@@ -57,6 +63,17 @@ function buttonClicked(button) {
 
     contactInfo.style.opacity = '1';
     contactInfo.style.transform = '';
+
+    // Find and set currently visible contact
+    var i=0;
+    contacts.forEach(element => {
+        if(element.firstName == firstName && element.lastName == lastName && element.email == email) {
+            currentVisibleContact = i;
+            return;
+        }
+        i++;
+    });
+
 }
 
 
@@ -68,3 +85,44 @@ xButton.addEventListener('click',function(){
         contactInfo.style.transform = 'translateY(-150%)';
     },500);
 })
+
+
+
+// Editing and deleting support
+
+const editButton = document.getElementById("edit-contact").addEventListener('click',function(){
+    editContact();
+});
+const deleteButton = document.getElementById("delete-contact").addEventListener('click',function(){
+    deleteContact();
+});
+
+
+function deleteContact() {
+    const contact = contacts[currentVisibleContact];
+    console.log("Deleting contact with name " + contact.firstName + " " + contact.lastName + ", and email " + contact.email);
+}
+
+var editing = false;
+
+const editDiv = document.getElementById("contact-info-edit");
+
+function editContact() {
+    const contact = contacts[currentVisibleContact];
+    console.log("Editing contact with name " + contact.firstName + " " + contact.lastName + ", and email " + contact.email);
+
+    editing = true;
+    editDiv.style.display = "block";
+    contactInfo.style.display = "none";
+    editDiv.style.opacity= "1";
+}
+
+
+
+// Add support
+
+addButton.addEventListener('click',function(){ addContact() });
+
+function addContact() {
+    console.log("Adding contact");
+}

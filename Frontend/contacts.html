@@ -23,11 +23,13 @@
                     <input type="text" placeholder="Search contacts..." name="query">
                     <button type="submit">Search</button>
                 </form>
+
+                <a class="x-button add" data-tooltip="Add a new contact">+</a>
             </div>
             <p id="placeholder-text">Contacts will appear here when searched.</p>
             <a id="contact-button-template" style="display:none"><div>Contact Name</div></a>
         </div>
-        <div id="contact-info" style="transform: translateY(-150%)">
+        <div class="contact-info" id="contact-info" style="transform: translateY(-150%)">
             <a class="x-button">X</a>
             <div>
                 <h3 id="detail-firstname">First Name</h3>
@@ -35,7 +37,27 @@
             </div>
             <p style="font-size: 3rem; margin: 0 !important">•</p>
             <h4 id="detail-email">Email</h4>
+
+            <div class="actions">
+                <a href="#" id="edit-contact">Edit</a>
+                <a href="#" id="delete-contact" style="color:red;">Delete</a>
+            </div>
         </div>
+
+        <div class="contact-info" id="contact-info-edit" style="display: none">
+            <a class="x-button">X</a>
+            <div>
+                <input id="detail-firstname">First Name</input>
+                <input id="detail-lastname">Last Name</input>
+            </div>
+            <p style="font-size: 3rem; margin: 0 !important">•</p>
+            <input id="detail-email">Email</input>
+
+            <div class="actions">
+                <a href="#" id="save-contact">Save</a>
+            </div>
+        </div>
+
     </div>
 
     
