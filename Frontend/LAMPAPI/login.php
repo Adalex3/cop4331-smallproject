@@ -1,43 +1,54 @@
 <?php
-session_start();
 
-// Database connection
+$data = getRequestInfo();
+
 $conn = new mysqli("localhost", "root", "qUJ@lHgJrNi1", "contactManager");
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if($conn->connect_error)
+{
+    die("Connetion failed: " . $conn->connect_error);
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+if(isset($data->username) && isset($data->Password))
+{
+    $username = htmlspecialchars($data->username);
+    $password = htmlspecialchars($data->Password);
 
-    // Prepared statement to prevent SQL injection
-    $stmt = $conn->prepare("SELECT username, password FROM Users WHERE username = ?");
-    $stmt->bind_param("s", $username);
+    $stmt = $conn->prepare("SELECT Password FROM Users WHERE username = ?");
+    $stmt->bind_param("s", username);
     $stmt->execute();
     $stmt->store_result();
 
-    if ($stmt->num_rows == 1) { // Username exists
-        $stmt->bind_result($dbPassword);
+    if(stmt->num_rows > 0) 
+    {
+        $stmt->bind_result($hashedPassword);
         $stmt->fetch();
 
-        // Verify the password
-        if (password_verify($password, $dbPassword)) {
-            $_SESSION["username"] = $username;
-            header("Location: http://contactmanager11.online/Frontend/contacts.html"); // Redirect to contacts page
-            exit();
-        } else {
-            echo("Invalid username or password.");
+        if(password_verify($password, $hashedPassword))
+        {
+            echo json_encode(["message" => "Login successful."]);
         }
-    } else {
-        echo("Invalid username or password.");
+        else
+        {
+            echo json_encode(["error" => "Incorrect password."]);
+        }
     }
-
+    else 
+    {
+        echo json_encode(["error" => "Username not found."]);
+    }
     $stmt->close();
-} else {
-    echo("Unexpected error. Please try again.");
+}
+
+else 
+{
+    echo json_encode(["error" => "Invalid input"]);
 }
 
 $conn->close();
+
+function getRequestInfo() 
+{
+    return json_decode(file_get_contents('php://input'), true);
+}
 ?>
