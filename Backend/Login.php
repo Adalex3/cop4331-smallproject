@@ -1,60 +1,57 @@
 <?php
 
-// Enable error reporting for debugging
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+	$inData = getRequestInfo();
+	
+	$id = 0;
+	$firstName = "";
+	$lastName = "";
 
-$data = getRequestInfo();
+    $conn = new mysqli("localhost", "root", "qUJ@lHgJrNi1", "contactManager");
 
-$conn = new mysqli("localhost", "root", "qUJ@lHgJrNi1", "contactManager");
 
-if ($conn->connect_error) {
-    die(json_encode(["error" => "Connection failed: " . $conn->connect_error]));
-}
+    if ($conn->connect_error) {
+        returnWithError( $conn->connect_error );
+    }
+    else
+	{
+		$stmt = $conn->prepare("SELECT username, FirstName, LastName FROM Users WHERE username = ? AND Password = ?");
+		$stmt->bind_param("ss", $inData["login"], $inData["password"]);
+		$stmt->execute();
+		$result = $stmt->get_result();
 
-if (isset($data->username) && isset($data->password)) {
-    $username = $data->username;
-    $password = $data->password;
+		if( $row = $result->fetch_assoc()  )
+		{
+			returnWithInfo( $row['username'], $row['FirstName'], $row['LastName'] );
+		}
+		else
+		{
+			returnWithError("No Records Found");
+		}
 
-    $stmt = $conn->prepare("SELECT Password FROM Users WHERE username = ?");
-    if (!$stmt) {
-        die(json_encode(["error" => "Prepare failed: " . $conn->error]));
+		$stmt->close();
+		$conn->close();
+	}
+
+    function getRequestInfo()
+    {
+        return json_decode(file_get_contents('php://input'), true);
     }
 
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $stmt->store_result();
-
-    if ($stmt->num_rows > 0) {
-        $stmt->bind_result($hashedPassword);
-        $stmt->fetch();
-
-        if (password_verify($password, $hashedPassword)) {
-            echo json_encode(["message" => "Login successful."]);
-        } else {
-            echo json_encode(["error" => "Incorrect password."]);
-        }
-    } else {
-        echo json_encode(["error" => "Username not found."]);
+    function sendResultInfoAsJson( $obj )
+    {
+        header('Content-type: application/json');
+        echo $obj;
     }
 
-    $stmt->close();
-} else {
-    echo json_encode(["error" => "Invalid input"]);
-}
-
-$conn->close();
-
-function getRequestInfo() {
-    $data = file_get_contents('php://input');
-    if ($data === false) {
-        die(json_encode(["error" => "Failed to read input."]));
+    function returnWithError( $err )
+    {
+        $retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
+        sendResultInfoAsJson( $retValue );
     }
-    $json = json_decode($data);
-    if (json_last_error() !== JSON_ERROR_NONE) {
-        die(json_encode(["error" => "Invalid JSON input."]));
+
+    function returnWithInfo( $firstName, $lastName, $username )
+    {
+        $retValue = '{"username":"' . $username . '","firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
+        sendResultInfoAsJson( $retValue );
     }
-    return $json;
-}
 ?>
