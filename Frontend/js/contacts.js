@@ -13,18 +13,16 @@ const addButton = document.querySelector(".x-button.add");
 contacts = []
 currentVisibleContact = -1
 
-
+var buttonCount = 0;
 function createAndAssignButton(firstName,lastName,email) {
 
     const newButton = templateButton.cloneNode(true);
 
     newButton.style.display = '';
 
-    contacts.push({"firstName":firstName,"lastName":lastName,"email":email});
+    const localButtonCount = buttonCount;
 
-    newButton.setAttribute("data-firstname",firstName);
-    newButton.setAttribute("data-lastname",lastName);
-    newButton.setAttribute("data-email",email);
+    contacts.push({"firstName":firstName,"lastName":lastName,"email":email,"id":localButtonCount});
 
     newButton.firstChild.textContent = firstName + " " + lastName;
 
@@ -33,33 +31,32 @@ function createAndAssignButton(firstName,lastName,email) {
 
     contactsList.appendChild(newButton);
 
+    newButton.setAttribute("data-id",localButtonCount);
+    newButton.classList.toggle("added",true);
+
     newButton.addEventListener('click', function(e){
-        buttonClicked(e.currentTarget); // Pass the button itself
+        buttonClicked(localButtonCount);
     });
 
     placeholderText.style.display = 'none';
 
-}
+    buttonCount++;
 
-// Just for testing
-createAndAssignButton("Alex","Hynds","hynds@ucf.edu");
-createAndAssignButton("Ryan","Rohan","rohan@ucf.edu");
-createAndAssignButton("Other","Person","person@ucf.edu");
-createAndAssignButton("Another","Human","human@ucf.edu");
+}
 
 
 const detailFirstName = document.querySelector("#detail-firstname");
 const detailLastName = document.querySelector("#detail-lastname");
 const detailEmail = document.querySelector("#detail-email");
 
-function buttonClicked(button) {
-    const firstName = button.getAttribute("data-firstname");
-    const lastName = button.getAttribute("data-lastname");
-    const email = button.getAttribute("data-email");
+function buttonClicked(buttonNumber) {
 
-    detailFirstName.textContent = firstName;
-    detailLastName.textContent = lastName;
-    detailEmail.textContent = email;
+
+    let contact = contacts.find(contact => contact.id === buttonNumber);
+
+    detailFirstName.textContent = contact.firstName;
+    detailLastName.textContent = contact.lastName;
+    detailEmail.textContent = contact.email;
 
     contactInfo.style.opacity = '1';
     contactInfo.style.transform = '';
@@ -67,7 +64,7 @@ function buttonClicked(button) {
     // Find and set currently visible contact
     var i=0;
     contacts.forEach(element => {
-        if(element.firstName == firstName && element.lastName == lastName && element.email == email) {
+        if(element.firstName == contact.firstName && element.lastName == contact.lastName && element.email == contact.email) {
             currentVisibleContact = i;
             return;
         }
@@ -101,28 +98,153 @@ const deleteButton = document.getElementById("delete-contact").addEventListener(
 function deleteContact() {
     const contact = contacts[currentVisibleContact];
     console.log("Deleting contact with name " + contact.firstName + " " + contact.lastName + ", and email " + contact.email);
+
+
+    // Delete from the list
+    const listButtons = document.querySelectorAll("#contacts a#contact-button-template");
+    console.log(listButtons);
+
+    const buttonToEdit = listButtons[currentVisibleContact+1]; // there is a template button that is first, skip that
+    buttonToEdit.remove();
+    contacts.splice(currentVisibleContact,1);
+    currentVisibleContact = -1;
+
+    // Hide the contact div
+    contactInfo.style.opacity = '0';
+    contactInfo.style.transform = 'translateY(150%) rotate(40deg)';
+
+    setTimeout(function(){
+        contactInfo.style.transform = 'translateY(-150%)';
+    },500);
+
+    // TODO: ADD THE API ENDPOINT FOR DELETING A CONTACT HERE
 }
 
 var editing = false;
+adding = false;
 
+const saveButton = document.getElementById("save-contact");
 const editDiv = document.getElementById("contact-info-edit");
+
+const firstNameInput = document.getElementById('input-firstname');
+const lastNameInput = document.getElementById('input-lastname');
+const emailInput = document.getElementById('input-email');
 
 function editContact() {
     const contact = contacts[currentVisibleContact];
     console.log("Editing contact with name " + contact.firstName + " " + contact.lastName + ", and email " + contact.email);
 
     editing = true;
-    editDiv.style.display = "block";
+    editDiv.style.display = "flex";
     contactInfo.style.display = "none";
     editDiv.style.opacity= "1";
+
+    if(adding) {
+        saveButton.textContent = "Add Contact";
+    } else {
+        saveButton.textContent = "Save";
+    }
+
+    firstNameInput.value = contact.firstName;
+    lastNameInput.value = contact.lastName;
+    emailInput.value = contact.email;
 }
+
+saveButton.addEventListener('click',function(){
+
+    const firstName = firstNameInput.value;
+    const lastName = lastNameInput.value;
+    const email = emailInput.value;
+
+    if(adding) {
+        addContact(firstName,lastName,email);
+    } else {
+        // SAVE CONTACT
+        // TODO: THIS IS WHERE THE API ENDPOINT NEEDS TO GO FOR UPDATING
+    }
+
+    contacts[currentVisibleContact].firstName = firstName;
+    contacts[currentVisibleContact].lastName = lastName;
+    contacts[currentVisibleContact].email = email;
+
+    editDiv.style.display = "none";
+    contactInfo.style.display = "flex";
+    editDiv.style.opacity= "0";
+    contactInfo.style.opacity= "1";
+
+    buttonClicked(contacts[currentVisibleContact].id);
+
+    // Also update the list text
+    const listButtons = document.querySelectorAll("#contacts a#contact-button-template");
+    if(!adding) {
+        const buttonToEdit = listButtons[currentVisibleContact+1]; // there is a template button that is first, skip that
+        buttonToEdit.firstChild.textContent = firstName + " " + lastName;
+    } else {
+        // Add to list
+        createAndAssignButton(firstName,lastName,email);
+    }
+
+    adding = false;
+    editing = false;
+
+});
 
 
 
 // Add support
 
-addButton.addEventListener('click',function(){ addContact() });
+addButton.addEventListener('click',function(){
 
-function addContact() {
+    adding = true;
+    contacts.push({"firstName":"","lastName":"","email":""});
+    currentVisibleContact = contacts.length-1;
+    editContact();
+
+});
+function addContact(firstName, lastName, email) {
     console.log("Adding contact");
+
+    // TODO: THIS IS WHERE THE API ENDPOINT NEEDS TO GO FOR ADDING
+}
+
+
+
+
+
+
+// Just for testing
+createAndAssignButton("Alex","Hynds","hynds@ucf.edu");
+createAndAssignButton("Ryan","Rohan","rohan@ucf.edu");
+createAndAssignButton("Other","Person","person@ucf.edu");
+createAndAssignButton("Another","Human","human@ucf.edu");
+// TODO: THIS IS WHERE THE API ENDPOINT NEEDS TO GO FOR FETCHING CONTACTS
+
+
+// Search form handling
+const searchForm = document.querySelector('.search-container form');
+searchForm.addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent form from submitting and refreshing the page
+    const query = e.target.query.value.trim();
+    
+    if (query) {
+        searchContacts(query);
+    }
+});
+
+function searchContacts(query) {
+    // Clear current list
+    const contactButtons = document.querySelectorAll("#contacts a.added");
+    contactButtons.forEach(button => button.remove());
+
+    placeholderText.style.display = 'block'; // Show placeholder initially
+
+    // TODO: Fetch contacts from the API based on the search query
+    // USE THIS FUNCTION FOR IT
+    function dataCollected(contact) {
+        placeholderText.style.display = 'none';
+        data.forEach(contact => {
+            createAndAssignButton(contact.firstName, contact.lastName, contact.email);
+        });
+    }
+    
 }
