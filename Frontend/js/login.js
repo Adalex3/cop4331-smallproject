@@ -1,4 +1,4 @@
-const urlBase = 'http://contactmanager11.online/Frontend/LAMPAPI';
+const urlBase = 'http://contactmanager11.online/Backend';
 const extension = 'php';
 
 let userId = 0;
@@ -21,7 +21,7 @@ function doLogin()
 //	var tmp = {login:login,password:hash};
 	let jsonPayload = JSON.stringify( tmp );
 	
-	let url = urlBase + '/login.' + extension;
+	let url = urlBase + '/Login.' + extension;
 
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
