@@ -12,7 +12,7 @@ if($conn->connect_error)
 if(isset($data->username) && isset($data->Password))
 {
     $username = $data->username;
-    $password = $data->password;
+    $password = $data->Password;
 
     $stmt = $conn->prepare("SELECT Password FROM Users WHERE username = ?");
     if (!$stmt) {
