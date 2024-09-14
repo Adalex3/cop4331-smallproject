@@ -4,8 +4,8 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 $servername = "localhost"; // or your database server
-$username = "TheBeast";        // or your database username
-$password = "WeLoveCOP4331"; // or your database password
+$username = "badridemo";        // or your database username
+$password = "badridemo1"; // or your database password
 $database = "contactManager";
 
 // Create connection
