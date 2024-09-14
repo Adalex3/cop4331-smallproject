@@ -1,6 +1,6 @@
 <?php
 $servername = "localhost"; // or the IP address of your MySQL server
-$username = "TheBeast";        // MySQL root user
+$username = "root";        // MySQL root user
 $password = "qUJ@lHgJrNi1"; // replace with the actual root password
 $database = "contactManager";
 
