@@ -3,7 +3,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-$servername = "172.26.4.41"; // or your database server
+$servername = "localhost"; // or your database server
 $username = "TheBeast";        // or your database username
 $password = "qUJ@lHgJrNi1"; // or your database password
 $database = "contactManager";
