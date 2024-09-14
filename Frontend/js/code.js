@@ -1,6 +1,10 @@
 const urlBase = 'http://contactmanager11.online/Backend';
 const extension = 'php';
 
+let userId = 0
+let firstName = ""
+let lastName = ""
+
 function doLogin()
 {
 	userId = 0;
@@ -30,9 +34,9 @@ function doLogin()
 			if (this.readyState == 4 && this.status == 200) 
 			{
 				let jsonObject = JSON.parse( xhr.responseText );
-				userId = username.id;
+				userId = jsonObject.id;
 		
-				if(!userId)
+				if(userId < 1)
 				{		
 					document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
 					return;
@@ -60,7 +64,7 @@ function saveCookie()
 	let minutes = 20;
 	let date = new Date();
 	date.setTime(date.getTime()+(minutes*60*1000));	
-	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ";expires=" + date.toGMTString();
+	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
 }
 
 function readCookie()
@@ -88,7 +92,7 @@ function readCookie()
 	
 	if( userId < 0 )
 	{
-		window.location.href = "index.html";
+		window.location.href = "login.html";
 	}
 	else
 	{

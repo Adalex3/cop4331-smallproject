@@ -6,7 +6,7 @@
 	$firstName = "";
 	$lastName = "";
 
-    $conn = new mysqli("localhost", "root", "qUJ@lHgJrNi1", "contactManager");
+    $conn = new mysqli("http://contactmanager11.online/Frontend/login.html", "root", "qUJ@lHgJrNi1", "contactManager");
 
 
     if ($conn->connect_error) {
@@ -14,14 +14,14 @@
     }
     else
 	{
-		$stmt = $conn->prepare("SELECT username, FirstName, LastName FROM Users WHERE username = ? AND Password = ?");
+		$stmt = $conn->prepare("SELECT ID, firstName, lastName FROM Users WHERE Login=? AND Password =?");
 		$stmt->bind_param("ss", $inData["login"], $inData["password"]);
 		$stmt->execute();
 		$result = $stmt->get_result();
 
 		if( $row = $result->fetch_assoc()  )
 		{
-			returnWithInfo( $row['username'], $row['FirstName'], $row['LastName'] );
+			returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'] );
 		}
 		else
 		{
@@ -51,7 +51,7 @@
 
     function returnWithInfo( $firstName, $lastName, $username )
     {
-        $retValue = '{"username":"' . $username . '","firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
+        $retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
         sendResultInfoAsJson( $retValue );
     }
 ?>
