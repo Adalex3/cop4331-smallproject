@@ -99,6 +99,39 @@ function readCookie()
 	}
 }
 
+function addUser(){
+	let newFirstName = document.getElementById("firstnameText").value;
+    let newLastName = document.getElementById("lastnameText").value;
+    let newUsername = document.getElementById("usernameText").value;
+    let newPassword = document.getElementById("passwordText").value;
+    document.getElementById("userAddResult").innerHTML = "";
+
+    let tmp = {firstname:newFirstName, lastname:newLastName, username:newUsername, password:newPassword};
+    let jsonPayload = JSON.stringify( tmp );
+
+    let url = urlBase + '/Register.' + extension;
+    
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    try
+    {
+        xhr.onreadystatechange = function() 
+        {
+            if (this.readyState == 4 && this.status == 200) 
+            {
+                document.getElementById("userAddResult").innerHTML = "User has been added";
+				window.location.href = "login.html"; 
+            }
+        };
+        xhr.send(jsonPayload);
+    }
+    catch(err)
+    {
+        document.getElementById("userAddResult").innerHTML = err.message;
+    }
+
+}
 
 function doLogout() {
     userId = 0;
