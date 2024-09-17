@@ -11,13 +11,13 @@ if ($conn->connect_error) {
     returnWithError($conn->connect_error);
 } else {
     // Prepare and execute the SQL statement to insert the new user
-    $stmt = $conn->prepare("INSERT INTO Users (firstName, lastName, Login, Password) VALUES (?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO Users (FirstName, LastName, Login, Password) VALUES (?, ?, ?, ?)");
     if ($stmt) {
         // Hash the password for security
         $passwordHash = password_hash($data["password"], PASSWORD_BCRYPT);
         
         // Bind parameters and execute
-        $stmt->bind_param("ssss", $data["firstname"], $data["lastname"], $data["username"], $data["password"]);
+        $stmt->bind_param("ssss", $data["firstname"], $data["lastname"], $data["username"], $passwordHash);
         $stmt->execute();
 
         // Check if the user was added successfully
