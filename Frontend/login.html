@@ -1,61 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Manager</title>
-    <link rel="stylesheet" href="style.css">
+	<title>COP 4331 LAMP Stack Demo</title>
+	<script type="text/javascript" src="js/md5.js"></script>
+	<script type="text/javascript" src="js/code.js"></script>
+    <link href="style.css" rel="stylesheet">	
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 </head>
+<body>
 
-    <body>
-        <header>
-            <h1>Contact Manager</h1>
-        </header>
+<h1 id="title">COP 4331 LAMP Stack Demo</h1>
 
-        <div class="container">
-            <!--Log-in Form-->
-            <div id="login-form">
-                <h2>Login</h2>
-                <form action="javascript:doLogin()" method="POST">
-                    <input id="loginName" type="text" name="username" placeholder="Username" required>
-                    <input id="loginPassword" type="password" name="password" placeholder="Password" required>
-                    <input type="submit" value="Login">
-                </form>
-                <p>Need to create an account? <a href="#" id="register-here">Register here</a></p>
-            </div>
-    
-            <!--Registration Form(for new users)-->
-            <div id="register-form" style="display:none;">
-                <h2>Register</h2>
-                <form action="doLogin()" method="POST">
-                    <input type="text" name="firstName" placeholder="First Name" required>
-                    <input type="text" name="lastName" placeholder="Last Name" required>
-                    <input type="text" name="username" placeholder="Username" required>
-                    <input type="password" name="password" placeholder="Password" required>
-                    <input type="submit" value="Register">
-                </form>
-                <p>Already have an account? <a href="#" id="login-here">Login here</a></p>
-            </div>
-        </div>
+<div id="loginDiv">
+	<span id="inner-title">PLEASE LOG IN</span>
+	<input type="text" id="loginName" placeholder="Username" /><br />
+	<input type="password" id="loginPassword" placeholder="Password"/><br />
+	<button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Do It </button>
+	<span id="loginResult"></span>
+</div>
 
-        <p id="loginResult">Login test.</p>
-    
-        <script>
-            document.getElementById('register-here').addEventListener('click', function(e) {
-                e.preventDefault();
-                document.getElementById('login-form').style.display = 'none';
-                document.getElementById('register-form').style.display = 'block';
-            });
-    
-            document.getElementById('login-here').addEventListener('click', function(e) {
-                e.preventDefault();
-                document.getElementById('register-form').style.display = 'none';
-                document.getElementById('login-form').style.display = 'block';
-            });
-        </script>
-
-    </body>
-
-    <script src="js/login.js"></script>
-
+</body>
 </html>

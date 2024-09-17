@@ -1,58 +1,57 @@
 <?php
 
-$data = getRequestInfo();
+	$inData = getRequestInfo();
+	
+	$id = 0;
+	$firstName = "";
+	$lastName = "";
 
-$conn = new mysqli("localhost", "root", "qUJ@lHgJrNi1", "contactManager");
+    $conn = new mysqli("127.0.0.1", "badridemo", "badridemo1", "contactManager");
 
-if($conn->connect_error)
-{
-    die("Connetion failed: " . $conn->connect_error);
-}
 
-if(isset($data->username) && isset($data->Password))
-{
-    $username = $data->username;
-    $password = $data->Password;
-
-    $stmt = $conn->prepare("SELECT Password FROM Users WHERE username = ?");
-    if (!$stmt) {
-        echo json_encode(["error" => "Database error."]);
-        exit();
+    if ($conn->connect_error) {
+        returnWithError( $conn->connect_error );
     }
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $stmt->store_result();
+    else
+	{
+		$stmt = $conn->prepare("SELECT ID, firstName, lastName FROM Users WHERE Login=? AND Password =?");
+		$stmt->bind_param("ss", $inData["login"], $inData["password"]);
+		$stmt->execute();
+		$result = $stmt->get_result();
 
-    if($stmt->num_rows > 0) 
+		if( $row = $result->fetch_assoc()  )
+		{
+			returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'] );
+		}
+		else
+		{
+			returnWithError("No Records Found");
+		}
+
+		$stmt->close();
+		$conn->close();
+	}
+
+    function getRequestInfo()
     {
-        $stmt->bind_result($hashedPassword);
-        $stmt->fetch();
-
-        if(password_verify($password, $hashedPassword))
-        {
-            echo json_encode(["message" => "Login successful."]);
-        }
-        else
-        {
-            echo json_encode(["error" => "Incorrect password."]);
-        }
+        return json_decode(file_get_contents('php://input'), true);
     }
-    else 
+
+    function sendResultInfoAsJson( $obj )
     {
-        echo json_encode(["error" => "Username not found."]);
+        header('Content-type: application/json');
+        echo $obj;
     }
-    $stmt->close();
-}
 
-else 
-{
-    echo json_encode(["error" => "Invalid input"]);
-}
+    function returnWithError( $err )
+    {
+        $retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
+        sendResultInfoAsJson( $retValue );
+    }
 
-$conn->close();
-
-function getRequestInfo() 
-{
-    return json_decode(file_get_contents('php://input'));
-}
+    function returnWithInfo( $firstName, $lastName, $id )
+    {
+        $retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
+        sendResultInfoAsJson( $retValue );
+    }
 ?>

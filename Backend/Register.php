@@ -1,59 +1,70 @@
 <?php
 
+// Retrieve the JSON input data
 $data = getRequestInfo();
 
-// need to change these values
-$conn = new mysqli("localhost", "root", "qUJ@lHgJrNi1", "contactManager");
+// Database connection
+$conn = new mysqli("127.0.0.1", "badridemo", "badridemo1", "contactManager");
 
-if($conn->connect_error)
-{
-    die("Connetion failed: " . $conn->connect_error);
-}
+// Check connection
+if ($conn->connect_error) {
+    returnWithError($conn->connect_error);
+} else {
+    // Prepare and execute the SQL statement to insert the new user
+    $stmt = $conn->prepare("INSERT INTO Users (firstName, lastName, Login, Password) VALUES (?, ?, ?, ?)");
+    if ($stmt) {
+        // Hash the password for security
+        $passwordHash = password_hash($data["password"], PASSWORD_BCRYPT);
+        
+        // Bind parameters and execute
+        $stmt->bind_param("ssss", $data["firstname"], $data["lastname"], $data["username"], $data["password"]);
+        $stmt->execute();
 
-if(isset($data->username) && isset($data->FirstName) && isset($data->LastName) && isset($data->Password))
-{
-    $username = htmlspecialchars($data->username);
-    $firstName = htmlspecialchars($data->FirstName);
-    $lastName = htmlspecialchars($data->LastName);
-    $password = password_hash($data->password, PASSWORD_DEFAULT);
-
-    $checkStmt = $conn->prepare("SELECT username FROM Users WHERE username = ?");
-    $checkStmt->bind_param("s", $username);
-    $checkStmt->execute();
-    $checkStmt->store_result();
-
-    if($checkStmt->num_rows > 0)
-    {
-        echo json_encode(["error" => "Username already taken."]);
-    }
-    else 
-    {
-        $stmt = $conn->prepare("INSERT INTO Users (usrname, FirstName, LastName, Password) VALUES(?, ?, ?, ?");
-        $stmt->bind_param("ssss", $username, $firstName, $lastName, $password);
-
-        if($stmt->execute()) 
-        {
-            echo json_encode(["message" => "Registration successful"]);
+        // Check if the user was added successfully
+        if ($stmt->affected_rows > 0) {
+            // Retrieve the ID of the newly inserted user
+            $userID = $conn->insert_id;
+            returnWithSuccess("User has been added", $userID);
+        } else {
+            returnWithError("Failed to add user");
         }
-        else 
-        {
-            echo json_encode(["error" => "Error registering user"]);
-        }
+
         $stmt->close();
+    } else {
+        returnWithError("Failed to prepare statement");
     }
-    $checkStmt->close();
+
+    $conn->close();
 }
 
-else
-{
-    echo json_encode(["error" => "Invalid input"]);
-}
-
-$conn->close();
-
-function getRequestInfo() 
-{
+// Function to get request data
+function getRequestInfo() {
     return json_decode(file_get_contents('php://input'), true);
 }
 
+// Function to send JSON response
+function sendResultInfoAsJson($obj) {
+    header('Content-type: application/json');
+    echo $obj;
+}
+
+// Function to handle errors
+function returnWithError($err) {
+    $retValue = json_encode(array(
+        "id" => 0,
+        "firstName" => "",
+        "lastName" => "",
+        "error" => $err
+    ));
+    sendResultInfoAsJson($retValue);
+}
+
+// Function to handle successful user creation
+function returnWithSuccess($message, $userID) {
+    $retValue = json_encode(array(
+        "success" => $message,
+        "id" => $userID
+    ));
+    sendResultInfoAsJson($retValue);
+}
 ?>
