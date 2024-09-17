@@ -17,7 +17,7 @@ if ($conn->connect_error) {
         $passwordHash = password_hash($data["password"], PASSWORD_BCRYPT);
         
         // Bind parameters and execute
-        $stmt->bind_param("ssss", $data["firstname"], $data["lastname"], $data["username"], $passwordHash);
+        $stmt->bind_param("ssss", $data["firstname"], $data["lastname"], $data["username"], $data["password"]);
         $stmt->execute();
 
         // Check if the user was added successfully
