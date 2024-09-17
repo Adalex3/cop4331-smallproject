@@ -276,3 +276,20 @@ button:hover {
     font-size: 1.5rem;
     margin: 5%;
   }
+
+
+  .contact-info.edit {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+  }
+
+  .contact-info.edit p {
+    font-size: 1rem;
+    margin-right: 5%;
+  }
+
+  .contact-info.edit div div {
+    display: flex;
+    flex-direction: row;
+  }
