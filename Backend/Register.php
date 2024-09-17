@@ -1,7 +1,7 @@
 <?php
 
 // Retrieve the JSON input data
-$data = getRequestInfo();
+$inData = getRequestInfo();
 
 // Database connection
 $conn = new mysqli("127.0.0.1", "badridemo", "badridemo1", "contactManager");
