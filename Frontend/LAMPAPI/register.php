@@ -3,7 +3,7 @@
 $data = getRequestInfo();
 
 // need to change these values
-$conn = new mysqli("localhost", "username", "password", "database");
+$conn = new mysqli("127.0.0.1", "badridemo", "badridemo1", "contactManager");
 
 if($conn->connect_error)
 {

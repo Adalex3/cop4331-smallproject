@@ -1,5 +1,5 @@
 <?php
-$conn = new mysqli("localhost", "root", "qUJ@lHgJrNi1", "contactManager");
+$conn = new mysqli("127.0.0.1", "badridemo", "badridemo1", "contactManager");
 
 if($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
