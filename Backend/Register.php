@@ -73,7 +73,10 @@ function returnWithError($err) {
 function returnWithSuccess($message, $userID) {
     $retValue = json_encode(array(
         "success" => $message,
-        "id" => $userID
+        "id" => $userID,
+        "firstName" => $firstName,
+        "lastName" => $lastName,
+        "username" => $username
     ));
     sendResultInfoAsJson($retValue);
 }
