@@ -3,14 +3,14 @@
 // Retrieve the JSON input data
 $inData = getRequestInfo();
 
-
-
-// Database connection
-$conn = new mysqli("127.0.0.1", "badridemo", "badridemo1", "contactManager");
 if (!isset($data['firstname'], $data['lastname'], $data['username'], $data['password'])) {
     returnWithError("Missing required fields. Received: " . json_encode($data));
     exit();
 }
+
+// Database connection
+$conn = new mysqli("127.0.0.1", "badridemo", "badridemo1", "contactManager");
+
 // Check connection
 if ($conn->connect_error) {
     returnWithError($conn->connect_error);
@@ -23,15 +23,15 @@ if ($conn->connect_error) {
         
         // Bind parameters and execute
         $stmt->bind_param("ssss", $data["firstname"], $data["lastname"], $data["username"], $passwordHash);
-        $stmt->execute();
+        // $stmt->execute();
 
         // Check if the user was added successfully
-        if ($stmt->affected_rows > 0) {
+        if (stmt_execute()) {
             // Retrieve the ID of the newly inserted user
             $userID = $conn->insert_id;
             returnWithSuccess("User has been added", $userID);
         } else {
-            returnWithError("Failed to add user");
+            returnWithError("Failed to add user" . $stmt->error);
         }
 
         $stmt->close();
