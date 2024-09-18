@@ -74,8 +74,8 @@ function returnWithSuccess($message, $userID) {
     $retValue = json_encode(array(
         "success" => $message,
         "id" => $userID,
-        "firstName" => $firstName,
-        "lastName" => $lastName,
+        "firstname" => $firstName,
+        "lastname" => $lastName,
         "username" => $username
     ));
     sendResultInfoAsJson($retValue);
