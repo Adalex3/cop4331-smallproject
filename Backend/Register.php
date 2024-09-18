@@ -1,10 +1,14 @@
 <?php
+
+// Enable error reporting for debugging
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
 // Retrieve the JSON input data
 $data = getRequestInfo();
 
+// Check if all required fields are present
 if (!isset($data['firstname'], $data['lastname'], $data['username'], $data['password'])) {
     returnWithError("Missing required fields. Received: " . json_encode($data));
     exit();
@@ -16,33 +20,32 @@ $conn = new mysqli("127.0.0.1", "badridemo", "badridemo1", "contactManager");
 // Check connection
 if ($conn->connect_error) {
     returnWithError($conn->connect_error);
-} else {
-    // Prepare and execute the SQL statement to insert the new user
-    $stmt = $conn->prepare("INSERT INTO Users (FirstName, LastName, Login, Password) VALUES (?, ?, ?, ?)");
-    if ($stmt) {
-        // Hash the password for security
-        $passwordHash = password_hash($data["password"], PASSWORD_BCRYPT);
-        
-        // Bind parameters and execute
-        $stmt->bind_param("ssss", $data["firstname"], $data["lastname"], $data["username"], $passwordHash);
-        // $stmt->execute();
+    exit();
+}
 
-        // Check if the user was added successfully
-        if (stmt->execute()) {
-            // Retrieve the ID of the newly inserted user
-            $userID = $conn->insert_id;
-            returnWithSuccess("User has been added", $userID);
-        } else {
-            returnWithError("Failed to add user" . $stmt->error);
-        }
+// Prepare and execute the SQL statement to insert the new user
+$stmt = $conn->prepare("INSERT INTO Users (FirstName, LastName, Login, Password) VALUES (?, ?, ?, ?)");
+if ($stmt) {
+    // Hash the password for security
+    $passwordHash = password_hash($data["password"], PASSWORD_BCRYPT);
 
-        $stmt->close();
+    // Bind parameters and execute
+    $stmt->bind_param("ssss", $data["firstname"], $data["lastname"], $data["username"], $passwordHash);
+
+    if ($stmt->execute()) {
+        // Retrieve the ID of the newly inserted user
+        $userID = $conn->insert_id;
+        returnWithSuccess("User has been added", $userID);
     } else {
-        returnWithError("Failed to prepare statement");
+        returnWithError("Failed to add user: " . $stmt->error);
     }
 
-    $conn->close();
+    $stmt->close();
+} else {
+    returnWithError("Failed to prepare statement: " . $conn->error);
 }
+
+$conn->close();
 
 // Function to get request data
 function getRequestInfo() {
