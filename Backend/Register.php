@@ -71,7 +71,8 @@ function returnWithSuccess($message, $userID, $firstName, $lastName, $username) 
         "id" => $userID,
         "firstName" => $firstName,
         "lastName" => $lastName,
-        "username" => $username
+        "username" => $username,
+        "password" => $passwordHash
     ));
     sendResultInfoAsJson($retValue);
 }
