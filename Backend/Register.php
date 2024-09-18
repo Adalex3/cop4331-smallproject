@@ -35,9 +35,12 @@ function returnWithSuccess($message, $userID) {
 // Retrieve the JSON input data
 $data = getRequestInfo();
 
+// Debug: Print out the received data (for development purposes, you can remove this later)
+file_put_contents("php://stderr", print_r($data, true));
+
 // Check if required data is provided
 if (!isset($data['firstname'], $data['lastname'], $data['username'], $data['password'])) {
-    returnWithError("Missing required fields");
+    returnWithError("Missing required fields. Received: " . json_encode($data));
     exit();
 }
 
