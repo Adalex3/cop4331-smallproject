@@ -11,24 +11,31 @@ $conn = new mysqli("127.0.0.1", "badridemo", "badridemo1", "contactManager");
 if ($conn->connect_error) {
     returnWithError($conn->connect_error);
 } else {
-    // Prepare and execute the SQL statement to select the user
+    // Prepare SQL statement to fetch user data
     $stmt = $conn->prepare("SELECT ID, FirstName, LastName, Password FROM Users WHERE Login=?");
-    $stmt->bind_param("s", $inData["login"]);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($row = $result->fetch_assoc()) {
-        // Verify the password
-        if (password_verify($inData["password"], $row["Password"])) {
-            returnWithInfo($row['FirstName'], $row['LastName'], $row['ID']);
+    if ($stmt) {
+        // Bind parameters and execute
+        $stmt->bind_param("s", $inData["login"]);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($row = $result->fetch_assoc()) {
+            // Verify password
+            if (password_verify($inData["password"], $row["Password"])) {
+                // Return user info if password matches
+                returnWithInfo($row['FirstName'], $row['LastName'], $row['ID']);
+            } else {
+                returnWithError("Invalid credentials");
+            }
         } else {
-            returnWithError("Invalid password");
+            returnWithError("No Records Found");
         }
+        
+        $stmt->close();
     } else {
-        returnWithError("No Records Found");
+        returnWithError("Failed to prepare statement");
     }
 
-    $stmt->close();
     $conn->close();
 }
 
@@ -45,13 +52,23 @@ function sendResultInfoAsJson($obj)
 
 function returnWithError($err)
 {
-    $retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
+    $retValue = json_encode(array(
+        "id" => 0,
+        "firstName" => "",
+        "lastName" => "",
+        "error" => $err
+    ));
     sendResultInfoAsJson($retValue);
 }
 
 function returnWithInfo($firstName, $lastName, $id)
 {
-    $retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
+    $retValue = json_encode(array(
+        "id" => $id,
+        "firstName" => $firstName,
+        "lastName" => $lastName,
+        "error" => ""
+    ));
     sendResultInfoAsJson($retValue);
 }
 ?>
