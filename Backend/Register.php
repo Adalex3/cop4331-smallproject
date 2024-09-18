@@ -1,10 +1,10 @@
 <?php
 
 // Retrieve the JSON input data
-$data = getRequestInfo();
+$inData = getRequestInfo();
 
-if (!isset($data['firstname'], $data['lastname'], $data['username'], $data['password'])) {
-    returnWithError("Missing required fields. Received: " . json_encode($data));
+if (!isset($inData['firstname'], $inData['lastname'], $inData['username'], $inData['password'])) {
+    returnWithError("Missing required fields. Received: " . json_encode($inData));
     exit();
 }
 
