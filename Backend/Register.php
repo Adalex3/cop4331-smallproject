@@ -1,10 +1,12 @@
 <?php
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 // Retrieve the JSON input data
-$inData = getRequestInfo();
+$data = getRequestInfo();
 
-if (!isset($inData['firstname'], $inData['lastname'], $inData['username'], $inData['password'])) {
-    returnWithError("Missing required fields. Received: " . json_encode($inData));
+if (!isset($data['firstname'], $data['lastname'], $data['username'], $data['password'])) {
+    returnWithError("Missing required fields. Received: " . json_encode($data));
     exit();
 }
 
@@ -26,7 +28,7 @@ if ($conn->connect_error) {
         // $stmt->execute();
 
         // Check if the user was added successfully
-        if (stmt_execute()) {
+        if (stmt->execute()) {
             // Retrieve the ID of the newly inserted user
             $userID = $conn->insert_id;
             returnWithSuccess("User has been added", $userID);
