@@ -15,7 +15,7 @@ if ($conn->connect_error) {
     $stmt = $conn->prepare("SELECT ID, FirstName, LastName, Password FROM Users WHERE Login=?");
     if ($stmt) {
         // Bind parameters and execute
-        $stmt->bind_param("s", $inData["login"]);
+        $stmt->bind_param("s", $inData["username"]);
         $stmt->execute();
         $result = $stmt->get_result();
         
