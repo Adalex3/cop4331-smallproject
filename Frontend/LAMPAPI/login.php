@@ -15,11 +15,11 @@ if(isset($data->username) && isset($data->Password))
     $password = htmlspecialchars($data->Password);
 
     $stmt = $conn->prepare("SELECT Password FROM Users WHERE username = ?");
-    $stmt->bind_param("s", username);
+    $stmt->bind_param("s", $username);
     $stmt->execute();
     $stmt->store_result();
 
-    if(stmt->num_rows > 0) 
+    if($stmt->num_rows > 0) 
     {
         $stmt->bind_result($hashedPassword);
         $stmt->fetch();
