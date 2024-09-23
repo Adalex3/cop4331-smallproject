@@ -12,37 +12,28 @@ if($conn->connect_error)
 if(isset($data->username) && isset($data->Password))
 {
     $username = htmlspecialchars($data->username);
-    $password = htmlspecialchars($data->Password);
+    $name = htmlspecialchars($data->Name);
+    $email = htmlspecialchars($data->Email);
 
     $stmt = $conn->prepare("INSERT INTO Contacts (username, Name, Email) VALUES (?, ?, ?)");
     $stmt->bind_param("sss", $username, $name, $email);
-    $stmt->execute();
-    $stmt->store_result();
+    // $stmt->execute();
+    // $stmt->store_result();
 
-    if($stmt->num_rows > 0) 
-    {
-        $stmt->bind_result($hashedPassword);
-        $stmt->fetch();
+    if ($stmt->execute()) {
+        echo json_encode(["message" => "Contact added successfully."]);
+    } 
+    else {
+        echo json_encode(["error" => "Error adding contact: " . $stmt->error]);
+    }
 
-        if(password_verify($password, $hashedPassword))
-        {
-            echo json_encode(["message" => "Login successful."]);
-        }
-        else
-        {
-            echo json_encode(["error" => "Incorrect password."]);
-        }
-    }
-    else 
-    {
-        echo json_encode(["error" => "Username not found."]);
-    }
     $stmt->close();
 }
 
 else 
 {
-    echo json_encode(["error" => "Invalid input"]);
+    echo json_encode(["error" => "Missing data"]);
+    exit();
 }
 
 $conn->close();
