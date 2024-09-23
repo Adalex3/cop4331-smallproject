@@ -14,8 +14,8 @@ if(isset($data->username) && isset($data->Password))
     $username = htmlspecialchars($data->username);
     $password = htmlspecialchars($data->Password);
 
-    $stmt = $conn->prepare("SELECT Password FROM Users WHERE username = ?");
-    $stmt->bind_param("s", $username);
+    $stmt = $conn->prepare("INSERT INTO Contacts (username, Name, Email) VALUES (?, ?, ?)");
+    $stmt->bind_param("sss", $username, $name, $email);
     $stmt->execute();
     $stmt->store_result();
 
