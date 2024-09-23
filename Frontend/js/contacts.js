@@ -118,6 +118,28 @@ function deleteContact() {
     },500);
 
     // TODO: ADD THE API ENDPOINT FOR DELETING A CONTACT HERE
+    const data = {
+        firstName: firstName,
+        lastName: lastName,
+        email: email
+    }
+
+    fetch('Backend/deleteContact.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success){
+            console.log(result.success)
+        } else if (result.error){
+            console.log(result.error)
+        }
+    })
+    .catch(error => console.error('Error:', error))
 }
 
 var editing = false;
@@ -213,7 +235,7 @@ function addContact(firstName, lastName, email) {
     };
 
     // Make a POST request to the add_contact.php API
-    fetch('add_contact.php', {
+    fetch('Backend/createContact.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
