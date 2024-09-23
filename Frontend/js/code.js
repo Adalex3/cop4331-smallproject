@@ -37,7 +37,7 @@ function doLogin()
 		
 				if( userId < 1 )
 				{		
-					document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
+					document.getElementById("loginResult").innerHTML = "Username/Password combination incorrect";
 					return;
 				}
 		
@@ -95,42 +95,46 @@ function readCookie()
 	}
 	else
 	{
-//		document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
+		document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
 	}
 }
 
-function addUser(){
-	let newFirstName = document.getElementById("firstnameText").value;
+function addUser() {
+    let newFirstName = document.getElementById("firstnameText").value;
     let newLastName = document.getElementById("lastnameText").value;
     let newUsername = document.getElementById("usernameText").value;
     let newPassword = document.getElementById("passwordText").value;
     document.getElementById("userAddResult").innerHTML = "";
 
-    let tmp = {firstname:newFirstName, lastname:newLastName, username:newUsername, password:newPassword};
-    let jsonPayload = JSON.stringify( tmp );
+    let tmp = { firstname: newFirstName, lastname: newLastName, username: newUsername, password: newPassword };
+    let jsonPayload = JSON.stringify(tmp);
 
     let url = urlBase + '/Register.' + extension;
-    
+
     let xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-    try
-    {
-        xhr.onreadystatechange = function() 
-        {
-            if (this.readyState == 4 && this.status == 200) 
-            {
-                document.getElementById("userAddResult").innerHTML = "User has been added";
-				window.location.href = "contacts.html"; 
+
+    try {
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                if (this.status == 200) {
+                    let jsonObject = JSON.parse(xhr.responseText);
+                    if (jsonObject.error && jsonObject.error === "Username already taken") {
+                        document.getElementById("userAddResult").innerHTML = "Username is already taken. Please choose another one.";
+                    } else {
+                        document.getElementById("userAddResult").innerHTML = "User has been added";
+                        window.location.href = "contacts.html";
+                    }
+                } else {
+                    document.getElementById("userAddResult").innerHTML = "Error registering user. Please try again.";
+                }
             }
         };
         xhr.send(jsonPayload);
-    }
-    catch(err)
-    {
+    } catch (err) {
         document.getElementById("userAddResult").innerHTML = err.message;
     }
-
 }
 
 function doLogout() {
