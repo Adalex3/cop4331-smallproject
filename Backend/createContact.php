@@ -1,54 +1,59 @@
 <?php
 
+// Get the incoming request data
 $data = getRequestInfo();
 
+// Check if the required fields are present
+if (!isset($data['firstName'], $data['lastName'], $data['email'])) {
+    returnWithError("Missing required fields.");
+    exit();
+}
+
+// Connect to the database
 $conn = new mysqli("127.0.0.1", "badridemo", "badridemo1", "contactManager");
 
-if($conn->connect_error)
-{
-    die("Connetion failed: " . $conn->connect_error);
-}
-
-if(isset($data->username) && isset($data->Password))
-{
-    $username = htmlspecialchars($data->username);
-    $password = htmlspecialchars($data->Password);
-
-    $stmt = $conn->prepare("SELECT Password FROM Users WHERE username = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $stmt->store_result();
-
-    if($stmt->num_rows > 0) 
-    {
-        $stmt->bind_result($hashedPassword);
-        $stmt->fetch();
-
-        if(password_verify($password, $hashedPassword))
-        {
-            echo json_encode(["message" => "Login successful."]);
+// Check for a connection error
+if ($conn->connect_error) {
+    returnWithError($conn->connect_error);
+} else {
+    // Prepare and execute the SQL statement to insert the contact
+    $stmt = $conn->prepare("INSERT INTO Contacts (FirstName, LastName, Email) VALUES (?, ?, ?)");
+    if ($stmt) {
+        // Bind the parameters and execute
+        $stmt->bind_param("sss", $data['firstName'], $data['lastName'], $data['email']);
+        if ($stmt->execute()) {
+            // Return success message
+            returnWithSuccess("Contact added successfully.");
+        } else {
+            returnWithError("Failed to add contact: " . $stmt->error);
         }
-        else
-        {
-            echo json_encode(["error" => "Incorrect password."]);
-        }
+        $stmt->close();
+    } else {
+        returnWithError("Failed to prepare statement.");
     }
-    else 
-    {
-        echo json_encode(["error" => "Username not found."]);
-    }
-    $stmt->close();
+    $conn->close();
 }
 
-else 
-{
-    echo json_encode(["error" => "Invalid input"]);
+// Function to get the request data
+function getRequestInfo() {
+    return json_decode(file_get_contents('php://input'), true);
 }
 
-$conn->close();
+// Function to send JSON response
+function sendResultInfoAsJson($obj) {
+    header('Content-type: application/json');
+    echo $obj;
+}
 
-function getRequestInfo() 
-{
-    return json_decode(file_get_contents('php://input'))
+// Function to return errors
+function returnWithError($err) {
+    $retValue = json_encode(array("error" => $err));
+    sendResultInfoAsJson($retValue);
+}
+
+// Function to return success message
+function returnWithSuccess($message) {
+    $retValue = json_encode(array("success" => $message));
+    sendResultInfoAsJson($retValue);
 }
 ?>

@@ -201,10 +201,35 @@ addButton.addEventListener('click',function(){
     editContact();
 
 });
+
 function addContact(firstName, lastName, email) {
     console.log("Adding contact");
 
-    // TODO: THIS IS WHERE THE API ENDPOINT NEEDS TO GO FOR ADDING
+    // The data to be sent to the API
+    const data = {
+        firstName: firstName,
+        lastName: lastName,
+        email: email
+    };
+
+    // Make a POST request to the add_contact.php API
+    fetch('add_contact.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success) {
+            console.log(result.success);
+            // Optionally, refresh the contact list or update the UI
+        } else if (result.error) {
+            console.error(result.error);
+        }
+    })
+    .catch(error => console.error('Error:', error));
 }
 
 
