@@ -15,7 +15,15 @@ $conn = new mysqli("127.0.0.1", "badridemo", "badridemo1", "contactManager");
 // Check connection
 if ($conn->connect_error) {
     returnWithError($conn->connect_error);
-} else {
+} 
+else {
+
+    if ($stmt->num_rows > 0) {
+        echo json_encode(["error" => "Username already exists."]);
+        $stmt->close();
+        $conn->close();
+        exit(); // Stop further execution if username exists
+    }
     // Prepare and execute the SQL statement to insert the new user
     $stmt = $conn->prepare("INSERT INTO Users (FirstName, LastName, Login, Password) VALUES (?, ?, ?, ?)");
     if ($stmt) {
