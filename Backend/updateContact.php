@@ -8,17 +8,17 @@ if ($conn->connect_error) {
 }
 
 // Check if the required fields are provided
-if (isset($data['id']) && isset($data['firstName']) && isset($data['lastName']) && isset($data['email'])) {
-    $id = $data['id'];
-    $firstName = htmlspecialchars($data['firstName']);
-    $lastName = htmlspecialchars($data['lastName']);
+if (isset($data['id']) && isset($data['username']) && isset($data['name']) && isset($data['email'])) {
+    $id = (int)$data['id']; // Ensure ID is treated as an integer
+    $username = htmlspecialchars($data['username']);
+    $name = htmlspecialchars($data['name']);
     $email = htmlspecialchars($data['email']);
     
     // Prepare the SQL statement
-    $stmt = $conn->prepare("UPDATE Contacts SET FirstName = ?, LastName = ?, Email = ? WHERE ID = ?");
+    $stmt = $conn->prepare("UPDATE Contacts SET username = ?, name = ?, email = ? WHERE id = ?");
     
     if ($stmt) {
-        $stmt->bind_param("sssi", $firstName, $lastName, $email, $id);
+        $stmt->bind_param("sssi", $username, $name, $email, $id);
         
         // Execute the statement
         if ($stmt->execute()) {
