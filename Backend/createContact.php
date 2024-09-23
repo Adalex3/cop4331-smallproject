@@ -1,10 +1,15 @@
 <?php
 
+// Enable error reporting for debugging
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Get the incoming request data
 $data = getRequestInfo();
 
 // Check if the required fields are present
-if (!isset($data['firstName'], $data['lastName'], $data['email'])) {
+if (!isset($data['username'], $data['name'], $data['email'])) {
     returnWithError("Missing required fields.");
     exit();
 }
@@ -14,25 +19,27 @@ $conn = new mysqli("127.0.0.1", "badridemo", "badridemo1", "contactManager");
 
 // Check for a connection error
 if ($conn->connect_error) {
-    returnWithError($conn->connect_error);
-} else {
-    // Prepare and execute the SQL statement to insert the contact
-    $stmt = $conn->prepare("INSERT INTO Contacts (FirstName, LastName, Email) VALUES (?, ?, ?)");
-    if ($stmt) {
-        // Bind the parameters and execute
-        $stmt->bind_param("sss", $data['firstName'], $data['lastName'], $data['email']);
-        if ($stmt->execute()) {
-            // Return success message
-            returnWithSuccess("Contact added successfully.");
-        } else {
-            returnWithError("Failed to add contact: " . $stmt->error);
-        }
-        $stmt->close();
-    } else {
-        returnWithError("Failed to prepare statement.");
-    }
-    $conn->close();
+    returnWithError("Connection failed: " . $conn->connect_error);
+    exit();
 }
+
+// Prepare and execute the SQL statement to insert the contact
+$stmt = $conn->prepare("INSERT INTO Contacts (username, name, email) VALUES (?, ?, ?)");
+if ($stmt) {
+    // Bind the parameters and execute
+    $stmt->bind_param("sss", $data['username'], $data['name'], $data['email']);
+    if ($stmt->execute()) {
+        // Return success message
+        returnWithSuccess("Contact added successfully.");
+    } else {
+        returnWithError("Failed to add contact: " . $stmt->error);
+    }
+    $stmt->close();
+} else {
+    returnWithError("Prepare failed: " . $conn->error);
+}
+
+$conn->close();
 
 // Function to get the request data
 function getRequestInfo() {
