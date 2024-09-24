@@ -8,12 +8,12 @@ if ($conn->connect_error) {
 }
 
 // Check if the required fields are provided
-if (isset($data['id']) && isset($data['username']) && isset($data['name']) && isset($data['email']) && isset($data['phonenumber'])) {
+if (isset($data['id']) && isset($data['username']) && isset($data['name']) && isset($data['email']) && isset($data['phone$phonenumbernumber'])) {
     $id = (int)$data['id']; // Ensure ID is treated as an integer
     $username = htmlspecialchars($data['username']);
     $name = htmlspecialchars($data['name']);
     $email = htmlspecialchars($data['email']);
-    $phone = htmlspecialchars($data['phonenumber'])
+    $phonenumber = htmlspecialchars($data['phonenumber']);
     
     // Prepare the SQL statement
     $stmt = $conn->prepare("UPDATE Contacts SET username = ?, name = ?, email = ?, phonenumber = ? WHERE id = ?");
