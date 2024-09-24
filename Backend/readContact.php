@@ -29,14 +29,7 @@ while($row = $result->fetch_assoc()) {
 }
 
 // Check if search term was provided and if no contacts were found
-if ($searchTerm !== '%' . $data['search'] . '%' && count($contacts) === 0) 
-{
-    echo json_encode([]);
-} 
-else
-{
-    echo json_encode($contacts);
-}
+echo json_encode($contacts);
 
 $conn->close();
 ?>
