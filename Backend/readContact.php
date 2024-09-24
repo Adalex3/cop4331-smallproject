@@ -19,8 +19,6 @@ else
     $stmt->bind_param("s", $searchTerm);
 }
 
-$result = $conn->query("SELECT * FROM Contacts WHERE Name LIKE ?");
-$stmt->bind_param("s", $searchTerm);  // Bind the search term
 $stmt->execute();
 
 $result = $stmt->get_result();
