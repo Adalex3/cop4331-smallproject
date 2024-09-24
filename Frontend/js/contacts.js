@@ -214,7 +214,6 @@ saveButton.addEventListener('click',function(){
 
 
 // Add support
-
 addButton.addEventListener('click',function(){
 
     adding = true;
@@ -228,30 +227,42 @@ function addContact(firstName, lastName, email) {
     console.log("Adding contact");
 
     // The data to be sent to the API
-    const data = {
-        firstName: firstName,
-        lastName: lastName,
-        email: email
-    };
+    let Name = firstNameInput
+    let email = emailInput
+    let username = lastNameInput
 
+    let tmp = {Name: Name, email: email, username: username}
     // Make a POST request to the add_contact.php API
-    fetch('Backend/createContact.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(result => {
-        if (result.success) {
-            console.log(result.success);
-            // Optionally, refresh the contact list or update the UI
-        } else if (result.error) {
-            console.error(result.error);
-        }
-    })
-    .catch(error => console.error('Error:', error));
+    let payload = JSON.stringify(tmp);
+    let url = 'Backend\createContact.php';
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+    try {
+        // Set up the callback function to handle the response
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                // Parse the JSON response from the server
+                let jsonObject = JSON.parse(xhr.responseText);
+
+                // Check for success or error in the response
+                if (jsonObject.success) {
+                    alert("Contact added successfully.");
+                    createAndAssignButton(firstNameInput.value, lastNameInput.value, emailInput.value); // Optionally, add contact to UI
+                } else if (jsonObject.error) {
+                    document.getElementById("contactResult").innerHTML = "Error: " + jsonObject.error;
+                    return;
+                }
+            }
+        };
+        // Send the request with the JSON payload
+        xhr.send(jsonPayload);
+    }catch (err){
+        document.getElementById("contactResult").innerHTML = err.message;
+    }
+    
 }
 
 
