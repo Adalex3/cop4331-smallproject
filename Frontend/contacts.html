@@ -18,12 +18,13 @@
         <h1>
             <button class="logoutBtn" onclick="doLogout();">Log Out</button>
         </h1>
+
         <div id="contacts">
             <h1 class="playfair-bold" style="margin: 5%;">Contacts List</h1>
             <div class="search-container">
                 <form action="/search_results.php" method="GET">
                     <input type="text" placeholder="Search contacts..." name="query">
-                    <button type="submit">Search</button>
+                    <button type="submit" onsubmit="doSearch()">Search</button>
                 </form>
 
                 <a class="x-button add" data-tooltip="Add a new contact">+</a>

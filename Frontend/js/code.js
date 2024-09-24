@@ -146,6 +146,10 @@ function doLogout() {
     window.location.href = "login.html";
 }
 
+function doSearch() {
+	
+}
+
 
 /* 
 // Load the contacts from the database
