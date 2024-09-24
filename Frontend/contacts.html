@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Manager</title>
     <link rel="stylesheet" href="contacts.css">
+    <script src="js/code.js"></script>
 
     <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,57 +13,53 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 
 </head>
+<body onload="doSearch()"></body>
+    <h1>
+        <button class="buttonLogout" onclick="doLogout();">Log Out</button>
+    </h1>
+    <!-- Contact Form for Adding a New Contact -->
+    <div>
+        <main class="form-containerAdd">
+            <h2>Add a New Contact</h2>
 
-<body>
-
-    <div class="content">
-        <div id="contacts">
-            <h1 class="playfair-bold" style="margin: 5%;">Contacts List</h1>
-            <div class="search-container">
-                <form action="/search_results.php" method="GET">
-                    <input type="text" placeholder="Search contacts..." name="query">
-                    <button type="submit">Search</button>
-                </form>
-
-                <a class="x-button add" data-tooltip="Add a new contact">+</a>
-            </div>
-            <p id="placeholder-text">Contacts will appear here when searched.</p>
-            <a id="contact-button-template" style="display:none"><div>Contact Name</div></a>
-        </div>
-        <div class="contact-info" id="contact-info" style="transform: translateY(-150%)">
-            <a class="x-button">X</a>
-            <div>
-                <h3 id="detail-firstname">First Name</h3>
-                <h3 id="detail-lastname">Last Name</h3>
-            </div>
-            <p style="font-size: 3rem; margin: 0 !important">•</p>
-            <h4 id="detail-email">Email</h4>
-
-            <div class="actions">
-                <a href="#" id="edit-contact">Edit</a>
-                <a href="#" id="delete-contact" style="color:red;">Delete</a>
-            </div>
-        </div>
-
-        <div class="contact-info edit" id="contact-info-edit" style="display: none">
-            <a class="x-button">X</a>
-            <div>
-                <div><p>First Name</p><input id="input-firstname"></input></div>
-                <div><p>Last Name</p><input id="input-lastname"></input></div>
-                <div><p>Email</p><input id="input-email"></input></div>
-                <div><p>Phone Number: </p><input id="input-phoneNum"></div>
-            </div>
-            <div class="actions">
-                <a href="#" id="save-contact">Save</a>
-            </div>
-        </div>
-
+            <form onsubmit="createContact(); return false;" class="horizontal-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" placeholder="Name" required>
+                <br>
+                <label for="email">Email:</label>
+                <input type="text" id="email" placeholder="Email" required>
+                <br>
+                <label for="phone">Phone:</label>
+                <input type="text" id="phone" placeholder="Phone" required>
+                <br>
+                <button type="submit">Add Contact</button>
+            </form>
+            <div class="justify-content-center font-bold" id="contactAddResult"></div>
+        </main>
     </div>
-
+    <div class="containerTable">
+        <h2>Contacts</h2>
+        <div class="search-container">
+            <input type="text" id="searchBar" placeholder="Search Contacts" oninput="doSearch()">
+        </div>
+        <!-- Contacts Table -->
+        <table id="contacts-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="contacts-body">
+                <!-- contacts go here DONT EDIT  -->
+            </tbody>
+        </table>
+    <div class="justify-content-center font-bold" id="contactEditResult"></div>
+    <div class="justify-content-center font-bold" id="contactDeleteResult"></div>
+    </div>
     
 </body>
-
-
-<script src="js/contacts.js"></script>
 
 </html>
