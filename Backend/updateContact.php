@@ -8,7 +8,7 @@ if ($conn->connect_error) {
 }
 
 // Check if the required fields are provided
-if (isset($data['id']) && isset($data['username']) && isset($data['name']) && isset($data['email']) && isset($data['phone$phonenumbernumber'])) {
+if (isset($data['id']) && isset($data['username']) && isset($data['name']) && isset($data['email']) && isset($data['phonenumber'])) {
     $id = (int)$data['id']; // Ensure ID is treated as an integer
     $username = htmlspecialchars($data['username']);
     $name = htmlspecialchars($data['name']);
