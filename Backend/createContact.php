@@ -4,7 +4,7 @@
 $data = getRequestInfo();
 
 // Check if the required fields are present
-if (!isset($data['username'], $data['name'], $data['email'])) {
+if (!isset($data['username'], $data['name'], $data['email'], $data['phonenumber'])) {
     returnWithError("Missing required fields.");
     exit();
 }
@@ -19,10 +19,10 @@ if ($conn->connect_error) {
 }
 
 // Prepare and execute the SQL statement to insert the contact
-$stmt = $conn->prepare("INSERT INTO Contacts (username, name, email) VALUES (?, ?, ?)");
+$stmt = $conn->prepare("INSERT INTO Contacts (username, name, email, phonenumber) VALUES (?, ?, ?, ?)");
 if ($stmt) {
     // Bind the parameters and execute
-    $stmt->bind_param("sss", $data['username'], $data['name'], $data['email']);
+    $stmt->bind_param("ssss", $data['username'], $data['name'], $data['email'], $data['phonenumber']);
     if ($stmt->execute()) {
         // Return success message
         returnWithSuccess("Contact added successfully.");
