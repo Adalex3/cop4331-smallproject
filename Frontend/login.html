@@ -6,37 +6,32 @@
     <title>Contact Manager</title>
     <link rel="stylesheet" href="style.css">
 </head>
+<body id="login-body">
+    <header>
+        <h1>Contact Manager</h1>
+    </header>
 
-    <body id="login-body">
-        <header>
-            <h1>Contact Manager</h1>
-        </header>
-
-        <div class="container">
-            <!--Log-in Form-->
-            <div id="login-form">
-                <h2>Login</h2>
-                <form action="js/code.js/doLogin()" method="POST">
-                    <input id="loginName" type="text" name="username" placeholder="Username" required>
-                    <input id="loginPassword" type="password" name="password" placeholder="Password" required>
-                    <input type="submit" value="Login">
-                </form>
-                <p>Need to create an account? <a href="#" id="register-here">Register here</a></p>
-            </div>
+    <div class="container">
+        <!--Log-in Form-->
+        <div id="login-form">
+            <h2>Login</h2>
+            <form onsubmit="event.preventDefault(); doLogin();">
+                <input id="loginName" type="text" name="username" placeholder="Username" required>
+                <input id="loginPassword" type="password" name="password" placeholder="Password" required>
+                <input type="submit" value="Login">
+            </form>
+            <p>Need to create an account? <a href="#" id="register-here">Register here</a></p>
         </div>
+    </div>
 
-        <p id="loginResult"></p>
+    <p id="loginResult"></p>
 
-    
-        <script>
-            document.getElementById('register-here').addEventListener('click', function(e) {
-                e.preventDefault();
-                window.location.href='signup.html';
-            });
-        </script>
-
-    </body>
-
+    <script>
+        document.getElementById('register-here').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href='signup.html';
+        });
+    </script>
     <script src="js/code.js"></script>
-
+</body>
 </html>
