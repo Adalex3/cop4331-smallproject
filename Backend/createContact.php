@@ -18,7 +18,6 @@ if ($conn->connect_error) {
     exit();
 }
 
-var_dump($data);
 // Prepare and execute the SQL statement to insert the contact
 $stmt = $conn->prepare("INSERT INTO Contacts (username, name, email, phonenumber) VALUES (?, ?, ?, ?)");
 if ($stmt) {
