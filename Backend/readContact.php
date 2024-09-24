@@ -20,18 +20,22 @@ else
 }
 
 $stmt->execute();
-
 $result = $stmt->get_result();
 
 
-if($result->num_rows > 0) {
-    $contacts = array();
-    while($row = $result->fetch_assoc()) {
-        $contacts[] = $row;
-    }
-    echo json_encode($contacts);
-} else {
+$contacts = array();
+while($row = $result->fetch_assoc()) {
+    $contacts[] = $row;
+}
+
+// Check if search term was provided and if no contacts were found
+if ($searchTerm !== '%' . $data['search'] . '%' && count($contacts) === 0) 
+{
     echo json_encode([]);
+} 
+else
+{
+    echo json_encode($contacts);
 }
 
 $conn->close();
