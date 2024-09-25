@@ -195,6 +195,8 @@ function saveContact(){
                 console.log("Contact added!");
                 addContactToList(firstName, lastName, email, phoneNum);
                 clearEditForm();
+                closeEditForm();
+                document.getElementById("placeholder-text").style.display = "none";
             } else if (response.error){
                 console.error("Error: " + response.error);
             }
@@ -223,3 +225,35 @@ function addContactToList(firstName, lastName, email, phoneNum){
     `;
     contactList.appendChild(newContact); // Append the newly added contact
 }
+
+function fetchContacts() {
+    let xhr = new XMLHttpRequest();
+    let url = urlBase + '/readContact.' + extension;
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            let response = JSON.parse(xhr.responseText);
+            if (response.results) {
+                document.getElementById("placeholder-text").style.display = "none";
+                response.results.forEach(contact => {
+                    const names = contact.name.split(' ');
+                    const firstName = names[0];
+                    const lastName = names[1] || "";
+                    addContactToList(firstName, lastName, contact.email, contact.phonenumber);
+                });
+            } else if (response.error) {
+                console.error("Error: " + response.error);
+            }
+        }
+    }
+
+    // Hardcoding the username "afetyko"
+    let payload = JSON.stringify({ username: "afetyko" });
+    xhr.send(payload);
+}
+
+
+// Call fetchContacts when the page loads
+document.addEventListener('DOMContentLoaded', fetchContacts);
