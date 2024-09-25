@@ -15,25 +15,34 @@
 
 <body>
     <div class="content">
+
+        <!-- Logout Button -->
         <h1>
             <button class="logoutBtn" onclick="doLogout();">Log Out</button>
         </h1>
 
+        <!-- Contact List -->
         <div id="contacts">
             <h1 class="playfair-bold" style="margin: 5%;">Contacts List</h1>
             <div class="search-container">
+
+                <!-- Search Contacts -->
                 <form action="/search_results.php" method="GET">
                     <input type="text" placeholder="Search contacts..." name="query">
                     <button type="submit" onsubmit="doSearch()">Search</button>
                 </form>
 
-                <a class="x-button add" data-tooltip="Add a new contact">+</a>
+                <!-- Add Contacts -->
+                <a class="x-button add" data-tooltip="Add a new contact" onclick="addContact();">+</a>
             </div>
+
             <p id="placeholder-text">Contacts will appear here when searched.</p>
             <a id="contact-button-template" style="display:none"><div>Contact Name</div></a>
         </div>
+
+        <!-- Contact Display -->
         <div class="contact-info" id="contact-info" style="transform: translateY(-150%)">
-            <a class="x-button">X</a>
+            <a class="x-button" onclick="closeContactInfo();">X</a>
             <div>
                 <h3 id="detail-firstname">First Name</h3>
                 <h3 id="detail-lastname">Last Name</h3>
@@ -42,13 +51,15 @@
             <h4 id="detail-email">Email</h4>
 
             <div class="actions">
-                <a href="#" id="edit-contact">Edit</a>
-                <a href="#" id="delete-contact" style="color:red;">Delete</a>
+                <!-- Update and Delete Contacts -->
+                <a href="#" id="edit-contact" onclick="editContact();">Edit</a>
+                <a href="#" id="delete-contact" style="color:red;" onclick="deleteContact();">Delete</a>
             </div>
         </div>
 
+        <!-- Contact Info Edit Form -->
         <div class="contact-info edit" id="contact-info-edit" style="display: none">
-            <a class="x-button">X</a>
+            <a class="x-button" onclick="closeEditForm();">X</a>
             <div>
                 <div><p>First Name</p><input id="input-firstname"></input></div>
                 <div><p>Last Name</p><input id="input-lastname"></input></div>
@@ -56,7 +67,8 @@
                 <div><p>Phone Number: </p><input id="input-phoneNum"></div>
             </div>
             <div class="actions">
-                <a href="#" id="save-contact">Save</a>
+                <!-- Save Contacts -->
+                <a href="#" id="save-contact" onclick="saveContact();">Save</a>
             </div>
         </div>
 
