@@ -167,4 +167,15 @@ function addContact() {
     document.getElementById("contact-info-edit").style.display = "flex"; // Show the form
     clearEditForm(); // Clear any previous data in the form
     console.log("Contact edit form fields have been cleared.");
+
+    let firstName = document.getElementById("input-firstname").value;
+    let lastName = document.getElementById("input-lastname").value;
+    let email = document.getElementById("input-email").value;
+    let phoneNum = document.getElementById("input-phoneNum").value;
+
+    // Log the input values
+    console.log("First Name: " + firstName);
+    console.log("Last Name: " + lastName);
+    console.log("Email: " + email);
+    console.log("Phone Number: " + phoneNum);
 }

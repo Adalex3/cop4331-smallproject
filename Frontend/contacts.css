@@ -174,7 +174,7 @@ button:hover {
 
 
 
-/* .contact-info {
+/* /* .contact-info {
     position: relative;
     border: solid 1px gray;
     width: 42.5vw;
@@ -182,7 +182,7 @@ button:hover {
 } */
 
 
-.contact-info {
+/* .contact-info {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -190,10 +190,19 @@ button:hover {
     border: solid 1px gray;
     width: 42.5vw;
     height: 85vh;
-    /* opacity: 0; */
+    /* opacity: 0;
     transition: 0.5s;
     display: none;
+}/* */
+
+.contact-info {
+    display: flex; 
+    border: solid 1px gray; 
+    width: 42.5vw;
+    height: 85vh;
+    position: relative; 
 }
+
 
 /* Added */
 .contact-info.edit{
