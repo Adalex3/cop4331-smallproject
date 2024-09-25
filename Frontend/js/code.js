@@ -170,14 +170,56 @@ function openContact() {
 }
 
 function saveContact(){
-    
+
     let firstName = document.getElementById("input-firstname").value;
     let lastName = document.getElementById("input-lastname").value;
     let email = document.getElementById("input-email").value;
     let phoneNum = document.getElementById("input-phoneNum").value;
-    // Log the input values
-    console.log("First Name: " + firstName);
-    console.log("Last Name: " + lastName);
-    console.log("Email: " + email);
-    console.log("Phone Number: " + phoneNum);
+
+    contactData = {
+        username: "afetyko",
+        name: firstName + " " + lastName,
+        email: email,
+        phonenumber: phoneNum
+    };
+
+    let xhr = new XMLHttpRequest();
+    let url = urlBase + '/createContact.' + extension;
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200){
+            let response = JSON.parse(xhr.responseText);
+            if (response.success){
+                console.log("Contact added!");
+                addContactToList(firstName, lastName, email, phoneNum);
+                clearEditForm();
+            } else if (response.error){
+                console.error("Error: " + response.error);
+            }
+        }
+    }
+
+    xhr.send(JSON.stringify(contactData));
+}
+
+function addContactToList(firstName, lastName, email, phoneNum){
+    let contactList = document.getElementById("contact-info");
+
+    let newContact = document.createElement("div");
+    newContact.classList.add("contact-info");
+
+    newContact.innerHTML = `
+        <div>
+            <h3>${firstName} ${lastName}</h3>
+            <p>${email}</p>
+            <p>${phoneNum}</p>
+        </div>
+        <div class="actions">
+            <a href="#" onclick="editContact('${firstName}', '${lastName}', '${email}', '${phoneNum}')">Edit</a>
+            <a href="#" style="color:red;" onclick="deleteContact(this)">Delete</a>
+        </div>
+    `;
+    contactList.appendChild(newContact); // Append the newly added contact
 }
