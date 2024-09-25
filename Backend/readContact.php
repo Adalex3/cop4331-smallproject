@@ -1,4 +1,5 @@
 <?php
+$data = getRequestInfo();
 $conn = new mysqli("127.0.0.1", "badridemo", "badridemo1", "contactManager");
 
 if($conn->connect_error) {
@@ -47,4 +48,8 @@ else
 
 $stmt->close();
 $conn->close();
+
+function getRequestInfo() {
+    return json_decode(file_get_contents('php://input'), true);
+}
 ?>
