@@ -163,9 +163,8 @@ function closeContactInfo() {
 }
 
 function addContact() {
-    console.log("Add Contact button pressed."); // Log when the function is triggered
+    console.log("Add Contact button pressed.");
     document.getElementById("contact-info-edit").style.display = "block"; // Show the form
-    console.log("Contact edit form is now visible."); // Log when the form is displayed
     clearEditForm(); // Clear any previous data in the form
-    console.log("Contact edit form fields have been cleared."); // Log after clearing the form fields
+    console.log("Contact edit form fields have been cleared.");
 }
