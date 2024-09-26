@@ -302,7 +302,7 @@ function deleteContact() {
             }
         }
     }
-    let payload = JSON.stringify({ username: "fdggfdsf" });
+    let payload = JSON.stringify({ username: "afetyko" });
     xhr.send(payload);
 }
 
