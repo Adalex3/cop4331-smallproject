@@ -233,7 +233,7 @@ function fetchContacts() {
 }
 
 function addContactToList(contacts) {
-    let contactList = document.getElementById("contact-info");
+    let contactList = document.getElementById("contact-list");
     contactList.innerHTML = ""; // Clear the list
 
     console.log("addContactToList function called with contacts:", contacts); // Log the contacts passed in
