@@ -219,9 +219,8 @@ function fetchContacts() {
             console.log("Parsed Response:", response);  // Log the parsed JSON object
             console.log("Response Results: ", response.results);
 
-            if (response.results) {
-                console.log("Contact Results:", response.results);  // Log the contact results array
-                addContactToList(response.results);
+            if (response) {
+                addContactToList(response);
             } else if (response.error) {
                 console.log("No results found or error:", response.error || "No error but no results");  // Log any error messages
             }
@@ -240,14 +239,14 @@ function addContactToList(contacts) {
     console.log("addContactToList function called with contacts:", contacts); // Log the contacts passed in
 
     contacts.forEach(contact => {
-        console.log("Adding contact:", contact);  // Log each contact
+        console.log("Adding contact:", contact); // Log each contact
 
         let newContact = document.createElement("div");
         newContact.classList.add("contact-info");
-        let nameParts = contact.name.split(" ");
-        let firstName = nameParts[0];    // Get the first name
-        let lastName = nameParts.slice(1).join(" ");    // Get the last name
-        
+        let nameParts = contact.Name.split(" "); // Note the capital 'N' in 'Name'
+        let firstName = nameParts[0]; // Get the first name
+        let lastName = nameParts.slice(1).join(" "); // Get the last name
+
         newContact.innerHTML = `
             <div>
                 <h3>${firstName} ${lastName}</h3>
