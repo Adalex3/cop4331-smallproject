@@ -241,6 +241,7 @@ function addContactToList(contacts) {
     contacts.forEach(contact => {
         console.log("Adding contact:", contact); // Log each contact
         let name = contact.Name;
+        let [firstName, lastName] = name.split(" ");
         let email = contact.Email;
         let phoneNumber = contact.phonenumber;
 
@@ -251,9 +252,14 @@ function addContactToList(contacts) {
 
         newContact.innerHTML = `
             <div>
-                <h3>${name}</h3>
-                <p>${email}</p>
-                <p>${phoneNumber}</p>
+                <h3>First Name: ${firstName}</h3>
+                <h3>Last Name: ${lastName}</h3>
+                <p>Email: ${email}</p>
+                <p>Phone Number: ${phoneNumber}</p>
+            </div>
+            <div class="actions">
+                <a href="#" onclick="editContact('${firstName}', '${lastName}', '${email}', '${phoneNumber}');">Edit</a>
+                <a href="#" onclick="deleteContact();">Delete</a>
             </div>
         `;
 
@@ -274,4 +280,8 @@ function editContact(firstName, lastName, email, phoneNum) {
     document.getElementById("input-lastname").value = lastName;
     document.getElementById("input-email").value = email;
     document.getElementById("input-phoneNum").value = phoneNum;
+}
+
+function deleteContact() {
+    console.log("Delete Contact button pressed.");
 }
