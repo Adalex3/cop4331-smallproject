@@ -222,7 +222,7 @@ function fetchContacts() {
                 console.log("Contact Results:", response.results);  // Log the contact results array
                 addContactToList(response.results);
             } else if (response.error) {
-                console.error("Error: " + response.error);  // Log any error messages
+                console.log("No results found or error:", response.error || "No error but no results");  // Log any error messages
             }
         }
     }
@@ -232,11 +232,15 @@ function fetchContacts() {
     xhr.send(payload);
 }
 
-function addContactToList(contacts){
+function addContactToList(contacts) {
     let contactList = document.getElementById("contact-info");
     contactList.innerHTML = ""; // Clear the list
 
+    console.log("addContactToList function called with contacts:", contacts); // Log the contacts passed in
+
     contacts.forEach(contact => {
+        console.log("Adding contact:", contact);  // Log each contact
+
         let newContact = document.createElement("div");
         newContact.classList.add("contact-info");
         let nameParts = contact.name.split(" ");
