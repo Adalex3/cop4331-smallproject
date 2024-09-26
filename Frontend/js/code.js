@@ -233,7 +233,7 @@ function fetchContacts() {
 }
 
 function addContactToList(contacts) {
-    let contactList = document.getElementById("contact-info");
+    let contactList = document.getElementById("contact-list");
     contactList.innerHTML = ""; // Clear the list
 
     console.log("addContactToList function called with contacts:", contacts); // Log the contacts passed in
@@ -248,15 +248,12 @@ function addContactToList(contacts) {
 
         let newContact = document.createElement("div");
         newContact.classList.add("contact-info");
-        let nameParts = contact.Name.trim().split(" ");
-        let firstName = nameParts[0];
-        let lastName = nameParts.slice(1).join(" ");
 
         newContact.innerHTML = `
             <div>
-                <h3>${firstName} ${lastName}</h3>
-                <p>${contact.Email}</p>
-                <p>${contact.phonenumber}</p>
+                <h3>${name}</h3>
+                <p>${email}</p>
+                <p>${phoneNumber}</p>
             </div>
         `;
 
