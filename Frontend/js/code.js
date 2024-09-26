@@ -228,7 +228,7 @@ function fetchContacts() {
     }
 
     // Hardcoding the username "afetyko"
-    let payload = JSON.stringify({ username: "afetyko" });
+    let payload = JSON.stringify({ username: "fdggfdsf" });
     xhr.send(payload);
 }
 
