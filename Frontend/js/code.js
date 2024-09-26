@@ -240,6 +240,11 @@ function addContactToList(contacts) {
 
     contacts.forEach(contact => {
         console.log("Adding contact:", contact); // Log each contact
+        let name = contact.Name;
+        let email = contact.Email;
+        let phoneNumber = contact.phonenumber;
+
+        console.log(`Name: ${name}, Email: ${email}, Phone Number: ${phoneNumber}`);
 
         let newContact = document.createElement("div");
         newContact.classList.add("contact-info");
