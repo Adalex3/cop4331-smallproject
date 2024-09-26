@@ -228,7 +228,7 @@ function fetchContacts() {
     }
 
     // Hardcoding the username "afetyko"
-    let payload = JSON.stringify({ username: "afetyko" });
+    let payload = JSON.stringify({ username: "fdggfdsf" });
     xhr.send(payload);
 }
 
@@ -267,7 +267,3 @@ window.onload = function() {
     fetchContacts(); // Fetch and display contacts on page load
     console.log("At OnLoad");
 };
-
-function editContact() {
-    console.log("Edit Contact button pressed.");
-}
