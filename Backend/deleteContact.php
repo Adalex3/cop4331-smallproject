@@ -12,8 +12,8 @@ if ($conn->connect_error) {
     exit();
 }
 
-if (!isset($data['username'], $data['contactId'])) {
-    echo json_encode(["error" => "Missing required fields (username or contactId)."]);
+if (!isset($data['username'], $data['id'])) {
+    echo json_encode(["error" => "Missing required fields (username or id)."]);
     exit();
 }
 
