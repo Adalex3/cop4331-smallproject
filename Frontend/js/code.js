@@ -284,4 +284,25 @@ function editContact(firstName, lastName, email, phoneNum) {
 
 function deleteContact() {
     console.log("Delete Contact button pressed.");
+    
+    // API call to delete Contact PHP
+    let xhr = new XMLHttpRequest();
+    let url = urlBase + '/deleteContact.' + extension;
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            let response = JSON.parse(xhr.responseText);
+            if (response.success) {
+                console.log("Contact deleted!");
+                fetchContacts();
+            } else if (response.error) {
+                console.error("Error: " + response.error);
+            }
+        }
+    }
+    let payload = JSON.stringify({ username: "fdggfdsf" });
+    xhr.send(payload);
 }
+
