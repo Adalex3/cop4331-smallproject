@@ -296,7 +296,7 @@ function deleteContact(username, contactID) {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             let response = JSON.parse(xhr.responseText);
-            if (response.success) {
+            if (response) {
                 console.log("Contact deleted!");
                 fetchContacts();
             } else if (response.error) {
