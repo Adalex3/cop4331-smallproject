@@ -244,8 +244,10 @@ function addContactToList(contacts) {
         let [firstName, lastName] = name.split(" ");
         let email = contact.Email;
         let phoneNumber = contact.phonenumber;
+        let id = contact.ID;
+        let username = contact.username;
 
-        console.log(`Name: ${name}, Email: ${email}, Phone Number: ${phoneNumber}`);
+        console.log(`Name: ${name}, Email: ${email}, Phone Number: ${phoneNumber}, ID: ${id}`);
 
         let newContact = document.createElement("div");
         newContact.classList.add("contact-info");
@@ -259,7 +261,7 @@ function addContactToList(contacts) {
             </div>
             <div class="actions">
                 <a href="#" onclick="editContact('${firstName}', '${lastName}', '${email}', '${phoneNumber}');">Edit</a>
-                <a href="#" onclick="deleteContact();">Delete</a>
+                <a href="#" onclick="deleteContact('${username}', '${id}');">Delete</a>
             </div>
         `;
 
@@ -282,7 +284,7 @@ function editContact(firstName, lastName, email, phoneNum) {
     document.getElementById("input-phoneNum").value = phoneNum;
 }
 
-function deleteContact() {
+function deleteContact(username, contactID) {
     console.log("Delete Contact button pressed.");
     
     // API call to delete Contact PHP
@@ -302,7 +304,7 @@ function deleteContact() {
             }
         }
     }
-    let payload = JSON.stringify({ username: "afetyko" });
+    let payload = JSON.stringify({ username: "afetyko", id: contactID });
     xhr.send(payload);
 }
 
