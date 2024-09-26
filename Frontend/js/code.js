@@ -261,4 +261,5 @@ function addContactToList(contacts){
 
 window.onload = function() {
     fetchContacts(); // Fetch and display contacts on page load
+    console.log("At OnLoad");
 };
