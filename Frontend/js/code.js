@@ -193,10 +193,9 @@ function saveContact(){
             let response = JSON.parse(xhr.responseText);
             if (response.success){
                 console.log("Contact added!");
-                addContactToList(firstName, lastName, email, phoneNum);
                 clearEditForm();
                 closeEditForm();
-                document.getElementById("placeholder-text").style.display = "none";
+                fetchContacts();
             } else if (response.error){
                 console.error("Error: " + response.error);
             }
@@ -204,26 +203,6 @@ function saveContact(){
     }
 
     xhr.send(JSON.stringify(contactData));
-}
-
-function addContactToList(firstName, lastName, email, phoneNum){
-    let contactList = document.getElementById("contact-info");
-
-    let newContact = document.createElement("div");
-    newContact.classList.add("contact-info");
-
-    newContact.innerHTML = `
-        <div>
-            <h3>${firstName} ${lastName}</h3>
-            <p>${email}</p>
-            <p>${phoneNum}</p>
-        </div>
-        <div class="actions">
-            <a href="#" onclick="editContact('${firstName}', '${lastName}', '${email}', '${phoneNum}')">Edit</a>
-            <a href="#" style="color:red;" onclick="deleteContact(this)">Delete</a>
-        </div>
-    `;
-    contactList.appendChild(newContact); // Append the newly added contact
 }
 
 function fetchContacts() {
@@ -234,17 +213,16 @@ function fetchContacts() {
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            let response = JSON.parse(xhr.responseText);
+            console.log("Raw Response:", xhr.responseText);  // Log raw response as a string
+
+            let response = JSON.parse(xhr.responseText);  // Parse the JSON response
+            console.log("Parsed Response:", response);  // Log the parsed JSON object
+
             if (response.results) {
-                document.getElementById("placeholder-text").style.display = "none";
-                response.results.forEach(contact => {
-                    const names = contact.name.split(' ');
-                    const firstName = names[0];
-                    const lastName = names[1] || "";
-                    addContactToList(firstName, lastName, contact.email, contact.phonenumber);
-                });
+                console.log("Contact Results:", response.results);  // Log the contact results array
+                addContactToList(response.results);
             } else if (response.error) {
-                console.error("Error: " + response.error);
+                console.error("Error: " + response.error);  // Log any error messages
             }
         }
     }
@@ -254,6 +232,34 @@ function fetchContacts() {
     xhr.send(payload);
 }
 
+function addContactToList(contacts){
+    let contactList = document.getElementById("contact-info");
+    contactList.innerHTML = ""; // Clear the list
 
-// Call fetchContacts when the page loads
-document.addEventListener('DOMContentLoaded', fetchContacts);
+    contacts.forEach(contact => {
+        let newContact = document.createElement("div");
+        newContact.classList.add("contact-info");
+        let nameParts = contact.name.split(" ");
+        let firstName = nameParts[0];    // Get the first name
+        let lastName = nameParts.slice(1).join(" ");    // Get the last name
+        
+        newContact.innerHTML = `
+            <div>
+                <h3>${firstName} ${lastName}</h3>
+                <p>${contact.Email}</p>
+                <p>${contact.phonenumber}</p>
+            </div>
+            <div class="actions">
+                <a href="#" onclick="editContact('${firstName}', '${lastName}', '${contact.Email}', '${contact.phonenumber}')">Edit</a>
+                <a href="#" style="color:red;" onclick="deleteContact(this)">Delete</a>
+            </div>
+        `;
+
+        contactList.appendChild(newContact);
+    });
+}
+
+window.onload = function() {
+    fetchContacts(); // Fetch and display contacts on page load
+    console.log("At OnLoad");
+};
