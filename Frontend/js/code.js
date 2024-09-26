@@ -268,6 +268,12 @@ window.onload = function() {
     console.log("At OnLoad");
 };
 
-function editContact(){
-    console.log("Edit Contact button pressed.");
+function editContact(firstName, lastName, email, phoneNum) {
+    console.log("Edit Contact button pressed for:", firstName, lastName, email, phoneNum);
+    
+    // Populate the edit form with the contact's details
+    document.getElementById("input-firstname").value = firstName;
+    document.getElementById("input-lastname").value = lastName;
+    document.getElementById("input-email").value = email;
+    document.getElementById("input-phoneNum").value = phoneNum;
 }
