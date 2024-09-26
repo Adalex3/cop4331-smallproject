@@ -21,14 +21,14 @@ $username = $conn->real_escape_string($data['username']);
 $id = $data['id'];
 
 $stmt = $conn->prepare("SELECT * FROM Contacts WHERE ID = ? AND username = ?");
-$stmt->bind_param("is", $contactId, $username);
+$stmt->bind_param("is", $id, $username);
 $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
     // Step 2: If the contact exists and belongs to the user, proceed with deletion
     $deleteStmt = $conn->prepare("DELETE FROM Contacts WHERE ID = ?");
-    $deleteStmt->bind_param("i", $contactId);
+    $deleteStmt->bind_param("i", $id);
 
     if ($deleteStmt->execute()) 
     {
