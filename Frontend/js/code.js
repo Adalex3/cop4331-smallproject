@@ -217,6 +217,7 @@ function fetchContacts() {
 
             let response = JSON.parse(xhr.responseText);  // Parse the JSON response
             console.log("Parsed Response:", response);  // Log the parsed JSON object
+            console.log("Response Results: ", response.results);
 
             if (response.results) {
                 console.log("Contact Results:", response.results);  // Log the contact results array
