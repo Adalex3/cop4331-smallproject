@@ -27,9 +27,9 @@
             <div class="search-container">
 
                 <!-- Search Contacts -->
-                <form action="/search_results.php" method="GET">
-                    <input type="text" placeholder="Search contacts..." name="query">
-                    <button type="submit" onsubmit="doSearch()">Search</button>
+                <form id="search-form" onsubmit="doSearch(event);">
+                    <input type="text" id="search-input" placeholder="Search contacts..." name="query">
+                    <button type="submit">Search</button>
                 </form>
 
                 <!-- Add Contacts -->

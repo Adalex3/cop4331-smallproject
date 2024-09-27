@@ -344,3 +344,7 @@ function deleteContact(username, contactID) {
     xhr.send(payload);
 }
 
+function doSearch(event){
+    let search = document.getElementById("search").value;
+    console.log("Searching for: " + search);
+}
