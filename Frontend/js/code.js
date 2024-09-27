@@ -146,8 +146,7 @@ function doLogout() {
 
 // Function to clear the edit form (for a new contact or reset)
 function clearEditForm() {
-    document.getElementById("input-firstname").value = "";
-    document.getElementById("input-lastname").value = "";
+    document.getElementById("input-name").value = "";
     document.getElementById("input-email").value = "";
     document.getElementById("input-phoneNum").value = "";
 }
@@ -204,11 +203,6 @@ function saveContact(){
 
     xhr.send(JSON.stringify(contactData));
 
-    xhr.onload = function () {
-        if (xhr.status === 200){
-            fetchContacts(); // Fetch and display contacts on page load
-        }
-        }
     }
 
 function fetchContacts() {
