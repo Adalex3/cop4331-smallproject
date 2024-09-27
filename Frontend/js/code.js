@@ -10,15 +10,15 @@ function doLogin()
 	userId = 0;
 	firstName = "";
 	lastName = "";
-	
+
 	let login = document.getElementById("loginName").value;
 	let password = document.getElementById("loginPassword").value;
-	
+
 	document.getElementById("loginResult").innerHTML = "";
 
 	let tmp = {username:login,password:password};
 	let jsonPayload = JSON.stringify( tmp );
-	
+
 	let url = urlBase + '/Login.' + extension;
 
 	let xhr = new XMLHttpRequest();
@@ -32,18 +32,18 @@ function doLogin()
 			{
 				let jsonObject = JSON.parse( xhr.responseText );
 				userId = jsonObject.id;
-		
+
 				if( userId < 1 )
 				{		
 					document.getElementById("loginResult").innerHTML = "Username/Password combination incorrect";
 					return;
 				}
-		
+
 				firstName = jsonObject.firstName;
 				lastName = jsonObject.lastName;
 
 				saveCookie();
-	
+
 				window.location.href = "contacts.html";
 			}
 		};
@@ -86,7 +86,7 @@ function readCookie()
 			userId = parseInt( tokens[1].trim() );
 		}
 	}
-	
+
 	if( userId < 0 )
 	{
 		window.location.href = "index.html";
@@ -176,7 +176,7 @@ function saveContact(){
     let phoneNum = document.getElementById("input-phoneNum").value;
 
     contactData = {
-        username: userId,
+        username: "afetyko",
         name: name, 
         email: email,
         phonenumber: phoneNum
@@ -228,7 +228,7 @@ function fetchContacts() {
     }
 
     // Hardcoding the username "afetyko"
-    let payload = JSON.stringify({ username: userId });
+    let payload = JSON.stringify({ username: "afetyko" });
     xhr.send(payload);
 }
 
@@ -279,7 +279,7 @@ window.onload = function() {
 
 function editContact(name, email, phoneNum, id, username) {
     console.log("Edit Contact button pressed for:", name, email, phoneNum, id, username);
-    
+
     // Make the edit form visible
     document.getElementById("edit-name-input").contentEditable = "true";
     // document.getElementById("edit-lastname-input").contentEditable = "true";
@@ -313,14 +313,14 @@ function editContact(name, email, phoneNum, id, username) {
                 }
             }
         }
-        let payload = JSON.stringify({ username: username, id: id, name: updatedName, email: updatedEmail, phonenumber: updatedPhoneNum });
+        let payload = JSON.stringify({ username: "afetyko", id: id, name: updatedName, email: updatedEmail, phonenumber: updatedPhoneNum });
         xhr.send(payload);
     });
 }
 
 function deleteContact(username, contactID) {
     console.log("Delete Contact button pressed.");
-    
+
     // API call to delete Contact PHP
     let xhr = new XMLHttpRequest();
     let url = urlBase + '/deleteContact.' + extension;
@@ -338,7 +338,7 @@ function deleteContact(username, contactID) {
             }
         }
     }
-    let payload = JSON.stringify({ username: username, id: contactID });
+    let payload = JSON.stringify({ username: "afetyko", id: contactID });
     xhr.send(payload);
 }
 
@@ -349,12 +349,11 @@ searchInput.addEventListener("input", doSearch);
 function doSearch(event){
     event.preventDefault();
     let search = document.getElementById("search-input").value;
-
     if (search === "") {
         fetchContacts();
         return;
     }
-    
+
     let xhr = new XMLHttpRequest();
     let url = urlBase + '/readContact.' + extension;
     xhr.open("POST", url, true);
@@ -371,6 +370,6 @@ function doSearch(event){
         }
     }
 
-    let payload = JSON.stringify({ username: username, search: search });
+    let payload = JSON.stringify({ username: "afetyko", search: search });
     xhr.send(payload);
 }
