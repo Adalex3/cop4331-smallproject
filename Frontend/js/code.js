@@ -347,5 +347,23 @@ function deleteContact(username, contactID) {
 function doSearch(event){
     event.preventDefault();
     let search = document.getElementById("search-input").value;
-    console.log("Searching for: " + search);
+    
+    let xhr = new XMLHttpRequest();
+    let url = urlBase + '/readContact.' + extension;
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            let response = JSON.parse(xhr.responseText);
+            if (response) {
+                addContactToList(response);
+            } else if (response.error) {
+                console.error("Error: " + response.error);
+            }
+        }
+    }
+
+    let payload = JSON.stringify({ username: "afetyko", search: search });
+    xhr.send(payload);
 }
