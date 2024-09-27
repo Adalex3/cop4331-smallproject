@@ -254,14 +254,15 @@ function addContactToList(contacts) {
 
         newContact.innerHTML = `
             <div>
-                <h3>First Name: ${firstName}</h3>
-                <h3>Last Name: ${lastName}</h3>
-                <p>Email: ${email}</p>
-                <p>Phone Number: ${phoneNumber}</p>
+            <h3 id="edit-firstname" contenteditable="false">First Name: ${firstName}</h3>
+            <h3 id="edit-lastname" contenteditable="false">Last Name: ${lastName}</h3>
+            <p id="edit-email" contenteditable="false">Email: ${email}</p>
+            <p id="edit-phoneNum" contenteditable="false">Phone Number: ${phoneNumber}</p>
             </div>
             <div class="actions">
-                <a href="#" onclick="editContact('${firstName}', '${lastName}', '${email}', '${phoneNumber}');">Edit</a>
+                <a href="#" onclick="editContact('${firstName}', '${lastName}', '${email}', '${phoneNumber}', '${id}', '${username}');">Edit</a>
                 <a href="#" onclick="deleteContact('${username}', '${id}');">Delete</a>
+                <button id="save-button" style="display: none;">Save</button>
             </div>
         `;
 
@@ -274,16 +275,45 @@ window.onload = function() {
     console.log("At OnLoad");
 };
 
-function editContact(firstName, lastName, email, phoneNum) {
-    console.log("Edit Contact button pressed for:", firstName, lastName, email, phoneNum);
+function editContact(firstName, lastName, email, phoneNum, id, username) {
+    console.log("Edit Contact button pressed for:", firstName, lastName, email, phoneNum, id, username);
     
-    // Populate the edit form with the contact's details
-    document.getElementById("input-firstname").value = firstName;
-    document.getElementById("input-lastname").value = lastName;
-    document.getElementById("input-email").value = email;
-    document.getElementById("input-phoneNum").value = phoneNum;
+    // Make the edit form visible
+    document.getElementById("edit-firstname").contentEditable = "true";
+    document.getElementById("edit-lastname").contentEditable = "true";
+    document.getElementById("edit-email").contentEditable = "true";
+    document.getElementById("edit-phoneNum").contentEditable = "true";
 
-    console.log("Contact edit form fields populated with:", firstName, lastName, email, phoneNum);
+    // Show the save button
+    document.getElementById("save-button").style.display = "block";
+
+    document.getElementById("save-button").addEventListener("click", function() {
+        const updatedFirstName = document.getElementById("edit-firstname").textContent;
+        const updatedLastName = document.getElementById("edit-lastname").textContent;
+        const updatedEmail = document.getElementById("edit-email").textContent;
+        const updatedPhoneNum = document.getElementById("edit-phoneNum").textContent;
+        console.log("New contact data:", updatedFirstName, updatedLastName, updatedEmail, updatedPhoneNum);
+
+        // API call to update Contact PHP
+        let xhr = new XMLHttpRequest();
+        let url = urlBase + '/updateContact.' + extension;
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let response = JSON.parse(xhr.responseText);
+                if (response) {
+                    console.log("Contact updated!");
+                    fetchContacts();
+                } else if (response.error) {
+                    console.error("Error: " + response.error);
+                }
+            }
+        }
+        let payload = JSON.stringify({ username: "afetyko", id: id, firstName: updatedFirstName, lastName: updatedLastName, email: updatedEmail, phoneNumber: updatedPhoneNum });
+        xhr.send(payload);
+    });
 }
 
 function deleteContact(username, contactID) {
