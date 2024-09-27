@@ -41,6 +41,7 @@ function doLogin()
 
 				firstName = jsonObject.firstName;
 				lastName = jsonObject.lastName;
+                username = login;
 
 				saveCookie();
 
@@ -61,7 +62,7 @@ function saveCookie()
 	let minutes = 20;
 	let date = new Date();
 	date.setTime(date.getTime()+(minutes*60*1000));	
-	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
+    document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ",username=" + username + ";expires=" + date.toGMTString();
 }
 
 function readCookie()
@@ -84,6 +85,10 @@ function readCookie()
 		else if( tokens[0] == "userId" )
 		{
 			userId = parseInt( tokens[1].trim() );
+		}
+        else if (tokens[0] == "username") 
+        {
+			username = tokens[1];
 		}
 	}
 
@@ -176,7 +181,7 @@ function saveContact(){
     let phoneNum = document.getElementById("input-phoneNum").value;
 
     contactData = {
-        username: "afetyko",
+        username: username,
         name: name, 
         email: email,
         phonenumber: phoneNum
@@ -228,7 +233,7 @@ function fetchContacts() {
     }
 
     // Hardcoding the username "afetyko"
-    let payload = JSON.stringify({ username: "afetyko" });
+    let payload = JSON.stringify({ username: username });
     xhr.send(payload);
 }
 
