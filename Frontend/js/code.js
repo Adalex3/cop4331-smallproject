@@ -311,7 +311,7 @@ function editContact(firstName, lastName, email, phoneNum, id, username) {
                 }
             }
         }
-        let payload = JSON.stringify({ username: "afetyko", id: id, name: updatedFirstName + " " + updatedLastName, email: updatedEmail, phoneNumber: updatedPhoneNum });
+        let payload = JSON.stringify({ username: "afetyko", id: id, name: updatedFirstName + " " + updatedLastName, email: updatedEmail, phonenumber: updatedPhoneNum });
         xhr.send(payload);
     });
 }
