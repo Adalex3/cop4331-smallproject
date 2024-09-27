@@ -344,6 +344,10 @@ function deleteContact(username, contactID) {
     xhr.send(payload);
 }
 
+
+const searchInput = document.getElementById("search-input");
+
+searchInput.addEventListener("input", doSearch);
 function doSearch(event){
     event.preventDefault();
     let search = document.getElementById("search-input").value;
