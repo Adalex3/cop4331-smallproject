@@ -254,10 +254,14 @@ function addContactToList(contacts) {
 
         newContact.innerHTML = `
             <div>
-            <h3 id="edit-firstname" contenteditable="false">First Name: ${firstName}</h3>
-            <h3 id="edit-lastname" contenteditable="false">Last Name: ${lastName}</h3>
-            <p id="edit-email" contenteditable="false">Email: ${email}</p>
-            <p id="edit-phoneNum" contenteditable="false">Phone Number: ${phoneNumber}</p>
+                <label>First Name:</label>
+                <span id="edit-firstname-input" contentEditable="false">${firstName}</span>
+                <label>Last Name:</label>
+                <span id="edit-lastname-input" contentEditable="false">${lastName}</span>
+                <label>Email:</label>
+                <span id="edit-email-input" contentEditable="false">${email}</span>
+                <label>Phone Number:</label>
+                <span id="edit-phoneNum-input" contentEditable="false">${phoneNumber}</span>
             </div>
             <div class="actions">
                 <a href="#" onclick="editContact('${firstName}', '${lastName}', '${email}', '${phoneNumber}', '${id}', '${username}');">Edit</a>
@@ -279,19 +283,19 @@ function editContact(firstName, lastName, email, phoneNum, id, username) {
     console.log("Edit Contact button pressed for:", firstName, lastName, email, phoneNum, id, username);
     
     // Make the edit form visible
-    document.getElementById("edit-firstname").contentEditable = "true";
-    document.getElementById("edit-lastname").contentEditable = "true";
-    document.getElementById("edit-email").contentEditable = "true";
-    document.getElementById("edit-phoneNum").contentEditable = "true";
+    document.getElementById("edit-firstname-input").contentEditable = "true";
+    document.getElementById("edit-lastname-input").contentEditable = "true";
+    document.getElementById("edit-email-input").contentEditable = "true";
+    document.getElementById("edit-phoneNum-input").contentEditable = "true";
 
     // Show the save button
     document.getElementById("save-button").style.display = "block";
 
     document.getElementById("save-button").addEventListener("click", function() {
-        const updatedFirstName = document.getElementById("edit-firstname").textContent;
-        const updatedLastName = document.getElementById("edit-lastname").textContent;
-        const updatedEmail = document.getElementById("edit-email").textContent;
-        const updatedPhoneNum = document.getElementById("edit-phoneNum").textContent;
+        const updatedFirstName = document.getElementById("edit-firstname-input").textContent.trim();
+        const updatedLastName = document.getElementById("edit-lastname-input").textContent.trim();
+        const updatedEmail = document.getElementById("edit-email-input").textContent.trim();
+        const updatedPhoneNum = document.getElementById("edit-phoneNum-input").textContent.trim();
         console.log("New contact data:", updatedFirstName, updatedLastName, updatedEmail, updatedPhoneNum);
 
         // API call to update Contact PHP
