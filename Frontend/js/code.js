@@ -345,6 +345,7 @@ function deleteContact(username, contactID) {
 }
 
 function doSearch(event){
-    let search = document.getElementById("search").value;
+    event.preventDefault();
+    let search = document.getElementById("search-input").value;
     console.log("Searching for: " + search);
 }
