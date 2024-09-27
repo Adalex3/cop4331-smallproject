@@ -368,6 +368,6 @@ function doSearch(event){
         }
     }
 
-    let payload = JSON.stringify({ username: "afetyko", search: search });
+    let payload = JSON.stringify({ username: "afetyko", search: "%" + search + "%" });
     xhr.send(payload);
 }
