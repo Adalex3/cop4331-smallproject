@@ -144,7 +144,7 @@ function doLogout() {
     window.location.href = "login.html";
 }
 
-// Function to clear the edit form (for a new contact or reset)
+// Function to clear the edit form (for a new contact or resetsss)
 function clearEditForm() {
     document.getElementById("input-name").value = "";
     document.getElementById("input-email").value = "";
