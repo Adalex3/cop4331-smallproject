@@ -255,7 +255,7 @@ function addContactToList(contacts) {
         newContact.innerHTML = `
             <div>
                 <label>Name:</label>
-                <span id="edit-firstname-input" contentEditable="false">${name}</span>
+                <span id="edit-name-input" contentEditable="false">${name}</span>
                 <label>Email:</label>
                 <span id="edit-email-input" contentEditable="false">${email}</span>
                 <label>Phone Number:</label>
@@ -277,8 +277,8 @@ window.onload = function() {
     console.log("At OnLoad");
 };
 
-function editContact(firstName, lastName, email, phoneNum, id, username) {
-    console.log("Edit Contact button pressed for:", firstName, lastName, email, phoneNum, id, username);
+function editContact(name, email, phoneNum, id, username) {
+    console.log("Edit Contact button pressed for:", name, email, phoneNum, id, username);
     
     // Make the edit form visible
     document.getElementById("edit-name-input").contentEditable = "true";
