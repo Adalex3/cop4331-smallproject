@@ -290,11 +290,11 @@ function editContact(firstName, lastName, email, phoneNum, id, username) {
     document.getElementById("save-button").style.display = "block";
 
     document.getElementById("save-button").addEventListener("click", function() {
-        const updatedFirstName = document.getElementById("edit-name-input").textContent.trim();
+        const updatedName = document.getElementById("edit-name-input").textContent.trim();
         // const updatedLastName = document.getElementById("edit-lastname-input").textContent.trim();
         const updatedEmail = document.getElementById("edit-email-input").textContent.trim();
         const updatedPhoneNum = document.getElementById("edit-phoneNum-input").textContent.trim();
-        console.log("New contact data:", updatedFirstName, updatedLastName, updatedEmail, updatedPhoneNum);
+        console.log("New contact data:", updatedName, updatedEmail, updatedPhoneNum);
 
         // API call to update Contact PHP
         let xhr = new XMLHttpRequest();
