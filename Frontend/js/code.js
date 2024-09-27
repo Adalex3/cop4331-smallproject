@@ -313,7 +313,7 @@ function editContact(name, email, phoneNum, id, username) {
                 }
             }
         }
-        let payload = JSON.stringify({ username: "afetyko", id: id, name: updatedName, email: updatedEmail, phonenumber: updatedPhoneNum });
+        let payload = JSON.stringify({ username: username, id: id, name: updatedName, email: updatedEmail, phonenumber: updatedPhoneNum });
         xhr.send(payload);
     });
 }
@@ -338,7 +338,7 @@ function deleteContact(username, contactID) {
             }
         }
     }
-    let payload = JSON.stringify({ username: "afetyko", id: contactID });
+    let payload = JSON.stringify({ username: username, id: contactID });
     xhr.send(payload);
 }
 
@@ -371,6 +371,6 @@ function doSearch(event){
         }
     }
 
-    let payload = JSON.stringify({ username: "afetyko", search: search });
+    let payload = JSON.stringify({ username: username, search: search });
     xhr.send(payload);
 }
