@@ -349,6 +349,11 @@ searchInput.addEventListener("input", doSearch);
 function doSearch(event){
     event.preventDefault();
     let search = document.getElementById("search-input").value;
+
+    if (search === "") {
+        fetchContacts();
+        return;
+    }
     
     let xhr = new XMLHttpRequest();
     let url = urlBase + '/readContact.' + extension;
@@ -366,6 +371,6 @@ function doSearch(event){
         }
     }
 
-    let payload = JSON.stringify({ username: "afetyko", search: "%" + search + "%" });
+    let payload = JSON.stringify({ username: "afetyko", search: search });
     xhr.send(payload);
 }
