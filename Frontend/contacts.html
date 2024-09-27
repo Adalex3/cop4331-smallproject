@@ -10,7 +10,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
-
 </head>
 
 <body>
@@ -31,39 +30,48 @@
                     <input type="text" id="search-input" placeholder="Search contacts..." name="query">
                 </form>
 
-                <!-- Add Contacts -->
-                <a class="x-button add" data-tooltip="Add a new contact" onclick="openContact();">+</a>
+                <!-- Add Contact Button -->
+                <a class="x-button add" data-tooltip="Add a new contact" onclick="openAddContactForm();">+</a>
             </div>
 
             <p id="placeholder-text">Contacts will appear here when searched.</p>
             <a id="contact-button-template" style="display:none"><div>Contact Name</div></a>
         </div>
 
-        <!-- Contact Display -->
-         <!-- Contact List -->
+        <!-- Contact List Display -->
         <div id="contact-list"></div>
 
-        <!-- Contact Info Edit Form -->
-        <div class="contact-info edit" id="contact-info-edit" style="display: none">
-            <a class="x-button" onclick="closeEditForm();">X</a>
+        <!-- Add Contact Form (Add) -->
+        <div class="contact-info" id="add-contact-form" style="display: none">
+            <a class="x-button" onclick="closeAddContactForm();">X</a>
             <div>
-                <div><p>Name</p><input id="edit-name"></input></div>
-                <!-- <div><p>Last Name</p><input id="edit-lastname"></input></div> -->
-                <div><p>Email</p><input id="edit-email"></input></div>
-                <div><p>Phone Number: </p><input id="edit-phoneNum"></div>
+                <div><p>Name</p><input id="add-name" type="text" /></div>
+                <div><p>Email</p><input id="add-email" type="email" /></div>
+                <div><p>Phone Number</p><input id="add-phoneNum" type="tel" /></div>
             </div>
             <div class="actions">
-                <!-- Save Contacts -->
-                <a href="#" id="save-contact" onclick="saveContact();">Save</a>
+                <!-- Save New Contact -->
+                <a href="#" id="add-contact-btn" onclick="saveNewContact();">Save</a>
+            </div>
+        </div>
+
+        <!-- Edit Contact Form (Edit) -->
+        <div class="contact-info" id="edit-contact-form" style="display: none">
+            <a class="x-button" onclick="closeEditContactForm();">X</a>
+            <div>
+                <div><p>Name</p><input id="edit-name" type="text" /></div>
+                <div><p>Email</p><input id="edit-email" type="email" /></div>
+                <div><p>Phone Number</p><input id="edit-phoneNum" type="tel" /></div>
+            </div>
+            <div class="actions">
+                <!-- Save Edited Contact -->
+                <a href="#" id="edit-contact-btn" onclick="saveEditedContact();">Save</a>
             </div>
         </div>
 
     </div>
 
-    
-</body>
-
-
 <script src="js/code.js"></script>
 
+</body>
 </html>
