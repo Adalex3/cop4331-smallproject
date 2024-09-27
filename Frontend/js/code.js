@@ -282,6 +282,8 @@ function editContact(firstName, lastName, email, phoneNum) {
     document.getElementById("input-lastname").value = lastName;
     document.getElementById("input-email").value = email;
     document.getElementById("input-phoneNum").value = phoneNum;
+
+    console.log("Contact edit form fields populated with:", firstName, lastName, email, phoneNum);
 }
 
 function deleteContact(username, contactID) {
