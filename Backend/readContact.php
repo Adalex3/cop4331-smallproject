@@ -22,9 +22,9 @@ if($searchTerm === '')
 
 else 
 {
-    $searchTerm = '%' . $searchTerm . '%';  // Add wildcards for partial search
-    $stmt = $conn->prepare("SELECT * FROM Contacts WHERE username = ? AND Name LIKE ?");
-    $stmt->bind_param("ss", $username, $searchTerm);
+    $stmt = $conn->prepare("SELECT * FROM Contacts WHERE username = ? AND name LIKE ?");
+    $searchTerm = $data['search'] . '%';  // Append '%' to the search term to match names starting with the term
+    $stmt->bind_param("ss", $data['username'], $searchTerm);
 }
 
 $stmt->execute();
