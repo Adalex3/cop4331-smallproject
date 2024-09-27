@@ -176,7 +176,7 @@ function saveContact(){
     let phoneNum = document.getElementById("input-phoneNum").value;
 
     contactData = {
-        username: "afetyko",
+        username: username,
         name: name, 
         email: email,
         phonenumber: phoneNum
@@ -228,7 +228,7 @@ function fetchContacts() {
     }
 
     // Hardcoding the username "afetyko"
-    let payload = JSON.stringify({ username: "afetyko" });
+    let payload = JSON.stringify({ username: username });
     xhr.send(payload);
 }
 
