@@ -203,7 +203,13 @@ function saveContact(){
     }
 
     xhr.send(JSON.stringify(contactData));
-}
+
+    xhr.onload = function () {
+        if (xhr.status === 200){
+            fetchContacts(); // Fetch and display contacts on page load
+        }
+        }
+    }
 
 function fetchContacts() {
     let xhr = new XMLHttpRequest();
