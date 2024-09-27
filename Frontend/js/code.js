@@ -176,7 +176,7 @@ function saveContact(){
     let phoneNum = document.getElementById("input-phoneNum").value;
 
     contactData = {
-        username: username,
+        username: userId,
         name: name, 
         email: email,
         phonenumber: phoneNum
