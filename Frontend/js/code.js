@@ -171,14 +171,14 @@ function openContact() {
 
 function saveContact(){
 
-    let firstName = document.getElementById("input-firstname").value;
-    let lastName = document.getElementById("input-lastname").value;
+    let name = document.getElementById("input-name").value;
+    //let lastName = document.getElementById("input-lastname").value;
     let email = document.getElementById("input-email").value;
     let phoneNum = document.getElementById("input-phoneNum").value;
 
     contactData = {
         username: "afetyko",
-        name: firstName + " " + lastName,
+        name: name, 
         email: email,
         phonenumber: phoneNum
     };
@@ -241,7 +241,7 @@ function addContactToList(contacts) {
     contacts.forEach(contact => {
         console.log("Adding contact:", contact); // Log each contact
         let name = contact.Name;
-        let [firstName, lastName] = name.split(" ");
+        //let [firstName, lastName] = name.split(" ");
         let email = contact.Email;
         let phoneNumber = contact.phonenumber;
         let id = contact.ID;
@@ -254,17 +254,15 @@ function addContactToList(contacts) {
 
         newContact.innerHTML = `
             <div>
-                <label>First Name:</label>
-                <span id="edit-firstname-input" contentEditable="false">${firstName}</span>
-                <label>Last Name:</label>
-                <span id="edit-lastname-input" contentEditable="false">${lastName}</span>
+                <label>Name:</label>
+                <span id="edit-firstname-input" contentEditable="false">${name}</span>
                 <label>Email:</label>
                 <span id="edit-email-input" contentEditable="false">${email}</span>
                 <label>Phone Number:</label>
                 <span id="edit-phoneNum-input" contentEditable="false">${phoneNumber}</span>
             </div>
             <div class="actions">
-                <a href="#" onclick="editContact('${firstName}', '${lastName}', '${email}', '${phoneNumber}', '${id}', '${username}');">Edit</a>
+                <a href="#" onclick="editContact('${name}', '${email}', '${phoneNumber}', '${id}', '${username}');">Edit</a>
                 <a href="#" onclick="deleteContact('${username}', '${id}');">Delete</a>
                 <button id="save-button" style="display: none;">Save</button>
             </div>
@@ -283,8 +281,8 @@ function editContact(firstName, lastName, email, phoneNum, id, username) {
     console.log("Edit Contact button pressed for:", firstName, lastName, email, phoneNum, id, username);
     
     // Make the edit form visible
-    document.getElementById("edit-firstname-input").contentEditable = "true";
-    document.getElementById("edit-lastname-input").contentEditable = "true";
+    document.getElementById("edit-name-input").contentEditable = "true";
+    // document.getElementById("edit-lastname-input").contentEditable = "true";
     document.getElementById("edit-email-input").contentEditable = "true";
     document.getElementById("edit-phoneNum-input").contentEditable = "true";
 
@@ -292,8 +290,8 @@ function editContact(firstName, lastName, email, phoneNum, id, username) {
     document.getElementById("save-button").style.display = "block";
 
     document.getElementById("save-button").addEventListener("click", function() {
-        const updatedFirstName = document.getElementById("edit-firstname-input").textContent.trim();
-        const updatedLastName = document.getElementById("edit-lastname-input").textContent.trim();
+        const updatedFirstName = document.getElementById("edit-name-input").textContent.trim();
+        // const updatedLastName = document.getElementById("edit-lastname-input").textContent.trim();
         const updatedEmail = document.getElementById("edit-email-input").textContent.trim();
         const updatedPhoneNum = document.getElementById("edit-phoneNum-input").textContent.trim();
         console.log("New contact data:", updatedFirstName, updatedLastName, updatedEmail, updatedPhoneNum);
@@ -315,7 +313,7 @@ function editContact(firstName, lastName, email, phoneNum, id, username) {
                 }
             }
         }
-        let payload = JSON.stringify({ username: "afetyko", id: id, name: updatedFirstName + " " + updatedLastName, email: updatedEmail, phonenumber: updatedPhoneNum });
+        let payload = JSON.stringify({ username: "afetyko", id: id, name: updatedName, email: updatedEmail, phonenumber: updatedPhoneNum });
         xhr.send(payload);
     });
 }
