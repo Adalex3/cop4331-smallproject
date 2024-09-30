@@ -1,4 +1,4 @@
-const urlBase = 'http://contactmanager11.online/Backend';
+const urlBase = 'http://contactmanager11.online/Frontend/login.html';
 const extension = 'php';
 
 let userId = 0;
