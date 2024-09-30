@@ -4,6 +4,7 @@ const extension = 'php';
 let userId = 0;
 let firstName = "";
 let lastName = "";
+let currentUser = null;
 
 function doLogin()
 {
@@ -53,6 +54,10 @@ function doLogin()
 	{
 		document.getElementById("loginResult").innerHTML = err.message;
 	}
+
+    // Store user in local storage
+    localStorage.setItem('currentUser', login);
+    currentUser = login;
 
 }
 
@@ -142,6 +147,10 @@ function doLogout() {
     document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
     console.log("Logged out, cookie cleared.");
     window.location.href = "login.html";
+    currentUser = null;
+
+    // Remove user from local storage   
+    localStorage.removeItem('currentUser');
 }
 
 // Function to clear the edit form (for a new contact or resetsss)
@@ -176,7 +185,7 @@ function saveContact(){
     let phoneNum = document.getElementById("input-phoneNum").value;
 
     contactData = {
-        username: "afetyko",
+        username: currentUser,
         name: name, 
         email: email,
         phonenumber: phoneNum
@@ -227,8 +236,8 @@ function fetchContacts() {
         }
     }
 
-    // Hardcoding the username "afetyko"
-    let payload = JSON.stringify({ username: "afetyko" });
+    // Hardcoding the username "currentUser"
+    let payload = JSON.stringify({ username: currentUser });
     xhr.send(payload);
 }
 
@@ -275,7 +284,14 @@ function addContactToList(contacts) {
 window.onload = function() {
     fetchContacts(); // Fetch and display contacts on page load
     console.log("At OnLoad");
+
 };
+
+document.addEventListener("DOMContentLoaded", function() {
+    currentUser = localStorage.getItem("currentUser");
+    console.log("At DOMContentLoaded");
+    console.log("Current user:", currentUser);
+});
 
 function editContact(name, email, phoneNum, id, username) {
     console.log("Edit Contact button pressed for:", name, email, phoneNum, id, username);
@@ -313,7 +329,7 @@ function editContact(name, email, phoneNum, id, username) {
                 }
             }
         }
-        let payload = JSON.stringify({ username: "afetyko", id: id, name: updatedName, email: updatedEmail, phonenumber: updatedPhoneNum });
+        let payload = JSON.stringify({ username: currentUser, id: id, name: updatedName, email: updatedEmail, phonenumber: updatedPhoneNum });
         xhr.send(payload);
     });
 }
@@ -338,7 +354,7 @@ function deleteContact(username, contactID) {
             }
         }
     }
-    let payload = JSON.stringify({ username: "afetyko", id: contactID });
+    let payload = JSON.stringify({ username: currentUser, id: contactID });
     xhr.send(payload);
 }
 
@@ -370,6 +386,6 @@ function doSearch(event){
         }
     }
 
-    let payload = JSON.stringify({ username: "afetyko", search: search });
+    let payload = JSON.stringify({ username: currentUser, search: search });
     xhr.send(payload);
 }
