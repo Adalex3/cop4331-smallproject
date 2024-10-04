@@ -381,15 +381,22 @@ function doSearch(event){
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             let response = JSON.parse(xhr.responseText);
-            if (response && response.results.length > 0) {
-                addContactToList(response.results); // Populate contact list with the search results
+
+            // Ensure that results are returned
+            if (response && response.results && response.results.length > 0) {
+                addContactToList(response.results); // Populate contact list with search results
             } else {
-                document.getElementById("contact-list").innerHTML = ""; // Clear contact list if no results
-                document.getElementById("placeholder-text").style.display = "block"; // Show placeholder text if no results
+                // No results, show placeholder
+                document.getElementById("contact-list").innerHTML = ""; // Clear any existing contacts
+                document.getElementById("placeholder-text").style.display = "block"; // Show placeholder text
             }
+        } else if (xhr.readyState === 4 && xhr.status !== 200) {
+            // Handle any errors from the backend
+            console.error("Search failed. Please check the backend or query.");
         }
     }
 
+    // Pass the search query to the backend
     let payload = JSON.stringify({ username: currentUser, search: search });
     xhr.send(payload);
 }
