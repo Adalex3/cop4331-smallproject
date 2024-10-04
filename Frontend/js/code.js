@@ -241,43 +241,34 @@ function fetchContacts() {
     xhr.send(payload);
 }
 
+function showContactInfo(contact) {
+    let contactInfoEdit = document.getElementById("contact-info-edit");
+
+    // Update the input fields in the contact info edit form with the selected contact's data
+    document.getElementById("input-name").value = contact.Name;
+    document.getElementById("input-email").value = contact.Email;
+    document.getElementById("input-phoneNum").value = contact.phonenumber;
+
+    // Display the contact info edit form (right side)
+    contactInfoEdit.style.display = "flex"; // Make sure it's visible
+}
+
 function addContactToList(contacts) {
     let contactList = document.getElementById("contact-list");
-    contactList.innerHTML = ""; // Clear the list
-
-    console.log("addContactToList function called with contacts:", contacts); // Log the contacts passed in
+    contactList.innerHTML = ""; // Clear the left-side list of contacts
 
     contacts.forEach(contact => {
-        console.log("Adding contact:", contact); // Log each contact
-        let name = contact.Name;
-        //let [firstName, lastName] = name.split(" ");
-        let email = contact.Email;
-        let phoneNumber = contact.phonenumber;
-        let id = contact.ID;
-        let username = contact.username;
+        // Clone the contact button template
+        let contactButton = document.getElementById("contact-button-template").cloneNode(true);
+        contactButton.style.display = "block"; // Make the cloned button visible
+        contactButton.querySelector("div").innerText = contact.Name; // Set contact name
+        
+        // Set the click event to show contact info on the right side
+        contactButton.onclick = function () {
+            showContactInfo(contact); // Display the selected contact info
+        };
 
-        console.log(`Name: ${name}, Email: ${email}, Phone Number: ${phoneNumber}, ID: ${id}`);
-
-        let newContact = document.createElement("div");
-        newContact.classList.add("contact-info");
-
-        newContact.innerHTML = `
-            <div>
-                <label>Name:</label>
-                <span id="edit-name-input" contentEditable="false">${name}</span>
-                <label>Email:</label>
-                <span id="edit-email-input" contentEditable="false">${email}</span>
-                <label>Phone Number:</label>
-                <span id="edit-phoneNum-input" contentEditable="false">${phoneNumber}</span>
-            </div>
-            <div class="actions">
-                <a href="#" onclick="editContact('${name}', '${email}', '${phoneNumber}', '${id}', '${username}');">Edit</a>
-                <a href="#" onclick="deleteContact('${username}', '${id}');">Delete</a>
-                <button id="save-button" style="display: none;">Save</button>
-            </div>
-        `;
-
-        contactList.appendChild(newContact);
+        contactList.appendChild(contactButton); // Add the button to the contact list
     });
 }
 
