@@ -257,14 +257,6 @@ function addContactToList(contacts) {
     let contactList = document.getElementById("contact-list");
     contactList.innerHTML = ""; // Clear the left-side list of contacts
 
-    // Handle placeholder text based on the presence of contacts
-    if (contacts.length === 0) {
-        document.getElementById("placeholder-text").style.display = "block"; // Show placeholder if no contacts
-        return;
-    } else {
-        document.getElementById("placeholder-text").style.display = "none"; // Hide placeholder if contacts exist
-    }
-
     contacts.forEach(contact => {
         // Clone the contact button template
         let contactButton = document.getElementById("contact-button-template").cloneNode(true);
@@ -273,10 +265,10 @@ function addContactToList(contacts) {
         
         // Set the click event to show contact info on the right side
         contactButton.onclick = function () {
-            showContactInfo(contact); // Display the selected contact info on the right
+            showContactInfo(contact); // Display the selected contact info
         };
 
-        contactList.appendChild(contactButton); // Append the button to the contact list in the correct div
+        contactList.appendChild(contactButton); // Add the button to the contact list
     });
 }
 
@@ -373,12 +365,9 @@ function doSearch(event) {
 
     // If the search field is empty, clear the contact list and show the placeholder
     if (search === "") {
-        document.getElementById("contact-list").innerHTML = ""; // Clear contacts when search is empty
-        document.getElementById("placeholder-text").style.display = "block"; // Show placeholder text
+        fetchContacts();
         return;
     }
-
-    document.getElementById("placeholder-text").style.display = "none"; // Hide placeholder text during search
 
     let xhr = new XMLHttpRequest();
     let url = urlBase + '/readContact.' + extension;
