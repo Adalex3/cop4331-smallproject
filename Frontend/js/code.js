@@ -361,25 +361,11 @@ function deleteContact(username, contactID) {
 
 const searchInput = document.getElementById("search-input");
 
-document.getElementById("search-form").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevent page reload on form submission
-});
-
 searchInput.addEventListener("input", doSearch);
-function doSearch(event) {
-
-    console.log("Searching...");
-
-    // Prevent form submission or reload when Enter is pressed
+function doSearch(event){
     event.preventDefault();
-
-    let search = document.getElementById("search-input").value.trim();
-
-    console.log("Search query: " + search);
-
-    // If the search field is empty, clear the contact list and show the placeholder
+    let search = document.getElementById("search-input").value;
     if (search === "") {
-        console.log("Search was empty. Show all.");
         fetchContacts();
         return;
     }
@@ -392,24 +378,14 @@ function doSearch(event) {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             let response = JSON.parse(xhr.responseText);
-
-            console.log("Got response: " + response.results);
-
-            // Ensure that results are returned
-            if (response && response.results && response.results.length > 0) {
-                addContactToList(response.results); // Populate contact list with search results
-            } else {
-                // No results, show placeholder
-                document.getElementById("contact-list").innerHTML = ""; // Clear any existing contacts
-                document.getElementById("placeholder-text").style.display = "block"; // Show placeholder text
+            if (response) {
+                addContactToList(response);
+            } else if (response.error) {
+                console.error("Error: " + response.error);
             }
-        } else if (xhr.readyState === 4 && xhr.status !== 200) {
-            // Handle any errors from the backend
-            console.error("Search failed. Please check the backend or query.");
         }
-    };
+    }
 
-    // Pass the search query to the backend
     let payload = JSON.stringify({ username: currentUser, search: search });
     xhr.send(payload);
 }
