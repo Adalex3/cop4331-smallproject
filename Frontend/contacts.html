@@ -25,9 +25,9 @@
         <div id="contacts">
             <h1 class="playfair-bold" style="margin: 5%;">Contacts List</h1>
             <div class="search-container">
-                <form id="search-form">
-                    <input type="text" id="search-input" placeholder="Search contacts..." name="query">
-                </form> 
+                <form id="search-form" onsubmit="return false;">
+                    <input type="text" id="search-input" placeholder="Search contacts..." name="query" oninput="doSearch(event)">
+                </form>
         
                 <a class="x-button add" data-tooltip="Add a new contact" onclick="openContact();">+</a>
             </div>

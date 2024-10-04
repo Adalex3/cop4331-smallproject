@@ -360,11 +360,18 @@ function deleteContact(username, contactID) {
 
 const searchInput = document.getElementById("search-input");
 
+document.getElementById("search-form").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent page reload on form submission
+});
+
 searchInput.addEventListener("input", doSearch);
-function doSearch(event){
+function doSearch(event) {
+    // Prevent form submission or reload when Enter is pressed
     event.preventDefault();
+
     let search = document.getElementById("search-input").value.trim();
-    
+
+    // If the search field is empty, clear the contact list and show the placeholder
     if (search === "") {
         document.getElementById("contact-list").innerHTML = ""; // Clear contacts when search is empty
         document.getElementById("placeholder-text").style.display = "block"; // Show placeholder text
@@ -394,7 +401,7 @@ function doSearch(event){
             // Handle any errors from the backend
             console.error("Search failed. Please check the backend or query.");
         }
-    }
+    };
 
     // Pass the search query to the backend
     let payload = JSON.stringify({ username: currentUser, search: search });
