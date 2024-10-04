@@ -367,13 +367,19 @@ document.getElementById("search-form").addEventListener("submit", function(event
 
 searchInput.addEventListener("input", doSearch);
 function doSearch(event) {
+
+    console.log("Searching...");
+
     // Prevent form submission or reload when Enter is pressed
     event.preventDefault();
 
     let search = document.getElementById("search-input").value.trim();
 
+    console.log("Search query: " + search);
+
     // If the search field is empty, clear the contact list and show the placeholder
     if (search === "") {
+        console.log("Search was empty. Show all.");
         fetchContacts();
         return;
     }
@@ -386,6 +392,8 @@ function doSearch(event) {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             let response = JSON.parse(xhr.responseText);
+
+            console.log("Got response: " + response.results);
 
             // Ensure that results are returned
             if (response && response.results && response.results.length > 0) {
