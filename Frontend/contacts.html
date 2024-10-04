@@ -25,23 +25,19 @@
         <div id="contacts">
             <h1 class="playfair-bold" style="margin: 5%;">Contacts List</h1>
             <div class="search-container">
-
-                <!-- Search Contacts -->
                 <form id="search-form">
                     <input type="text" id="search-input" placeholder="Search contacts..." name="query">
                 </form> 
-
-                <!-- Add Contacts -->
+        
                 <a class="x-button add" data-tooltip="Add a new contact" onclick="openContact();">+</a>
             </div>
-
-            <p id="placeholder-text">Contacts will appear here when searched.</p>
-            <a id="contact-button-template" style="display:none"><div>Contact Name</div></a>
+        
+            <p id="placeholder-text">Contacts will appear here when searched.</p> <!-- Placeholder text -->
+            <div id="contact-list"></div> <!-- Contact list div where the template buttons will be appended -->
+        
+            <a id="contact-button-template" style="display:none"><div>Contact Name</div></a> <!-- Contact button template -->
         </div>
-
-        <!-- Contact Display -->
-        <div id="contact-list"></div>
-
+        
         <!-- Contact Info Edit Form -->
         <div class="contact-info edit" id="contact-info-edit" style="display: none">
             <a class="x-button" onclick="closeEditForm();">X</a>
@@ -51,7 +47,6 @@
                 <div><p>Phone Number: </p><input id="input-phoneNum" type="tel" /></div>
             </div>
             <div class="actions">
-                <!-- Save Contacts -->
                 <a href="#" id="save-contact" onclick="saveContact();">Save</a>
             </div>
         </div>

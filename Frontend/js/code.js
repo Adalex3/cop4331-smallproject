@@ -257,6 +257,14 @@ function addContactToList(contacts) {
     let contactList = document.getElementById("contact-list");
     contactList.innerHTML = ""; // Clear the left-side list of contacts
 
+    // Handle placeholder text based on the presence of contacts
+    if (contacts.length === 0) {
+        document.getElementById("placeholder-text").style.display = "block"; // Show placeholder if no contacts
+        return;
+    } else {
+        document.getElementById("placeholder-text").style.display = "none"; // Hide placeholder if contacts exist
+    }
+
     contacts.forEach(contact => {
         // Clone the contact button template
         let contactButton = document.getElementById("contact-button-template").cloneNode(true);
@@ -265,10 +273,10 @@ function addContactToList(contacts) {
         
         // Set the click event to show contact info on the right side
         contactButton.onclick = function () {
-            showContactInfo(contact); // Display the selected contact info
+            showContactInfo(contact); // Display the selected contact info on the right
         };
 
-        contactList.appendChild(contactButton); // Add the button to the contact list
+        contactList.appendChild(contactButton); // Append the button to the contact list in the correct div
     });
 }
 
@@ -355,11 +363,15 @@ const searchInput = document.getElementById("search-input");
 searchInput.addEventListener("input", doSearch);
 function doSearch(event){
     event.preventDefault();
-    let search = document.getElementById("search-input").value;
+    let search = document.getElementById("search-input").value.trim();
+    
     if (search === "") {
-        fetchContacts();
+        document.getElementById("contact-list").innerHTML = ""; // Clear contacts when search is empty
+        document.getElementById("placeholder-text").style.display = "block"; // Show placeholder text
         return;
     }
+
+    document.getElementById("placeholder-text").style.display = "none"; // Hide placeholder text during search
 
     let xhr = new XMLHttpRequest();
     let url = urlBase + '/readContact.' + extension;
@@ -369,10 +381,11 @@ function doSearch(event){
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             let response = JSON.parse(xhr.responseText);
-            if (response) {
-                addContactToList(response);
-            } else if (response.error) {
-                console.error("Error: " + response.error);
+            if (response && response.results.length > 0) {
+                addContactToList(response.results); // Populate contact list with the search results
+            } else {
+                document.getElementById("contact-list").innerHTML = ""; // Clear contact list if no results
+                document.getElementById("placeholder-text").style.display = "block"; // Show placeholder text if no results
             }
         }
     }
