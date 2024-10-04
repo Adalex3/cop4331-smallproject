@@ -241,50 +241,48 @@ function fetchContacts() {
     xhr.send(payload);
 }
 
-function showContactInfo(contact) {
-    // Get the right side display area (you may need to customize this selector)
-    let contactInfo = document.getElementById("contact-info");
-
-    // Clear the previous contact details
-    contactInfo.innerHTML = "";
-
-    // Populate with the selected contact's info
-    contactInfo.innerHTML = `
-        <h2>${contact.Name}</h2>
-        <p><strong>Email:</strong> ${contact.Email}</p>
-        <p><strong>Phone Number:</strong> ${contact.phonenumber}</p>
-    `;
-
-    // Show the contact info popup
-    contactInfo.style.transform = "translateY(0)";
-}
-
 function addContactToList(contacts) {
     let contactList = document.getElementById("contact-list");
-    contactList.innerHTML = ""; // Clear the left-side list of contacts
+    contactList.innerHTML = ""; // Clear the list
+
+    console.log("addContactToList function called with contacts:", contacts); // Log the contacts passed in
 
     contacts.forEach(contact => {
+        console.log("Adding contact:", contact); // Log each contact
         let name = contact.Name;
+        //let [firstName, lastName] = name.split(" ");
         let email = contact.Email;
         let phoneNumber = contact.phonenumber;
         let id = contact.ID;
         let username = contact.username;
 
-        // Create a button for each contact on the left
-        let contactButton = document.createElement("a");
-        contactButton.classList.add("contact-item");
-        contactButton.innerText = name;
-        contactButton.href = "#";
-        contactButton.onclick = function () {
-            showContactInfo(contact); // Show selected contact's details on the right
-        };
+        console.log(`Name: ${name}, Email: ${email}, Phone Number: ${phoneNumber}, ID: ${id}`);
 
-        contactList.appendChild(contactButton);
+        let newContact = document.createElement("div");
+        newContact.classList.add("contact-info");
+
+        newContact.innerHTML = `
+            <div>
+                <label>Name:</label>
+                <span id="edit-name-input" contentEditable="false">${name}</span>
+                <label>Email:</label>
+                <span id="edit-email-input" contentEditable="false">${email}</span>
+                <label>Phone Number:</label>
+                <span id="edit-phoneNum-input" contentEditable="false">${phoneNumber}</span>
+            </div>
+            <div class="actions">
+                <a href="#" onclick="editContact('${name}', '${email}', '${phoneNumber}', '${id}', '${username}');">Edit</a>
+                <a href="#" onclick="deleteContact('${username}', '${id}');">Delete</a>
+                <button id="save-button" style="display: none;">Save</button>
+            </div>
+        `;
+
+        contactList.appendChild(newContact);
     });
 }
 
 window.onload = function() {
-    // fetchContacts(); // Fetch and display contacts on page load   // we dont want this
+    fetchContacts(); // Fetch and display contacts on page load
     console.log("At OnLoad");
 
 };
