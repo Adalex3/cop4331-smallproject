@@ -179,6 +179,17 @@ body {
   max-width: 600px;
   margin: 0 auto; /* Center align within the parent container */
   padding: 10px 0; /* Add padding for consistency */
+  padding-left: 20px;
+}
+
+.search-box input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-left: 10px; /* Optional: margin for more spacing */
 }
 
 #search-box {
