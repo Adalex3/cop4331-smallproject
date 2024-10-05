@@ -26,15 +26,16 @@
 
         <!-- Contact List -->
         <div id="contacts">
-            <h1 class="playfair-bold" style="margin: 5% 0;">Contacts List</h1>
+            <h1 class="playfair-bold" style="margin: 5%;">Contacts List</h1>
             <div class="search-container">
 
                 <!-- Search Contacts -->
-                <form id="search-form" style="flex: 1; display: flex; align-items: center;">
-                    <input type="text" id="search-input" placeholder="Search contacts..." name="query" style="width: 100%; border: 1px solid #ddd;">
-                    <!-- Add Contacts -->
-                    <a class="x-button add" data-tooltip="Add a new contact" onclick="openContact();" style="margin-left: 10px;">+</a>
-                </form>
+                <form id="search-form" style="flex: 1;">
+                    <input type="text" id="search-input" placeholder="Search contacts..." name="query" style="width: 40%;">
+                </form> 
+
+                <!-- Add Contacts -->
+                <a class="x-button add" data-tooltip="Add a new contact" onclick="openContact();" style="margin-left: 10px;">+</a>
             </div>
 
             <p id="placeholder-text">Contacts will appear here when searched.</p>
