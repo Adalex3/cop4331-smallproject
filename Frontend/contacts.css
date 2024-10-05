@@ -174,14 +174,13 @@ body {
 .search-container {
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* This ensures the search bar aligns to the left */
+  justify-content: flex-start;
   width: 100%;
   max-width: 600px;
-  margin: 0; /* Remove auto margin to avoid centering */
-  padding: 10px 0;
+  margin: 0 auto; /* Center align within the parent container */
+  padding: 10px 0; /* Add padding for consistency */
   padding-left: 20px;
 }
-
 
 .search-box input[type="text"] {
   width: 100%;
@@ -202,6 +201,7 @@ body {
   padding: 10px;
   margin: 0 auto;
 }
+
 
 .search-button {
   padding: 10px;
