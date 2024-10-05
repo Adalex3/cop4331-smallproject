@@ -1,139 +1,63 @@
-.playfair {
-  font-family: "Playfair Display", serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-}
-
+/* Fonts */
 .playfair-bold {
     font-family: "Playfair Display", serif;
-    font-optical-sizing: auto;
     font-weight: 900;
-    font-style: normal;
 }
 
-.zilla-slab-light {
-    font-family: "Zilla Slab", serif;
-    font-weight: 300;
-    font-style: normal;
-  }
-  
-  .zilla-slab-regular {
+.zilla-slab-regular {
     font-family: "Zilla Slab", serif;
     font-weight: 400;
-    font-style: normal;
-  }
-  
-  .zilla-slab-medium {
-    font-family: "Zilla Slab", serif;
-    font-weight: 500;
-    font-style: normal;
-  }
-  
-  .zilla-slab-semibold {
-    font-family: "Zilla Slab", serif;
-    font-weight: 600;
-    font-style: normal;
-  }
-  
-  .zilla-slab-bold {
-    font-family: "Zilla Slab", serif;
-    font-weight: 700;
-    font-style: normal;
-  }
-  
-  .zilla-slab-light-italic {
-    font-family: "Zilla Slab", serif;
-    font-weight: 300;
-    font-style: italic;
-  }
-  
-  .zilla-slab-regular-italic {
-    font-family: "Zilla Slab", serif;
-    font-weight: 400;
-    font-style: italic;
-  }
-  
-  .zilla-slab-medium-italic {
-    font-family: "Zilla Slab", serif;
-    font-weight: 500;
-    font-style: italic;
-  }
-  
-  .zilla-slab-semibold-italic {
-    font-family: "Zilla Slab", serif;
-    font-weight: 600;
-    font-style: italic;
-  }
-  
-  .zilla-slab-bold-italic {
-    font-family: "Zilla Slab", serif;
-    font-weight: 700;
-    font-style: italic;
-  }
-  
-
-h1,h2,h3,h4,h5,h6 {
-    font-family: "Playfair Display", serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
 }
 
-p, input, button {
+h1, h2, h3, h4, h5, h6, p, input, button {
     font-family: "Zilla Slab", serif;
-    font-weight: 400;
-    font-style: normal;
 }
-
 
 body {
     padding: 5vh 5vw;
 }
 
-
 .content {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* Align items to the left */
-  justify-content: flex-start;
-  gap: 2vw;
-  padding-left: 20px; /* Add some padding for spacing */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2vw;
+    padding-left: 20px;
 }
 
-
 #contacts {
-  border: solid 1px gray;
-  width: 100%;
-  max-width: 600px; /* Increase max width for better visibility */
-  margin: 0 auto; /* Remove extra margins */
-  padding: 0; /* Remove padding */
-  height: auto;
+    border: solid 1px gray;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0;
 }
 
 .contact-info {
-  display: block;
-  width: 100%; /* Match width with the contacts list */
-  margin-bottom: 10px; /* Keep consistent spacing between cards */
+  display: flex;
+  border: solid 1px gray;
+  width: 42.5vw;
+  height: vh;
+  position: relative;
 }
 
 #contacts a div h2 {
-  margin: 0;
-  font-size: 18px;
-  font-weight: bold;
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 #contacts a div p {
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.5; /* Improve readability */
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
 #contacts a div span {
-  font-size: 14px;
-  color: blue;
-  text-decoration: underline;
-  margin-left: 10px;
+    font-size: 14px;
+    color: blue;
+    text-decoration: underline;
+    margin-left: 10px;
 }
 
 #contacts a div:hover {
@@ -160,81 +84,26 @@ body {
     text-align: center;
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;  /* No gap between search box and contacts */
-}
-
-.search-box, .contact-info {
-  border-bottom: 1px solid #ccc;  /* Slight border to visually connect */
-}
-
 .search-container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto; /* Center align within the parent container */
-  padding: 10px 0; /* Add padding for consistency */
-  padding-left: 20px;
-}
-
-.search-box input[type="text"] {
-  width: 100%;
-  padding: 10px;
-  font-size: 1.5rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
-  margin-left: 10px; /* Optional: margin for more spacing */
-}
-
-#search-box {
-  display: flex;
-  justify-content: center;  /* Center the search bar */
-  align-items: center;
-  width: 100%;
-  max-width: 600px;  /* Match the contact info max width */
-  padding: 10px;
-  margin: 0 auto;
-}
-
-
-.search-button {
-  padding: 10px;
-  background-color: #333;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.search-box input[type="text"] {
-  width: 100%;
-  padding: 10px;
-  font-size: 1.5rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
-}
-
-.search-box button {
-  padding: 10px;
-  margin-left: -45px; /* Moves the button inside the input */
-  background-color: #333;
-  color: white;
-  border: none;
-  border-radius: 0 5px 5px 0; /* Matches the border-radius of input */
-  cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 10px 0;
+    padding-left: 20px;
 }
 
 input[type="text"] {
-    width: 30%;
+    width: 100%;
     padding: 10px;
-    font-size: 16px;
+    font-size: 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
 }
+
 button {
     padding: 10px 20px;
     font-size: 16px;
@@ -244,106 +113,88 @@ button {
     cursor: pointer;
     transition: 0.2s;
 }
+
 button:hover {
     background-color: #999;
 }
 
 #contact-list {
-  width: 100%;
-  max-width: 500px;
-  margin: 20px 0; /* Add margin between search bar and contact list */
+    width: 100%;
+    max-width: 500px;
+    margin: 20px 0;
 }
 
 .contact-details {
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Adds space between each field */
+    gap: 10px;
     padding: 10px;
-    background-color: #f5f5f5; /* Light background to make it stand out */
-    border: 1px solid #ddd; /* Light border */
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
     border-radius: 5px;
 }
 
 .contact-field {
-  display: flex;
-  justify-content: space-between; /* Evenly space label and data */
-  align-items: center;
-  font-size: 14px; /* Smaller, consistent font size */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
 }
 
 .contact-label {
-  font-weight: bold;
-  margin-right: 10px; /* Adds space between label and actual info */
-  min-width: 80px; /* Ensure labels align properly */
+    font-weight: bold;
+    margin-right: 10px;
+    min-width: 80px;
 }
 
 .contact-data {
-  flex: 1;
-  text-align: left; /* Aligns data to the left */
+    flex: 1;
+    text-align: left;
 }
 
 .contact-details .name {
-  font-size: 18px; /* Make the name slightly larger */
-  font-weight: bold;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .contact-details .email, .contact-details .phone {
-  font-size: 14px;
-  margin-top: 5px;
+    font-size: 14px;
+    margin-top: 5px;
 }
 
 .contact-actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
 }
 
 .contact-actions a {
-  color: blue;
-  text-decoration: none;
-  font-size: 14px;
+    color: blue;
+    text-decoration: none;
+    font-size: 14px;
 }
 
 .contact-actions a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .contact-info {
-  display: flex;
-  border: solid 1px gray;
-  width: 42.5vw;
-  height: vh;
-  position: relative;
+    display: flex;
+    border: solid 1px gray;
+    width: 42.5vw;
+    position: relative;
 }
 
-
-/* Added */
-.contact-info.edit{
-  display: flex;
+.contact-info.edit {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
 }
 
-.contact-info div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 600px;
-  font-weight: 100;
-  font-size: 2rem;
-  margin-top: 0;
+.contact-info.edit div {
+    display: flex;
+    flex-direction: row;
 }
-
-.contact-info h3 {
-    margin: 0 !important;
-    font-size: 3rem;
-}
-
-.contact-info h4 {
-    margin-top: 5%;
-    font-size: 2rem;
-}
-
 
 .x-button {
     position: absolute;
@@ -351,30 +202,23 @@ button:hover {
     top: 10px;
     width: 30px;
     height: 25px;
-    text-align: center;
-    padding-top: 5px;
     background-color: #444;
-    color:white;
+    color: white;
     cursor: pointer;
 }
 
-
 .x-button.add {
     top: 40%;
-    bottom: 0px;
-    left: auto;
-    right: 0px;
+    right: 0;
     border-radius: 5px;
     transition: 0.2s;
 }
 
-.x-button:hover {
-    scale:110%;
+.x-button.add:hover {
+    scale: 110%;
 }
 
-
-  /* Tooltip text from the data attribute */
-  .x-button.add::after {
+.x-button.add::after {
     content: attr(data-tooltip);
     width: 100px;
     background-color: black;
@@ -391,76 +235,37 @@ button:hover {
     opacity: 0;
     transition: opacity 0.3s, transform 0.2s;
     pointer-events: none;
-  }
-
-  .x-button.add:hover::after {
-    visibility: visible;
-    opacity: 1;
-    transform: translate(-50%,0);
-  }
-
-  .x-button.add:active::after {
-    visibility: visible;
-    opacity: 1;
-    transform: translate(-50%,125%) scale(90%);
-  }
-
-
-  .actions a {
-    font-size: 1.5rem;
-    margin: 5%;
-  }
-
-
-  .contact-info.edit {
-    flex-direction: column;
-    display: flex;
-    align-items: center;
-  }
-
-  .contact-info.edit p {
-    font-size: 1rem;
-    margin-right: 5%;
-  }
-
-  .contact-info.edit div div {
-    display: flex;
-    flex-direction: row;
-  }
-
-  /* Absolute positioning of the log out button */
-.logoutBtn {
-  position: absolute;
-  top: 20px;        /* Adjust to move vertically */
-  right: 20px;      /* Adjust to move horizontally */
-  background-color: #000000; /* Example color */
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  border-radius: 5px;
 }
 
-/* Ensure the parent container has relative positioning for absolute positioning to work */
-.content {
-  position: relative;
+.x-button.add:hover::after {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+.logoutBtn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
 .contacts-table {
-  width: 100%;
-  border-collapse: collapse;
+    width: 100%;
+    border-collapse: collapse;
 }
 
 .contacts-table th, .contacts-table td {
-  padding: 10px;
-  text-align: left;
+    padding: 10px;
+    text-align: left;
 }
 
 #add-contact-btn {
-  padding: 5px 10px;
-  cursor: pointer;
+    padding: 5px 10px;
+    cursor: pointer;
 }
-
-
-
