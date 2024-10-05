@@ -425,7 +425,7 @@ button:hover {
   position: absolute;
   top: 20px;        /* Adjust to move vertically */
   right: 20px;      /* Adjust to move horizontally */
-  background-color: #ff6b6b; /* Example color */
+  background-color: #000000; /* Example color */
   color: white;
   border: none;
   padding: 10px 20px;
