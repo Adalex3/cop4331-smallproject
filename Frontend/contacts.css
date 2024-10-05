@@ -210,14 +210,16 @@ body {
   cursor: pointer;
 }
 
-.search-box input[type="text"] {
+input[type="text"] {
   width: 100%;
   padding: 10px;
+  margin-left: 20px; /* Adjust this value to move the input away from the border */
   font-size: 1.5rem;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
 }
+
 
 .search-box button {
   padding: 10px;
