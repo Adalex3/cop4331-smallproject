@@ -1,271 +1,264 @@
 /* Fonts */
 .playfair-bold {
-    font-family: "Playfair Display", serif;
-    font-weight: 900;
+  font-family: "Playfair Display", serif;
+  font-weight: 900;
 }
 
 .zilla-slab-regular {
-    font-family: "Zilla Slab", serif;
-    font-weight: 400;
+  font-family: "Zilla Slab", serif;
+  font-weight: 400;
 }
 
 h1, h2, h3, h4, h5, h6, p, input, button {
-    font-family: "Zilla Slab", serif;
+  font-family: "Zilla Slab", serif;
 }
 
 body {
-    padding: 5vh 5vw;
+  padding: 5vh 5vw;
 }
 
 .content {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2vw;
-    padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2vw;
+  padding-left: 20px;
 }
 
 #contacts {
-    border: solid 1px gray;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 0;
+  border: solid 1px gray;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.contact-info {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+#contacts a div h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#contacts a div p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+#contacts a div span {
+  font-size: 14px;
+  color: blue;
+  text-decoration: underline;
+  margin-left: 10px;
+}
+
+#contacts a div:hover {
+  background-color: #ddd;
+}
+
+#contacts a div:active {
+  background-color: #aaa;
+}
+
+#contacts a div::after {
+  content: ">";
+  position: absolute;
+  right: 2%;
+  transition: 0.2s;
+}
+
+#contacts a div:hover::after {
+  transform: scale(150%);
+}
+
+#placeholder-text {
+  color: #555;
+  text-align: center;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 10px 0;
+  padding-left: 20px;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #444;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background-color: #999;
+}
+
+#contact-list {
+  width: 100%;
+  max-width: 600px;
+  margin: 20px 0;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 15px; /* Add margin to separate the contacts */
+}
+
+.contact-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.contact-label {
+  font-weight: bold;
+  margin-right: 10px;
+  min-width: 80px;
+}
+
+.contact-data {
+  flex: 1;
+  text-align: left;
+}
+
+.contact-details .name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.contact-details .email, .contact-details .phone {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.contact-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.contact-actions a {
+  color: blue;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.contact-actions a:hover {
+  text-decoration: underline;
 }
 
 .contact-info {
   display: flex;
+  flex-direction: column;
   border: solid 1px gray;
-  width: 42.5vw;
-  height: vh;
+  width: 100%;
   position: relative;
 }
 
-#contacts a div h2 {
-    margin: 0;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-#contacts a div p {
-    margin: 0;
-    font-size: 14px;
-    line-height: 1.5;
-}
-
-#contacts a div span {
-    font-size: 14px;
-    color: blue;
-    text-decoration: underline;
-    margin-left: 10px;
-}
-
-#contacts a div:hover {
-    background-color: #ddd;
-}
-
-#contacts a div:active {
-    background-color: #aaa;
-}
-
-#contacts a div::after {
-    content: ">";
-    position: absolute;
-    right: 2%;
-    transition: 0.2s;
-}
-
-#contacts a div:hover::after {
-    transform: scale(150%);
-}
-
-#placeholder-text {
-    color: #555;
-    text-align: center;
-}
-
-.search-container {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 10px 0;
-    padding-left: 20px;
-}
-
-input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    font-size: 1.5rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #444;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-button:hover {
-    background-color: #999;
-}
-
-#contact-list {
-    width: 100%;
-    max-width: 500px;
-    margin: 20px 0;
-}
-
-.contact-details {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 10px;
-    background-color: #f5f5f5;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.contact-field {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 14px;
-}
-
-.contact-label {
-    font-weight: bold;
-    margin-right: 10px;
-    min-width: 80px;
-}
-
-.contact-data {
-    flex: 1;
-    text-align: left;
-}
-
-.contact-details .name {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.contact-details .email, .contact-details .phone {
-    font-size: 14px;
-    margin-top: 5px;
-}
-
-.contact-actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-}
-
-.contact-actions a {
-    color: blue;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-.contact-actions a:hover {
-    text-decoration: underline;
-}
-
-.contact-info {
-    display: flex;
-    border: solid 1px gray;
-    width: 42.5vw;
-    position: relative;
-}
-
-.contact-info.edit {
-    flex-direction: column;
-    display: flex;
-    align-items: center;
-}
-
-.contact-info.edit div {
-    display: flex;
-    flex-direction: row;
-}
-
 .x-button {
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    width: 30px;
-    height: 25px;
-    background-color: #444;
-    color: white;
-    cursor: pointer;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 30px;
+  height: 25px;
+  background-color: #444;
+  color: white;
+  cursor: pointer;
 }
 
 .x-button.add {
-    top: 40%;
-    right: 0;
-    border-radius: 5px;
-    transition: 0.2s;
+  top: 40%;
+  right: 0;
+  border-radius: 5px;
+  transition: 0.2s;
 }
 
 .x-button.add:hover {
-    scale: 110%;
+  scale: 110%;
 }
 
 .x-button.add::after {
-    content: attr(data-tooltip);
-    width: 100px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    font-size: 0.8rem;
-    border-radius: 5px;
-    padding: 5px;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    transform: translate(-50%, 20%);
-    opacity: 0;
-    transition: opacity 0.3s, transform 0.2s;
-    pointer-events: none;
+  content: attr(data-tooltip);
+  width: 100px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  font-size: 0.8rem;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translate(-50%, 20%);
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.2s;
+  pointer-events: none;
 }
 
 .x-button.add:hover::after {
-    opacity: 1;
-    transform: translate(-50%, 0);
+  opacity: 1;
+  transform: translate(-50%, 0);
 }
 
 .logoutBtn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background-color: #000;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 5px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #000;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .contacts-table {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
 
 .contacts-table th, .contacts-table td {
-    padding: 10px;
-    text-align: left;
+  padding: 10px;
+  text-align: left;
 }
 
 #add-contact-btn {
-    padding: 5px 10px;
-    cursor: pointer;
+  padding: 5px 10px;
+  cursor: pointer;
 }
