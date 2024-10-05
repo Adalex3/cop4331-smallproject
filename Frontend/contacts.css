@@ -461,3 +461,51 @@ button:hover {
   align-items: center;
   justify-content: flex-start;
 }
+
+/* Adjust the container for the search box to align with the contact boxes */
+.search-container {
+  display: flex;
+  justify-content: space-between; /* Align search box and add button */
+  align-items: center;
+  width: 100%;
+  max-width: 600px;  /* Set the same width as the contact info boxes */
+  margin: 0 auto; /* Center it */
+  padding: 10px;
+  border: solid 1px gray;
+  border-radius: 5px;
+}
+
+/* Adjust the input box width */
+.search-container input[type="text"] {
+  width: 80%; /* Adjust width to balance with the button */
+  padding: 10px;
+  font-size: 1.2rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.x-button.add {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Ensure contact info boxes have the same width */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;  /* Same width as the search box */
+  margin-bottom: 10px; /* Add spacing between contacts */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+}
