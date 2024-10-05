@@ -106,7 +106,7 @@ body {
   border: solid 1px gray;
   width: 100%;
   max-width: 600px; /* Increase max width for better visibility */
-  margin: 0; /* Remove extra margins */
+  margin: 0 auto; /* Remove extra margins */
   padding: 0; /* Remove padding */
   height: auto;
 }
@@ -115,12 +115,6 @@ body {
   display: block;
   width: 100%; /* Match width with the contacts list */
   margin-bottom: 10px; /* Keep consistent spacing between cards */
-}
-
-#contacts {
-  display: flex;
-  flex-direction: column;
-  width: 100%; /* Ensure it takes the same width as the search box */
 }
 
 #contacts a div h2 {
@@ -179,12 +173,12 @@ body {
 
 .search-container {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
+  justify-content: flex-start;
   width: 100%;
   max-width: 600px;
-  margin: 0;
+  margin: 0 auto; /* Center align within the parent container */
+  padding: 10px 0; /* Add padding for consistency */
 }
 
 #search-box {
@@ -456,9 +450,5 @@ button:hover {
   cursor: pointer;
 }
 
-.search-container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
+
 
