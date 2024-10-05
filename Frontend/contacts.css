@@ -311,6 +311,7 @@ button:hover {
   align-items: center;
   justify-content: center;
   width: 100%;
+  max-width: 600px;
   font-weight: 100;
   font-size: 2rem;
 }
