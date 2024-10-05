@@ -202,18 +202,6 @@ body {
   margin: 0 auto;
 }
 
-#search-input {
-  width: 100% !important;
-  padding: 10px !important;
-  margin-left: 20px !important; /* This should now push it away from the left border */
-  font-size: 1.5rem !important;
-  border: 1px solid #ccc !important;
-  border-radius: 5px !important;
-  box-sizing: border-box !important;
-}
-
-
-
 .search-button {
   padding: 10px;
   background-color: #333;
