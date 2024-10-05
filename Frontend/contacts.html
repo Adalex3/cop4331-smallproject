@@ -24,45 +24,24 @@
             <button class="logoutBtn" onclick="doLogout();">Log Out</button>
         </div>
 
-        <!-- Contact List Table -->
-        <table id="contacts-table" class="contacts-table">
-            <thead>
-                <tr>
-                    <th colspan="2">
-                        <!-- Contacts List Title -->
-                        <h1 class="playfair-bold">Contacts List</h1>
-                    </th>
-                </tr>
-                <tr>
-                    <td>
-                        <!-- Search Contacts -->
-                        <form id="search-form">
-                            <input type="text" id="search-input" placeholder="Search contacts..." name="query">
-                        </form>
-                    </td>
-                    <td>
-                        <!-- Add Contacts Button -->
-                        <a class="x-button add" data-tooltip="Add a new contact" onclick="openContact();">+</a>
-                    </td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td colspan="2">
-                        <!-- Placeholder Text -->
-                        <p id="placeholder-text">Contacts will appear here when searched.</p>
-                        <!-- Contact Button Template (hidden by default) -->
-                        <a id="contact-button-template" style="display:none"><div>Contact Name</div></a>
-                    </td>
-                </tr>
-                <!-- Contact Display (contact-list) will go here -->
-                <tr>
-                    <td colspan="2">
-                        <div id="contact-list"></div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <!-- Contact List Section -->
+        <div id="contacts" class="contacts-container">
+            <h1 class="playfair-bold">Contacts List</h1>
+            <div class="search-container">
+
+                <!-- Search Contacts -->
+                <form id="search-form">
+                    <input type="text" id="search-input" placeholder="Search contacts..." name="query">
+                    <!-- Add Contact Button Inside the Box -->
+                    <a class="x-button add" data-tooltip="Add a new contact" onclick="openContact();">+</a>
+                </form> 
+            </div>
+
+            <p id="placeholder-text">Contacts will appear here when searched.</p>
+        </div>
+
+        <!-- Contact List Display -->
+        <div id="contact-list"></div>
 
         <!-- Contact Info Edit Form -->
         <div class="contact-info edit" id="contact-info-edit" style="display: none">
@@ -79,8 +58,8 @@
         </div>
 
     </div>
-</body>
 
 <script src="js/code.js"></script>
 
+</body>
 </html>
