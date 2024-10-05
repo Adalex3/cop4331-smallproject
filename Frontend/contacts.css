@@ -111,6 +111,12 @@ body {
   height: auto;
 }
 
+.contact-info {
+  display: block;
+  width: 100%; /* Match width with the contacts list */
+  margin-bottom: 10px; /* Keep consistent spacing between cards */
+}
+
 #contacts {
   display: flex;
   flex-direction: column;
@@ -170,20 +176,6 @@ body {
 .search-box, .contact-info {
   border-bottom: 1px solid #ccc;  /* Slight border to visually connect */
 }
-
-.search {
-  display: flex;
-  align-items: center; /* Aligns button and input on the same line */
-  justify-content: flex-start; /* Aligns both items to the left */
-  width: 100%; /* Full width of the parent */
-}
-
-#add-contact-btn {
-  margin-left: 10px; /* Space between search bar and button */
-  padding: 5px 10px;
-  cursor: pointer;
-}
-
 
 .search-container {
   display: flex;
@@ -311,9 +303,11 @@ button:hover {
 }
 
 .contact-info {
-  display: block;
-  width: 100%; /* Match width with the contacts list */
-  margin-bottom: 10px; /* Keep consistent spacing between cards */
+  display: flex;
+  border: solid 1px gray;
+  width: 42.5vw;
+  height: vh;
+  position: relative;
 }
 
 
