@@ -202,6 +202,17 @@ body {
   margin: 0 auto;
 }
 
+#search-input {
+  width: 100%;
+  padding: 10px;
+  margin-left: 20px; /* Adjust the left margin to move it away from the border */
+  font-size: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+
 .search-button {
   padding: 10px;
   background-color: #333;
