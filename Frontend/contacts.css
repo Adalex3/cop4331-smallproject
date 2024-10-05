@@ -214,9 +214,31 @@ button:hover {
 }
 
 .contact-details {
-  font-size: 14px; /* Adjusts the size of general text */
-  padding: 10px; /* Reduce padding for a tighter fit */
-  line-height: 1.4;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Adds space between each field */
+    padding: 10px;
+    background-color: #f5f5f5; /* Light background to make it stand out */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 5px;
+}
+
+.contact-field {
+  display: flex;
+  justify-content: space-between; /* Evenly space label and data */
+  align-items: center;
+  font-size: 14px; /* Smaller, consistent font size */
+}
+
+.contact-label {
+  font-weight: bold;
+  margin-right: 10px; /* Adds space between label and actual info */
+  min-width: 80px; /* Ensure labels align properly */
+}
+
+.contact-data {
+  flex: 1;
+  text-align: left; /* Aligns data to the left */
 }
 
 .contact-details .name {
@@ -270,11 +292,11 @@ button:hover {
 }/* */
 
 .contact-info {
-    display: flex; 
-    border: solid 1px gray; 
-    width: 42.5vw;
-    height: 85vh;
-    position: relative; 
+  display: flex;
+  border: solid 1px gray;
+  width: 42.5vw;
+  height: vh;
+  position: relative;
 }
 
 
@@ -284,13 +306,13 @@ button:hover {
 }
 
 .contact-info div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    font-weight: 900;
-    font-size: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-weight: 100;
+  font-size: 2rem;
 }
 
 .contact-info h3 {
