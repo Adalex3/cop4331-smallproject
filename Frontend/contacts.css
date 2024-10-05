@@ -96,33 +96,48 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 5vw;
+    justify-content: flex-start;
+    gap: 2vw;
 }
 
 #contacts {
-    border: solid 1px gray;
-    width: 100%;
-    max-width: 500px;
-    height: auto;
-    margin:0 auto;
+  border: solid 1px gray;
+  width: 100%;
+  max-width: 600px; /* Increase max width for better visibility */
+  margin: 0; /* Remove extra margins */
+  padding: 0; /* Remove padding */
+  height: auto;
 }
 
 #contacts a div {
-    border: solid 1px black;
-    background-color: #eee;
-    /* right:0; */
-    padding: 10px;
-    margin: 10px 0;
-    cursor: pointer;
-    max-width: 100%;
-    width: 100%;
-    /* position: relative;
-    transition: 0.2s;
-    user-select: none;
-    font-family: "Zilla Slab", serif;
-    font-weight: 400;
-    font-style: normal; */
+  border: solid 1px black;
+  background-color: #f9f9f9;
+  padding: 15px;
+  margin-bottom: 10px; /* Add some margin between each card */
+  cursor: pointer;
+  width: 100%;
+  max-width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+   font-size: 14px;
+}
+
+#contacts a div h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#contacts a div p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5; /* Improve readability */
+}
+
+#contacts a div span {
+  font-size: 14px;
+  color: blue;
+  text-decoration: underline;
+  margin-left: 10px;
 }
 
 #contacts a div:hover {
@@ -149,14 +164,31 @@ body {
     text-align: center;
 }
 
-
 .search-container {
-    position: relative;
-    margin: 0 auto;
-    max-width: 400px;
-    padding: 50px;
-    text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 0;
 }
+
+#search-box {
+  width: 80%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.search-button {
+  padding: 10px;
+  background-color: #333;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
 input[type="text"] {
     width: 70%;
     padding: 10px;
@@ -180,6 +212,39 @@ button:hover {
   max-width: 500px;
   margin: 20px 0; /* Add margin between search bar and contact list */
 }
+
+.contact-details {
+  font-size: 14px; /* Adjusts the size of general text */
+  padding: 10px; /* Reduce padding for a tighter fit */
+  line-height: 1.4;
+}
+
+.contact-details .name {
+  font-size: 18px; /* Make the name slightly larger */
+  font-weight: bold;
+}
+
+.contact-details .email, .contact-details .phone {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.contact-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.contact-actions a {
+  color: blue;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.contact-actions a:hover {
+  text-decoration: underline;
+}
+
 
 
 
