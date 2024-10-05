@@ -300,30 +300,6 @@ button:hover {
   text-decoration: underline;
 }
 
-
-
-
-/* /* .contact-info {
-    position: relative;
-    border: solid 1px gray;
-    width: 42.5vw;
-    height: 85vh;
-} */
-
-
-/* .contact-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: solid 1px gray;
-    width: 42.5vw;
-    height: 85vh;
-    /* opacity: 0;
-    transition: 0.5s;
-    display: none;
-}/* */
-
 .contact-info {
   display: flex;
   border: solid 1px gray;
@@ -443,3 +419,22 @@ button:hover {
     display: flex;
     flex-direction: row;
   }
+
+  /* Absolute positioning of the log out button */
+.logoutBtn {
+  position: absolute;
+  top: 20px;        /* Adjust to move vertically */
+  right: 20px;      /* Adjust to move horizontally */
+  background-color: #ff6b6b; /* Example color */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* Ensure the parent container has relative positioning for absolute positioning to work */
+.content {
+  position: relative;
+}
