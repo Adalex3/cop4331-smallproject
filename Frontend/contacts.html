@@ -9,16 +9,20 @@
     <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
     <div class="content">
 
-        <!-- Logout Button -->
-        <h1>
+        <!-- Header Section with Flexbox for Title and Logout Button -->
+        <div class="header">
+            <h1 class="title">Contact Manager</h1>
+
+            <!-- Logout Button -->
             <button class="logoutBtn" onclick="doLogout();">Log Out</button>
-        </h1>
+        </div>
 
         <!-- Contact List -->
         <div id="contacts">
@@ -26,7 +30,7 @@
             <div class="search-container">
 
                 <!-- Search Contacts -->
-                <form id="search-form" onsubmit="event.preventDefault(); searchContacts();">
+                <form id="search-form">
                     <input type="text" id="search-input" placeholder="Search contacts..." name="query">
                 </form> 
 
@@ -34,12 +38,12 @@
                 <a class="x-button add" data-tooltip="Add a new contact" onclick="openContact();">+</a>
             </div>
 
-            <!-- Placeholder text, if no contacts found -->
-            <p id="placeholder-text">Contacts will appear here when searched or added.</p>
-
-            <!-- Contact List will be populated here -->
-            <div id="contact-list"></div>
+            <p id="placeholder-text">Contacts will appear here when searched.</p>
+            <a id="contact-button-template" style="display:none"><div>Contact Name</div></a>
         </div>
+
+        <!-- Contact Display -->
+        <div id="contact-list"></div>
 
         <!-- Contact Info Edit Form -->
         <div class="contact-info edit" id="contact-info-edit" style="display: none">
@@ -60,7 +64,6 @@
     
 </body>
 
-<!-- Link to JavaScript file -->
 <script src="js/code.js"></script>
 
 </html>
