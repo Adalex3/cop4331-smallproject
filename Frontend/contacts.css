@@ -94,7 +94,7 @@ body {
 
 .content {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 5vw;
@@ -102,24 +102,27 @@ body {
 
 #contacts {
     border: solid 1px gray;
-    width: 42.5vw;
-    height: 85vh;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    margin:0 auto;
 }
 
 #contacts a div {
     border: solid 1px black;
     background-color: #eee;
-    right:0;
-    padding: 2% 2%;
-    margin: 2%;
+    /* right:0; */
+    padding: 10px;
+    margin: 10px 0;
     cursor: pointer;
     max-width: 100%;
-    position: relative;
+    width: 100%;
+    /* position: relative;
     transition: 0.2s;
     user-select: none;
     font-family: "Zilla Slab", serif;
     font-weight: 400;
-    font-style: normal;
+    font-style: normal; */
 }
 
 #contacts a div:hover {
@@ -170,6 +173,12 @@ button {
 }
 button:hover {
     background-color: #999;
+}
+
+#contact-list {
+  width: 100%;
+  max-width: 500px;
+  margin: 20px 0; /* Add margin between search bar and contact list */
 }
 
 
