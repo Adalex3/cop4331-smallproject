@@ -203,14 +203,15 @@ body {
 }
 
 #search-input {
-  width: 100%;
-  padding: 10px;
-  margin-left: 20px; /* Adjust the left margin to move it away from the border */
-  font-size: 1.5rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
+  width: 100% !important;
+  padding: 10px !important;
+  margin-left: 20px !important; /* This should now push it away from the left border */
+  font-size: 1.5rem !important;
+  border: 1px solid #ccc !important;
+  border-radius: 5px !important;
+  box-sizing: border-box !important;
 }
+
 
 
 .search-button {
