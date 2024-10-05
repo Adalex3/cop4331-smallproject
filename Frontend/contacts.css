@@ -93,7 +93,7 @@ body {
 
 
 .content {
-    display: flex;
+    display: flow;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
@@ -164,6 +164,17 @@ body {
     text-align: center;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;  /* No gap between search box and contacts */
+}
+
+.search-box, .contact-info {
+  border-bottom: 1px solid #ccc;  /* Slight border to visually connect */
+}
+
 .search-container {
   display: flex;
   flex-direction: row;
@@ -175,10 +186,13 @@ body {
 }
 
 #search-box {
-  width: 80%;
+  display: flex;
+  justify-content: center;  /* Center the search bar */
+  align-items: center;
+  width: 100%;
+  max-width: 600px;  /* Match the contact info max width */
   padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
+  margin: 0 auto;
 }
 
 .search-button {
@@ -186,6 +200,25 @@ body {
   background-color: #333;
   color: white;
   border: none;
+  cursor: pointer;
+}
+
+.search-box input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.search-box button {
+  padding: 10px;
+  margin-left: -45px; /* Moves the button inside the input */
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 0 5px 5px 0; /* Matches the border-radius of input */
   cursor: pointer;
 }
 
@@ -314,6 +347,7 @@ button:hover {
   max-width: 600px;
   font-weight: 100;
   font-size: 2rem;
+  margin-top: 0;
 }
 
 .contact-info h3 {
