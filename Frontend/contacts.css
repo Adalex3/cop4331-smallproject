@@ -95,9 +95,10 @@ body {
 .content {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start; /* Align items to the left */
   justify-content: flex-start;
   gap: 2vw;
+  padding-left: 20px; /* Add some padding for spacing */
 }
 
 
@@ -110,16 +111,10 @@ body {
   height: auto;
 }
 
-#contacts a div {
-  border: solid 1px black;
-  background-color: #f9f9f9;
-  padding: 15px;
-  margin-bottom: 10px; /* Add some margin between each card */
-  cursor: pointer;
-  width: 100%;
-  max-width: 100%;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-   font-size: 14px;
+#contacts {
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Ensure it takes the same width as the search box */
 }
 
 #contacts a div h2 {
@@ -175,6 +170,20 @@ body {
 .search-box, .contact-info {
   border-bottom: 1px solid #ccc;  /* Slight border to visually connect */
 }
+
+.search {
+  display: flex;
+  align-items: center; /* Aligns button and input on the same line */
+  justify-content: flex-start; /* Aligns both items to the left */
+  width: 100%; /* Full width of the parent */
+}
+
+#add-contact-btn {
+  margin-left: 10px; /* Space between search bar and button */
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
 
 .search-container {
   display: flex;
@@ -302,11 +311,9 @@ button:hover {
 }
 
 .contact-info {
-  display: flex;
-  border: solid 1px gray;
-  width: 42.5vw;
-  height: vh;
-  position: relative;
+  display: block;
+  width: 100%; /* Match width with the contacts list */
+  margin-bottom: 10px; /* Keep consistent spacing between cards */
 }
 
 
