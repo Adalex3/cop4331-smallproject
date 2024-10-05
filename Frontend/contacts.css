@@ -459,11 +459,5 @@ button:hover {
 .search-container {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Adjust space between search box and add button */
-  width: 100%;
-  max-width: 600px; /* Match the contact info max width */
-  margin: 0;
-  padding: 10px;
-  border: solid 1px gray; /* Add a border to the whole container */
-  border-radius: 5px; /* Make it rounded */
+  justify-content: flex-start;
 }
