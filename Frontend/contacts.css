@@ -440,3 +440,24 @@ button:hover {
 .content {
   position: relative;
 }
+
+.contacts-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.contacts-table th, .contacts-table td {
+  padding: 10px;
+  text-align: left;
+}
+
+#add-contact-btn {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
