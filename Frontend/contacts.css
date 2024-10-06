@@ -189,9 +189,8 @@ button:hover {
 }
 
 .x-button {
-  left: 10px;
   top: 10px;
-  width: 30px;
+  width: 25px;
   height: 25px;
   background-color: #444;
   color: white;
