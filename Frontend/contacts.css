@@ -290,14 +290,12 @@ button:hover {
 }
 
 .contact-info.edit input {
-  .contact-info.edit input {
-    width: 100%;               /* Make the input fields fill the available space */
-    padding: 10px;             /* Add padding for readability */
-    margin-bottom: 10px;       /* Add space between the fields */
-    border: 2px solid #888;    /* Add a distinct border to show that it's editable */
-    border-radius: 5px;        /* Keep the corners rounded */
-    box-sizing: border-box;
-    background-color: #fff;    /* Ensure the background is white for clarity */
+  width: 100%;         /* Ensure all input fields fit the form */
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
 }
 
 
@@ -325,4 +323,23 @@ button:hover {
 
 .contact-info.edit .x-button:hover {
   background-color: #666;
+}
+
+/* When a contact is in 'edit' mode, make the span look like an input field */
+.contact-info span[contenteditable="true"] {
+  display: inline-block;
+  width: 100%;                 /* Ensure it takes up full width */
+  padding: 8px;                /* Add some padding */
+  margin-bottom: 10px;          /* Space between fields */
+  border: 2px solid #ccc;       /* Add a clear border to indicate editability */
+  border-radius: 4px;           /* Slightly round the corners */
+  background-color: #f9f9f9;    /* Light background color */
+  box-sizing: border-box;       /* Ensure proper sizing with padding */
+}
+
+/* Optional: When a user clicks into the editable span */
+.contact-info span[contenteditable="true"]:focus {
+  border-color: #007bff;       /* Highlight border when span is focused */
+  outline: none;               /* Remove default focus outline */
+  background-color: #fff;      /* White background when focused */
 }
