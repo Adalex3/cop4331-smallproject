@@ -120,25 +120,19 @@ function addUser() {
 
     try {
         xhr.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                let jsonObject = JSON.parse(xhr.responseText);
-
-                if (jsonObject.error && jsonObject.error === "Username already taken") {
-                    document.getElementById("userAddResult").innerHTML = "Username is already taken. Please choose another one.";
+            if (this.readyState == 4) {
+                if (this.status == 200) {
+                    let jsonObject = JSON.parse(xhr.responseText);
+                    if (jsonObject.error && jsonObject.error === "Username already taken") {
+                        document.getElementById("userAddResult").innerHTML = "Username is already taken. Please choose another one.";
+                    } else {
+                        document.getElementById("userAddResult").innerHTML = "User has been added";
+                        // Automatically log in the user after registration
+                        loginAfterRegistration(newUsername, newPassword);
+                    }
                 } else {
-                    document.getElementById("userAddResult").innerHTML = "User has been added";
-
-                    // Automatically log in the user after successful registration
-                    userId = jsonObject.id;
-                    firstName = newFirstName;
-                    lastName = newLastName;
-                    saveCookie();  // Set the session/cookies just like during login
-
-                    // Redirect to the contacts page
-                    window.location.href = "contacts.html";
+                    document.getElementById("userAddResult").innerHTML = "Error registering user. Please try again.";
                 }
-            } else {
-                document.getElementById("userAddResult").innerHTML = "Error registering user. Please try again.";
             }
         };
         xhr.send(jsonPayload);
@@ -147,6 +141,40 @@ function addUser() {
     }
 }
 
+function loginAfterRegistration(username, password) {
+    let tmp = { username: username, password: password };
+    let jsonPayload = JSON.stringify(tmp);
+
+    let url = urlBase + '/Login.' + extension;
+
+    let xhrLogin = new XMLHttpRequest();
+    xhrLogin.open("POST", url, true);
+    xhrLogin.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+    xhrLogin.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            let jsonObject = JSON.parse(xhrLogin.responseText);
+            userId = jsonObject.id;
+
+            if (userId < 1) {
+                document.getElementById("userAddResult").innerHTML = "Error logging in after registration.";
+                return;
+            }
+
+            firstName = jsonObject.firstName;
+            lastName = jsonObject.lastName;
+
+            saveCookie();
+
+            // Store user in local storage
+            localStorage.setItem('currentUser', username);
+            currentUser = username;
+
+            window.location.href = "contacts.html";
+        }
+    };
+    xhrLogin.send(jsonPayload);
+}
 
 function doLogout() {
     userId = 0;
