@@ -163,22 +163,34 @@ button:hover {
 .contact-actions {
   display: flex;
   flex-direction: column;      /* Stack buttons vertically */
+  align-items: center;         /* Center align both buttons horizontally */
   gap: 5px;                    /* Add space between buttons */
-  align-items: flex-end;       /* Align buttons to the right */
 }
 
 .contact-actions a {
+  width: 80px;                 /* Ensure both buttons have the same width */
+  text-align: center;          /* Center the text within the buttons */
   padding: 5px 10px;
   background-color: #444;
   color: white;
   text-decoration: none;
   border-radius: 5px;
-  text-align: center;
 }
 
 .contact-actions a:hover {
   background-color: #666;
 }
+
+#save-button {
+  width: 80px;                 /* Ensure the Save button has the same width */
+  text-align: center;
+  background-color: #888;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+}
+
 
 .contact-info {
   display: flex;
