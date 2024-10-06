@@ -289,22 +289,15 @@ button:hover {
   z-index: 10;
 }
 
-/* Editable fields when 'Edit' is clicked */
-.contact-info input {
-  width: 100%;                /* Full width to fit the container */
-  padding: 8px;               /* Padding for better readability */
-  margin-bottom: 10px;        /* Space between input fields */
-  border: 2px solid white;     /* Add a clear border around editable fields */
-  border-radius: 4px;         /* Rounded corners for better aesthetics */
-  background-color: #f9f9f9;  /* Slight background change for visibility */
-  box-sizing: border-box;     /* Ensures padding and width don't break layout */
-}
-
-/* When a field is focused (clicked on) */
-.contact-info input:focus {
-  border-color: black;      /* Highlight the border with a color when active */
-  outline: none;              /* Remove the default outline */
-  background-color: #fff;     /* Change background to white when focused */
+.contact-info.edit input {
+  .contact-info.edit input {
+    width: 100%;               /* Make the input fields fill the available space */
+    padding: 10px;             /* Add padding for readability */
+    margin-bottom: 10px;       /* Add space between the fields */
+    border: 2px solid #888;    /* Add a distinct border to show that it's editable */
+    border-radius: 5px;        /* Keep the corners rounded */
+    box-sizing: border-box;
+    background-color: #fff;    /* Ensure the background is white for clarity */
 }
 
 
