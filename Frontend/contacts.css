@@ -200,7 +200,7 @@ button:hover {
 }
 
 .x-button.add {
-  padding: 10px 15px; /* Make padding equal on all sides */
+  padding: 10px 15px;  /* Ensure even padding */
   background-color: #444;
   color: white;
   border: none;
