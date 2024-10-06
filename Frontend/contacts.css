@@ -202,6 +202,7 @@ button:hover {
   background-color: #444;
   color: white;
   border: none;
+  text-align: center;
   border-radius: 5px;
   font-size: 1.5rem;
   cursor: pointer;
@@ -277,13 +278,14 @@ button:hover {
 }
 
 .contact-info.edit input {
-  width: 100%;         /* Ensure all input fields fit the form */
+  width: 100%;          /* Ensure all input fields span full width of the form */
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
 }
+
 
 
 .contact-info.edit .actions {
@@ -310,4 +312,8 @@ button:hover {
 
 .contact-info.edit .x-button:hover {
   background-color: #666;
+}
+
+input#input-name {
+  width: 50%;  /* This would be causing the inconsistency */
 }
