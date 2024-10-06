@@ -277,13 +277,14 @@ button:hover {
 }
 
 .contact-info.edit input {
-  width: 100%;         /* Ensure the input fields fit the form */
+  width: 100%;         /* Ensure all input fields fit the form */
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
 }
+
 
 .contact-info.edit .actions {
   text-align: center;  /* Align the save button to the right */
@@ -294,6 +295,8 @@ button:hover {
   top: 10px;
   right: 10px;        /* Keep space from the top and right */
   background-color: #444;
+  width: 30px;       /* Make the button wider to be evenly sized */
+    height: 30px;
   color: white;
   border: none;
   padding: 5px;
