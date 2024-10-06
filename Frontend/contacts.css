@@ -290,14 +290,19 @@ button:hover {
 }
 
 .contact-info.edit input {
-  width: 100%;         /* Ensure all input fields fit the form */
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  width: 100%;               /* Make the input fields fill the available space */
+  padding: 10px;             /* Add padding for readability */
+  margin-bottom: 10px;       /* Add space between the fields */
+  border: 2px solid #888;    /* Add a distinct border to show that it's editable */
+  border-radius: 5px;        /* Keep the corners rounded */
   box-sizing: border-box;
+  background-color: #fff;    /* Ensure the background is white for clarity */
 }
 
+.contact-info.edit input:focus {
+  border-color: #333;        /* Change border color on focus to show interaction */
+  outline: none;             /* Remove the default browser outline */
+}
 
 .contact-info.edit .actions {
   text-align: center;  /* Align the save button to the right */
