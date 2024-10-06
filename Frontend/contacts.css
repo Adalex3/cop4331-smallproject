@@ -97,7 +97,7 @@ body {
 }
 
 input[type="text"] {
-  width: 50%;
+  width: 60%;
   padding: 10px;
   font-size: 1.5rem;
   border: 1px solid #ccc;
@@ -155,20 +155,15 @@ button:hover {
   text-align: left;
 }
 
-.contact-details .name {
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.contact-details .email, .contact-details .phone {
-  font-size: 14px;
+.contact-details .name, .email, .contact-details .phone {
+  font-size: 16px;
   margin-top: 5px;
 }
 
 .contact-actions {
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
+  margin-top: 14px;
 }
 
 .contact-actions a {
