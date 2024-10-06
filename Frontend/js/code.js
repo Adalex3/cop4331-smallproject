@@ -296,29 +296,29 @@ document.addEventListener("DOMContentLoaded", function() {
     console.log("Current user:", currentUser);
 });
 
-function editContact(name, email, phoneNum, id, username) {
-    console.log("Edit Contact button pressed for:", name, email, phoneNum, id, username);
+function editContact(name, email, phoneNum, id) {
+    console.log("Edit Contact button pressed for:", name, email, phoneNum, id);
 
-    // Find the specific contact's container
+    // Find the specific contact's container based on the ID
     const contactContainer = document.querySelector(`[data-contact-id="${id}"]`);
 
-    // Hide any existing forms before showing the form for the selected contact
-    const existingForm = document.querySelector('.contact-info.edit');
-    if (existingForm) {
-        existingForm.style.display = 'none';
-    }
-
-    // Get the edit form and move it to the clicked contact's container
-    const editForm = document.getElementById('contact-info-edit');
-    editForm.style.display = 'block';
-
-    // Append the form to the correct contact container
-    contactContainer.appendChild(editForm);
-
-    // Populate the form with the selected contact's data
-    editForm.querySelector('#input-name').value = name;
-    editForm.querySelector('#input-email').value = email;
-    editForm.querySelector('#input-phoneNum').value = phoneNum;
+    // Replace the static text in that contact with input fields for editing
+    contactContainer.innerHTML = `
+        <div class="contact-details">
+            <div>
+                <label>Name:</label>
+                <input type="text" id="edit-name-${id}" value="${name}"><br>
+                <label>Email:</label>
+                <input type="email" id="edit-email-${id}" value="${email}"><br>
+                <label>Phone Number:</label>
+                <input type="tel" id="edit-phone-${id}" value="${phoneNum}">
+            </div>
+            <div class="actions">
+                <a href="#" onclick="saveContact('${id}', '${name}', '${email}', '${phoneNum}');">Save</a><br><br>
+                <a href="#" onclick="cancelEdit('${id}', '${name}', '${email}', '${phoneNum}');">Cancel</a>
+            </div>
+        </div>
+    `;
 }
 
 
