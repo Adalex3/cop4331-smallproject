@@ -262,20 +262,22 @@ function addContactToList(contacts) {
         newContact.classList.add("contact-info");
 
         newContact.innerHTML = `
-            <div class="contact-info" data-contact-id="${id}">
-    <div class="contact-details">
-        <label>Name:</label>
-        <span class="name">${name}</span><br>
-        <label>Email:</label>
-        <span class="email">${email}</span><br>
-        <label>Phone Number:</label>
-        <span class="phone">${phoneNum}</span>
-    </div>
-    <div class="actions">
-        <a href="#" onclick="editContact('${name}', '${email}', '${phoneNum}', '${id}');">Edit</a>
-    </div>
-</div>
+            <div class="contact-details">
 
+                <div>
+                    <label>Name:</label>
+                    <span id="edit-name-input" contentEditable="false">${name}</span><br>
+                    <label>Email:</label>
+                    <span id="edit-email-input" contentEditable="false">${email}</span><br>
+                    <label>Phone Number:</label>
+                    <span id="edit-phoneNum-input" contentEditable="false">${phoneNumber}</span>
+                </div>
+            <div class="actions">
+                <a href="#" onclick="editContact('${name}', '${email}', '${phoneNumber}', '${id}', '${username}');">Edit</a><br><br>
+                <a href="#" onclick="deleteContact('${username}', '${id}');">Delete</a>
+                <button id="save-button" style="display: none;">Save</button>
+            </div>
+            </div>
         `;
 
         contactList.appendChild(newContact);
@@ -294,30 +296,46 @@ document.addEventListener("DOMContentLoaded", function() {
     console.log("Current user:", currentUser);
 });
 
-function editContact(name, email, phoneNum, id) {
-    console.log("Edit Contact button pressed for:", name, email, phoneNum, id);
+function editContact(name, email, phoneNum, id, username) {
+    console.log("Edit Contact button pressed for:", name, email, phoneNum, id, username);
 
-    // Find the specific contact's container based on the ID
-    const contactContainer = document.querySelector(`[data-contact-id="${id}"]`);
+    // Make the edit form visible
+    document.getElementById("edit-name-input").contentEditable = "true";
+    // document.getElementById("edit-lastname-input").contentEditable = "true";
+    document.getElementById("edit-email-input").contentEditable = "true";
+    document.getElementById("edit-phoneNum-input").contentEditable = "true";
 
-    // Change the static text in the clicked contact to input fields for editing
-    const nameField = contactContainer.querySelector('.name');
-    const emailField = contactContainer.querySelector('.email');
-    const phoneField = contactContainer.querySelector('.phone');
+    // Show the save button
+    document.getElementById("save-button").style.display = "block";
 
-    // Replace the static text fields with input fields
-    nameField.innerHTML = `<input type="text" id="edit-name-${id}" value="${name}">`;
-    emailField.innerHTML = `<input type="email" id="edit-email-${id}" value="${email}">`;
-    phoneField.innerHTML = `<input type="tel" id="edit-phone-${id}" value="${phoneNum}">`;
+    document.getElementById("save-button").addEventListener("click", function() {
+        const updatedName = document.getElementById("edit-name-input").textContent.trim();
+        // const updatedLastName = document.getElementById("edit-lastname-input").textContent.trim();
+        const updatedEmail = document.getElementById("edit-email-input").textContent.trim();
+        const updatedPhoneNum = document.getElementById("edit-phoneNum-input").textContent.trim();
+        console.log("New contact data:", updatedName, updatedEmail, updatedPhoneNum);
 
-    // Change the Edit button to Save/Cancel buttons
-    const actions = contactContainer.querySelector('.actions');
-    actions.innerHTML = `
-        <a href="#" onclick="saveContact('${id}', '${name}', '${email}', '${phoneNum}');">Save</a>
-        <a href="#" onclick="cancelEdit('${id}', '${name}', '${email}', '${phoneNum}');">Cancel</a>
-    `;
+        // API call to update Contact PHP
+        let xhr = new XMLHttpRequest();
+        let url = urlBase + '/updateContact.' + extension;
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let response = JSON.parse(xhr.responseText);
+                if (response) {
+                    console.log("Contact updated!");
+                    fetchContacts();
+                } else if (response.error) {
+                    console.error("Error: " + response.error);
+                }
+            }
+        }
+        let payload = JSON.stringify({ username: currentUser, id: id, name: updatedName, email: updatedEmail, phonenumber: updatedPhoneNum });
+        xhr.send(payload);
+    });
 }
-
 
 function deleteContact(username, contactID) {
     console.log("Delete Contact button pressed.");
