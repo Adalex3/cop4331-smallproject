@@ -262,6 +262,7 @@ function addContactToList(contacts) {
         newContact.classList.add("contact-info");
 
         newContact.innerHTML = `
+            <div class="contact-details">
 
                 <div>
                     <label>Name:</label>
@@ -275,6 +276,7 @@ function addContactToList(contacts) {
                 <a href="#" onclick="editContact('${name}', '${email}', '${phoneNumber}', '${id}', '${username}');">Edit</a><br><br>
                 <a href="#" onclick="deleteContact('${username}', '${id}');">Delete</a>
                 <button id="save-button" style="display: none;">Save</button>
+            </div>
             </div>
         `;
 
