@@ -264,9 +264,9 @@ function addContactToList(contacts) {
         newContact.innerHTML = `
             <div>
                 <label>Name:</label>
-                <span id="edit-name-input" contentEditable="false">${name}</span>
+                <span id="edit-name-input" contentEditable="false">${name}</span><br>
                 <label>Email:</label>
-                <span id="edit-email-input" contentEditable="false">${email}</span>
+                <span id="edit-email-input" contentEditable="false">${email}</span><br>
                 <label>Phone Number:</label>
                 <span id="edit-phoneNum-input" contentEditable="false">${phoneNumber}</span>
             </div>
