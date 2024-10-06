@@ -128,13 +128,13 @@ button:hover {
 
 .contact-details {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  justify-content: space-between; /* Spread content across the width */
+  align-items: flex-start;        /* Align items at the top */
   padding: 10px;
   background-color: #f5f5f5;
   border: 1px solid #ddd;
   border-radius: 5px;
-  margin-bottom: 15px; /* Add margin to separate the contacts */
+  margin-bottom: 10px;
 }
 
 .contact-field {
@@ -173,7 +173,6 @@ button:hover {
   color: white;
   text-decoration: none;
   border-radius: 5px;
-  font-size: 14px;
   text-align: center;
 }
 
