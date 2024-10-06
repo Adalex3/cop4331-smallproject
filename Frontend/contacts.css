@@ -189,7 +189,6 @@ button:hover {
 }
 
 .x-button {
-  position: absolute;
   left: 10px;
   top: 10px;
   width: 30px;
