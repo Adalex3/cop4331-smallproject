@@ -184,7 +184,7 @@ button:hover {
   display: flex;
   flex-direction: column;
   border: solid 1px gray;
-  width: 100%;
+  width: 97%;
   position: relative;
 }
 
