@@ -262,14 +262,16 @@ function addContactToList(contacts) {
         newContact.classList.add("contact-info");
 
         newContact.innerHTML = `
-            <div>
-                <label>Name:</label>
-                <span id="edit-name-input" contentEditable="false">${name}</span><br>
-                <label>Email:</label>
-                <span id="edit-email-input" contentEditable="false">${email}</span><br>
-                <label>Phone Number:</label>
-                <span id="edit-phoneNum-input" contentEditable="false">${phoneNumber}</span>
-            </div>
+            <div class="contact-details">
+
+                <div>
+                    <label>Name:</label>
+                    <span id="edit-name-input" contentEditable="false">${name}</span><br>
+                    <label>Email:</label>
+                    <span id="edit-email-input" contentEditable="false">${email}</span><br>
+                    <label>Phone Number:</label>
+                    <span id="edit-phoneNum-input" contentEditable="false">${phoneNumber}</span>
+                </div>
             <div class="actions">
                 <a href="#" onclick="editContact('${name}', '${email}', '${phoneNumber}', '${id}', '${username}');">Edit</a>
                 <a href="#" onclick="deleteContact('${username}', '${id}');">Delete</a>
