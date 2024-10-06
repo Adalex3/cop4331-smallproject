@@ -162,18 +162,23 @@ button:hover {
 
 .contact-actions {
   display: flex;
-  justify-content: space-between;
-  margin-top: 14px;
+  flex-direction: column;      /* Stack buttons vertically */
+  gap: 5px;                    /* Add space between buttons */
+  align-items: flex-end;       /* Align buttons to the right */
 }
 
 .contact-actions a {
-  color: blue;
+  padding: 5px 10px;
+  background-color: #444;
+  color: white;
   text-decoration: none;
+  border-radius: 5px;
   font-size: 14px;
+  text-align: center;
 }
 
 .contact-actions a:hover {
-  text-decoration: underline;
+  background-color: #666;
 }
 
 .contact-info {
