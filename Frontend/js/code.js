@@ -8,52 +8,52 @@ let currentUser = null;
 
 function doLogin()
 {
-	userId = 0;
-	firstName = "";
-	lastName = "";
+    userId = 0;
+    firstName = "";
+    lastName = "";
 
-	let login = document.getElementById("loginName").value;
-	let password = document.getElementById("loginPassword").value;
+    let login = document.getElementById("loginName").value;
+    let password = document.getElementById("loginPassword").value;
 
-	document.getElementById("loginResult").innerHTML = "";
+    document.getElementById("loginResult").innerHTML = "";
 
-	let tmp = {username:login,password:password};
-	let jsonPayload = JSON.stringify( tmp );
+    let tmp = {username:login,password:password};
+    let jsonPayload = JSON.stringify( tmp );
 
-	let url = urlBase + '/Login.' + extension;
+    let url = urlBase + '/Login.' + extension;
 
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try
-	{
-		xhr.onreadystatechange = function() 
-		{
-			if (this.readyState == 4 && this.status == 200) 
-			{
-				let jsonObject = JSON.parse( xhr.responseText );
-				userId = jsonObject.id;
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    try
+    {
+        xhr.onreadystatechange = function() 
+        {
+            if (this.readyState == 4 && this.status == 200) 
+            {
+                let jsonObject = JSON.parse( xhr.responseText );
+                userId = jsonObject.id;
 
-				if( userId < 1 )
-				{		
-					document.getElementById("loginResult").innerHTML = "Username/Password combination incorrect";
-					return;
-				}
+                if( userId < 1 )
+                {       
+                    document.getElementById("loginResult").innerHTML = "Username/Password combination incorrect";
+                    return;
+                }
 
-				firstName = jsonObject.firstName;
-				lastName = jsonObject.lastName;
+                firstName = jsonObject.firstName;
+                lastName = jsonObject.lastName;
 
-				saveCookie();
+                saveCookie();
 
-				window.location.href = "contacts.html";
-			}
-		};
-		xhr.send(jsonPayload);
-	}
-	catch(err)
-	{
-		document.getElementById("loginResult").innerHTML = err.message;
-	}
+                window.location.href = "contacts.html";
+            }
+        };
+        xhr.send(jsonPayload);
+    }
+    catch(err)
+    {
+        document.getElementById("loginResult").innerHTML = err.message;
+    }
 
     // Store user in local storage
     localStorage.setItem('currentUser', login);
@@ -63,43 +63,43 @@ function doLogin()
 
 function saveCookie()
 {
-	let minutes = 20;
-	let date = new Date();
-	date.setTime(date.getTime()+(minutes*60*1000));	
-	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
+    let minutes = 20;
+    let date = new Date();
+    date.setTime(date.getTime()+(minutes*60*1000)); 
+    document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
 }
 
 function readCookie()
 {
-	userId = -1;
-	let data = document.cookie;
-	let splits = data.split(",");
-	for(var i = 0; i < splits.length; i++) 
-	{
-		let thisOne = splits[i].trim();
-		let tokens = thisOne.split("=");
-		if( tokens[0] == "firstName" )
-		{
-			firstName = tokens[1];
-		}
-		else if( tokens[0] == "lastName" )
-		{
-			lastName = tokens[1];
-		}
-		else if( tokens[0] == "userId" )
-		{
-			userId = parseInt( tokens[1].trim() );
-		}
-	}
+    userId = -1;
+    let data = document.cookie;
+    let splits = data.split(",");
+    for(var i = 0; i < splits.length; i++) 
+    {
+        let thisOne = splits[i].trim();
+        let tokens = thisOne.split("=");
+        if( tokens[0] == "firstName" )
+        {
+            firstName = tokens[1];
+        }
+        else if( tokens[0] == "lastName" )
+        {
+            lastName = tokens[1];
+        }
+        else if( tokens[0] == "userId" )
+        {
+            userId = parseInt( tokens[1].trim() );
+        }
+    }
 
-	if( userId < 0 )
-	{
-		window.location.href = "index.html";
-	}
-	else
-	{
-		document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
-	}
+    if( userId < 0 )
+    {
+        window.location.href = "index.html";
+    }
+    else
+    {
+        document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
+    }
 }
 
 function addUser() {
@@ -260,7 +260,6 @@ function addContactToList(contacts) {
 
         let newContact = document.createElement("div");
         newContact.classList.add("contact-info");
-        newContact.setAttribute('data-contact-id', id);
 
         newContact.innerHTML = `
             <div class="contact-details">
@@ -300,36 +299,23 @@ document.addEventListener("DOMContentLoaded", function() {
 function editContact(name, email, phoneNum, id, username) {
     console.log("Edit Contact button pressed for:", name, email, phoneNum, id, username);
 
-    // Find the specific contact's container
-    const contactContainer = document.querySelector(`[data-contact-id="${id}"]`);
+    // Make the edit form visible
+    document.getElementById("edit-name-input").contentEditable = "true";
+    // document.getElementById("edit-lastname-input").contentEditable = "true";
+    document.getElementById("edit-email-input").contentEditable = "true";
+    document.getElementById("edit-phoneNum-input").contentEditable = "true";
 
-    // Remove the form if it exists in another contact
-    const existingForm = document.getElementById('contact-info-edit');
-    if (existingForm) {
-        existingForm.style.display = 'none';
-    }
+    // Show the save button
+    document.getElementById("save-button").style.display = "block";
 
-    // Reuse the existing form and place it in the correct position
-    const editForm = document.getElementById('contact-info-edit');
-    editForm.style.display = 'block';
-
-    // Position the form under the clicked contact
-    contactContainer.appendChild(editForm);
-
-    // Populate the form with the selected contact's data
-    editForm.querySelector('#input-name').value = name;
-    editForm.querySelector('#input-email').value = email;
-    editForm.querySelector('#input-phoneNum').value = phoneNum;
-
-    // Add an event listener to the save button for this contact
-    const saveButton = editForm.querySelector('#save-contact');
-    saveButton.onclick = function() {
-        const updatedName = editForm.querySelector('#input-name').value.trim();
-        const updatedEmail = editForm.querySelector('#input-email').value.trim();
-        const updatedPhoneNum = editForm.querySelector('#input-phoneNum').value.trim();
+    document.getElementById("save-button").addEventListener("click", function() {
+        const updatedName = document.getElementById("edit-name-input").textContent.trim();
+        // const updatedLastName = document.getElementById("edit-lastname-input").textContent.trim();
+        const updatedEmail = document.getElementById("edit-email-input").textContent.trim();
+        const updatedPhoneNum = document.getElementById("edit-phoneNum-input").textContent.trim();
         console.log("New contact data:", updatedName, updatedEmail, updatedPhoneNum);
 
-        // Make an API call to update the contact
+        // API call to update Contact PHP
         let xhr = new XMLHttpRequest();
         let url = urlBase + '/updateContact.' + extension;
         xhr.open("POST", url, true);
@@ -340,23 +326,16 @@ function editContact(name, email, phoneNum, id, username) {
                 let response = JSON.parse(xhr.responseText);
                 if (response) {
                     console.log("Contact updated!");
-                    fetchContacts();  // Refresh contact list after save
+                    fetchContacts();
                 } else if (response.error) {
                     console.error("Error: " + response.error);
                 }
             }
-        };
-        let payload = JSON.stringify({
-            username: currentUser, 
-            id: id, 
-            name: updatedName, 
-            email: updatedEmail, 
-            phonenumber: updatedPhoneNum
-        });
+        }
+        let payload = JSON.stringify({ username: currentUser, id: id, name: updatedName, email: updatedEmail, phonenumber: updatedPhoneNum });
         xhr.send(payload);
-    };
+    });
 }
-
 
 function deleteContact(username, contactID) {
     console.log("Delete Contact button pressed.");
