@@ -277,6 +277,7 @@ function addContactToList(contacts) {
                 <a href="#" onclick="deleteContact('${username}', '${id}');">Delete</a>
                 <button id="save-button" style="display: none;">Save</button>
             </div>
+            </div>
         `;
 
         contactList.appendChild(newContact);
