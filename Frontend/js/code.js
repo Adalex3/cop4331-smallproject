@@ -273,7 +273,7 @@ function addContactToList(contacts) {
                     <span id="edit-phoneNum-input" contentEditable="false">${phoneNumber}</span>
                 </div>
             <div class="actions">
-                <a href="#" onclick="editContact('${name}', '${email}', '${phoneNumber}', '${id}', '${username}');">Edit</a><br>
+                <a href="#" onclick="editContact('${name}', '${email}', '${phoneNumber}', '${id}', '${username}');">Edit</a><br><br>
                 <a href="#" onclick="deleteContact('${username}', '${id}');">Delete</a>
                 <button id="save-button" style="display: none;">Save</button>
             </div>
