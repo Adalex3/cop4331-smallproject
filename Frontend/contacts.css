@@ -292,8 +292,6 @@ button:hover {
 
 .contact-info.edit .x-button {
   position: absolute;
-  top: 10px;       /* Keep the button near the top */
-  right: 10px;     /* Align it to the right of the form */
   background-color: #444;
   color: white;
   border: none;
