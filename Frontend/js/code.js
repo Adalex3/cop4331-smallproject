@@ -245,44 +245,37 @@ function addContactToList(contacts) {
     let contactList = document.getElementById("contact-list");
     contactList.innerHTML = ""; // Clear the list
 
-    console.log("addContactToList function called with contacts:", contacts); // Log the contacts passed in
-
     contacts.forEach(contact => {
-        console.log("Adding contact:", contact); // Log each contact
         let name = contact.Name;
-        //let [firstName, lastName] = name.split(" ");
         let email = contact.Email;
         let phoneNumber = contact.phonenumber;
         let id = contact.ID;
-        let username = contact.username;
 
-        console.log(`Name: ${name}, Email: ${email}, Phone Number: ${phoneNumber}, ID: ${id}`);
-
+        // Create a new contact container with HTML structure
         let newContact = document.createElement("div");
         newContact.classList.add("contact-info");
+        newContact.setAttribute('data-contact-id', id);  // Assign unique contact ID
 
+        // Set the inner HTML of the contact with editable fields and actions
         newContact.innerHTML = `
             <div class="contact-details">
-
-                <div>
-                    <label>Name:</label>
-                    <span id="edit-name-input" contentEditable="false">${name}</span><br>
-                    <label>Email:</label>
-                    <span id="edit-email-input" contentEditable="false">${email}</span><br>
-                    <label>Phone Number:</label>
-                    <span id="edit-phoneNum-input" contentEditable="false">${phoneNumber}</span>
-                </div>
-            <div class="actions">
-                <a href="#" onclick="editContact('${name}', '${email}', '${phoneNumber}', '${id}', '${username}');">Edit</a><br><br>
-                <a href="#" onclick="deleteContact('${username}', '${id}');">Delete</a>
-                <button id="save-button" style="display: none;">Save</button>
+                <label>Name:</label>
+                <span class="name">${name}</span><br>
+                <label>Email:</label>
+                <span class="email">${email}</span><br>
+                <label>Phone Number:</label>
+                <span class="phone">${phoneNumber}</span>
             </div>
+            <div class="actions">
+                <a href="#" onclick="editContact('${name}', '${email}', '${phoneNumber}', '${id}');">Edit</a>
             </div>
         `;
 
+        // Append the new contact element to the contact list container
         contactList.appendChild(newContact);
     });
 }
+
 
 window.onload = function() {
     fetchContacts(); // Fetch and display contacts on page load
