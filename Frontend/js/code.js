@@ -299,43 +299,28 @@ document.addEventListener("DOMContentLoaded", function() {
 function editContact(name, email, phoneNum, id, username) {
     console.log("Edit Contact button pressed for:", name, email, phoneNum, id, username);
 
-    // Make the edit form visible
-    document.getElementById("edit-name-input").contentEditable = "true";
-    // document.getElementById("edit-lastname-input").contentEditable = "true";
-    document.getElementById("edit-email-input").contentEditable = "true";
-    document.getElementById("edit-phoneNum-input").contentEditable = "true";
+    // Find the specific contact's container
+    const contactContainer = document.querySelector(`[data-contact-id="${id}"]`);
 
-    // Show the save button
-    document.getElementById("save-button").style.display = "block";
+    // Hide any existing forms before showing the form for the selected contact
+    const existingForm = document.querySelector('.contact-info.edit');
+    if (existingForm) {
+        existingForm.style.display = 'none';
+    }
 
-    document.getElementById("save-button").addEventListener("click", function() {
-        const updatedName = document.getElementById("edit-name-input").textContent.trim();
-        // const updatedLastName = document.getElementById("edit-lastname-input").textContent.trim();
-        const updatedEmail = document.getElementById("edit-email-input").textContent.trim();
-        const updatedPhoneNum = document.getElementById("edit-phoneNum-input").textContent.trim();
-        console.log("New contact data:", updatedName, updatedEmail, updatedPhoneNum);
+    // Get the edit form and move it to the clicked contact's container
+    const editForm = document.getElementById('contact-info-edit');
+    editForm.style.display = 'block';
 
-        // API call to update Contact PHP
-        let xhr = new XMLHttpRequest();
-        let url = urlBase + '/updateContact.' + extension;
-        xhr.open("POST", url, true);
-        xhr.setRequestHeader("Content-Type", "application/json");
+    // Append the form to the correct contact container
+    contactContainer.appendChild(editForm);
 
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                let response = JSON.parse(xhr.responseText);
-                if (response) {
-                    console.log("Contact updated!");
-                    fetchContacts();
-                } else if (response.error) {
-                    console.error("Error: " + response.error);
-                }
-            }
-        }
-        let payload = JSON.stringify({ username: currentUser, id: id, name: updatedName, email: updatedEmail, phonenumber: updatedPhoneNum });
-        xhr.send(payload);
-    });
+    // Populate the form with the selected contact's data
+    editForm.querySelector('#input-name').value = name;
+    editForm.querySelector('#input-email').value = email;
+    editForm.querySelector('#input-phoneNum').value = phoneNum;
 }
+
 
 function deleteContact(username, contactID) {
     console.log("Delete Contact button pressed.");
