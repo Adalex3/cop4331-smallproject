@@ -260,6 +260,7 @@ function addContactToList(contacts) {
 
         let newContact = document.createElement("div");
         newContact.classList.add("contact-info");
+        newContact.setAttribute('data-contact-id', id);
 
         newContact.innerHTML = `
             <div class="contact-details">
@@ -299,23 +300,36 @@ document.addEventListener("DOMContentLoaded", function() {
 function editContact(name, email, phoneNum, id, username) {
     console.log("Edit Contact button pressed for:", name, email, phoneNum, id, username);
 
-    // Make the edit form visible
-    document.getElementById("edit-name-input").contentEditable = "true";
-    // document.getElementById("edit-lastname-input").contentEditable = "true";
-    document.getElementById("edit-email-input").contentEditable = "true";
-    document.getElementById("edit-phoneNum-input").contentEditable = "true";
+    // Find the specific contact's container
+    const contactContainer = document.querySelector(`[data-contact-id="${id}"]`);
 
-    // Show the save button
-    document.getElementById("save-button").style.display = "block";
+    // Remove the form if it exists in another contact
+    const existingForm = document.getElementById('contact-info-edit');
+    if (existingForm) {
+        existingForm.style.display = 'none';
+    }
 
-    document.getElementById("save-button").addEventListener("click", function() {
-        const updatedName = document.getElementById("edit-name-input").textContent.trim();
-        // const updatedLastName = document.getElementById("edit-lastname-input").textContent.trim();
-        const updatedEmail = document.getElementById("edit-email-input").textContent.trim();
-        const updatedPhoneNum = document.getElementById("edit-phoneNum-input").textContent.trim();
+    // Reuse the existing form and place it in the correct position
+    const editForm = document.getElementById('contact-info-edit');
+    editForm.style.display = 'block';
+
+    // Position the form under the clicked contact
+    contactContainer.appendChild(editForm);
+
+    // Populate the form with the selected contact's data
+    editForm.querySelector('#input-name').value = name;
+    editForm.querySelector('#input-email').value = email;
+    editForm.querySelector('#input-phoneNum').value = phoneNum;
+
+    // Add an event listener to the save button for this contact
+    const saveButton = editForm.querySelector('#save-contact');
+    saveButton.onclick = function() {
+        const updatedName = editForm.querySelector('#input-name').value.trim();
+        const updatedEmail = editForm.querySelector('#input-email').value.trim();
+        const updatedPhoneNum = editForm.querySelector('#input-phoneNum').value.trim();
         console.log("New contact data:", updatedName, updatedEmail, updatedPhoneNum);
 
-        // API call to update Contact PHP
+        // Make an API call to update the contact
         let xhr = new XMLHttpRequest();
         let url = urlBase + '/updateContact.' + extension;
         xhr.open("POST", url, true);
@@ -326,16 +340,23 @@ function editContact(name, email, phoneNum, id, username) {
                 let response = JSON.parse(xhr.responseText);
                 if (response) {
                     console.log("Contact updated!");
-                    fetchContacts();
+                    fetchContacts();  // Refresh contact list after save
                 } else if (response.error) {
                     console.error("Error: " + response.error);
                 }
             }
-        }
-        let payload = JSON.stringify({ username: currentUser, id: id, name: updatedName, email: updatedEmail, phonenumber: updatedPhoneNum });
+        };
+        let payload = JSON.stringify({
+            username: currentUser, 
+            id: id, 
+            name: updatedName, 
+            email: updatedEmail, 
+            phonenumber: updatedPhoneNum
+        });
         xhr.send(payload);
-    });
+    };
 }
+
 
 function deleteContact(username, contactID) {
     console.log("Delete Contact button pressed.");
