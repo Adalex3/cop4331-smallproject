@@ -120,18 +120,25 @@ function addUser() {
 
     try {
         xhr.onreadystatechange = function () {
-            if (this.readyState == 4) {
-                if (this.status == 200) {
-                    let jsonObject = JSON.parse(xhr.responseText);
-                    if (jsonObject.error && jsonObject.error === "Username already taken") {
-                        document.getElementById("userAddResult").innerHTML = "Username is already taken. Please choose another one.";
-                    } else {
-                        document.getElementById("userAddResult").innerHTML = "User has been added";
-                        window.location.href = "contacts.html";
-                    }
+            if (this.readyState == 4 && this.status == 200) {
+                let jsonObject = JSON.parse(xhr.responseText);
+
+                if (jsonObject.error && jsonObject.error === "Username already taken") {
+                    document.getElementById("userAddResult").innerHTML = "Username is already taken. Please choose another one.";
                 } else {
-                    document.getElementById("userAddResult").innerHTML = "Error registering user. Please try again.";
+                    document.getElementById("userAddResult").innerHTML = "User has been added";
+
+                    // Automatically log in the user after successful registration
+                    userId = jsonObject.id;
+                    firstName = newFirstName;
+                    lastName = newLastName;
+                    saveCookie();  // Set the session/cookies just like during login
+
+                    // Redirect to the contacts page
+                    window.location.href = "contacts.html";
                 }
+            } else {
+                document.getElementById("userAddResult").innerHTML = "Error registering user. Please try again.";
             }
         };
         xhr.send(jsonPayload);
@@ -139,6 +146,7 @@ function addUser() {
         document.getElementById("userAddResult").innerHTML = err.message;
     }
 }
+
 
 function doLogout() {
     userId = 0;
