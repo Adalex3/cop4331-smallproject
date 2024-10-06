@@ -200,14 +200,14 @@ button:hover {
 }
 
 .x-button.add {
-  margin-left: 10px;
-  padding: 10px 15px;
+  padding: 10px 15px; /* Make padding equal on all sides */
   background-color: #444;
   color: white;
   border: none;
   border-radius: 5px;
   font-size: 1.5rem;
   cursor: pointer;
+  transition: 0.2s;
 }
 
 .x-button.add:hover {
