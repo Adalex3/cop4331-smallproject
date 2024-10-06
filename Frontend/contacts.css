@@ -293,16 +293,19 @@ button:hover {
 .contact-info.edit .x-button {
   position: absolute;
   top: 10px;
-  right: 10px;        /* Keep space from the top and right */
+  right: 10px;
+  width: auto;           /* Let the width be determined by the content */
+  height: auto;          /* Let the height be determined by the content */
   background-color: #444;
-  width: 30px;       /* Make the button wider to be evenly sized */
-    height: 30px;
   color: white;
   border: none;
-  padding: 5px;
+  padding: 5px 10px;     /* Adjust padding to create space inside the button */
   cursor: pointer;
   border-radius: 5px;
-  font-size: 1rem;
+  font-size: 1.2rem;     /* Adjust the font size */
+  text-align: center;
+  line-height: normal;   /* Make sure the text is vertically centered */
+  z-index: 11;
 }
 
 .contact-info.edit .x-button:hover {
