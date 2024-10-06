@@ -245,44 +245,39 @@ function addContactToList(contacts) {
     let contactList = document.getElementById("contact-list");
     contactList.innerHTML = ""; // Clear the list
 
-    console.log("addContactToList function called with contacts:", contacts); // Log the contacts passed in
-
     contacts.forEach(contact => {
-        console.log("Adding contact:", contact); // Log each contact
         let name = contact.Name;
-        //let [firstName, lastName] = name.split(" ");
         let email = contact.Email;
         let phoneNumber = contact.phonenumber;
         let id = contact.ID;
         let username = contact.username;
 
-        console.log(`Name: ${name}, Email: ${email}, Phone Number: ${phoneNumber}, ID: ${id}`);
-
         let newContact = document.createElement("div");
         newContact.classList.add("contact-info");
+        newContact.setAttribute('data-contact-id', id);  // Assign unique contact ID
 
         newContact.innerHTML = `
             <div class="contact-details">
-
                 <div>
                     <label>Name:</label>
-                    <span id="edit-name-input" contentEditable="false">${name}</span><br>
+                    <span id="edit-name-input-${id}" contentEditable="false">${name}</span><br>
                     <label>Email:</label>
-                    <span id="edit-email-input" contentEditable="false">${email}</span><br>
+                    <span id="edit-email-input-${id}" contentEditable="false">${email}</span><br>
                     <label>Phone Number:</label>
-                    <span id="edit-phoneNum-input" contentEditable="false">${phoneNumber}</span>
+                    <span id="edit-phoneNum-input-${id}" contentEditable="false">${phoneNumber}</span>
                 </div>
-            <div class="actions">
-                <a href="#" onclick="editContact('${name}', '${email}', '${phoneNumber}', '${id}', '${username}');">Edit</a><br><br>
-                <a href="#" onclick="deleteContact('${username}', '${id}');">Delete</a>
-                <button id="save-button" style="display: none;">Save</button>
-            </div>
+                <div class="actions">
+                    <a href="#" onclick="editContact('${id}');">Edit</a><br><br>
+                    <a href="#" onclick="deleteContact('${username}', '${id}');">Delete</a>
+                    <button id="save-button-${id}" style="display: none;">Save</button>
+                </div>
             </div>
         `;
 
         contactList.appendChild(newContact);
     });
 }
+
 
 window.onload = function() {
     fetchContacts(); // Fetch and display contacts on page load
@@ -296,26 +291,25 @@ document.addEventListener("DOMContentLoaded", function() {
     console.log("Current user:", currentUser);
 });
 
-function editContact(name, email, phoneNum, id, username) {
-    console.log("Edit Contact button pressed for:", name, email, phoneNum, id, username);
+function editContact(id) {
+    console.log("Edit Contact button pressed for contact ID:", id);
 
-    // Make the edit form visible
-    document.getElementById("edit-name-input").contentEditable = "true";
-    // document.getElementById("edit-lastname-input").contentEditable = "true";
-    document.getElementById("edit-email-input").contentEditable = "true";
-    document.getElementById("edit-phoneNum-input").contentEditable = "true";
+    // Make the fields in the correct contact editable
+    document.getElementById(`edit-name-input-${id}`).contentEditable = "true";
+    document.getElementById(`edit-email-input-${id}`).contentEditable = "true";
+    document.getElementById(`edit-phoneNum-input-${id}`).contentEditable = "true";
 
-    // Show the save button
-    document.getElementById("save-button").style.display = "block";
+    // Show the save button for this contact
+    document.getElementById(`save-button-${id}`).style.display = "block";
 
-    document.getElementById("save-button").addEventListener("click", function() {
-        const updatedName = document.getElementById("edit-name-input").textContent.trim();
-        // const updatedLastName = document.getElementById("edit-lastname-input").textContent.trim();
-        const updatedEmail = document.getElementById("edit-email-input").textContent.trim();
-        const updatedPhoneNum = document.getElementById("edit-phoneNum-input").textContent.trim();
+    // Add event listener for the save button
+    document.getElementById(`save-button-${id}`).addEventListener("click", function saveHandler() {
+        const updatedName = document.getElementById(`edit-name-input-${id}`).textContent.trim();
+        const updatedEmail = document.getElementById(`edit-email-input-${id}`).textContent.trim();
+        const updatedPhoneNum = document.getElementById(`edit-phoneNum-input-${id}`).textContent.trim();
         console.log("New contact data:", updatedName, updatedEmail, updatedPhoneNum);
 
-        // API call to update Contact PHP
+        // API call to update the contact
         let xhr = new XMLHttpRequest();
         let url = urlBase + '/updateContact.' + extension;
         xhr.open("POST", url, true);
@@ -328,14 +322,24 @@ function editContact(name, email, phoneNum, id, username) {
                     console.log("Contact updated!");
                     fetchContacts();
                 } else if (response.error) {
-                    console.error("Error: " + response.error);
+                    console.error("Error:", response.error);
                 }
             }
-        }
-        let payload = JSON.stringify({ username: currentUser, id: id, name: updatedName, email: updatedEmail, phonenumber: updatedPhoneNum });
+        };
+        let payload = JSON.stringify({
+            username: currentUser,
+            id: id,
+            name: updatedName,
+            email: updatedEmail,
+            phonenumber: updatedPhoneNum
+        });
         xhr.send(payload);
+
+        // Clean up: remove the event listener to prevent multiple bindings
+        document.getElementById(`save-button-${id}`).removeEventListener("click", saveHandler);
     });
 }
+
 
 function deleteContact(username, contactID) {
     console.log("Delete Contact button pressed.");
